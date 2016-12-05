@@ -7,6 +7,7 @@ npm-debug.log*
 *.js.map
 
 typings/
+npm-packages-offline-cache/
 
 # Runtime data
 pids
