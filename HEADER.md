@@ -21,11 +21,11 @@ $ npm install --save global-mercator
 ## Quickstart
 
 ```javascript
-import * as mercator from 'global-mercator'
+import { tileToBBox } from 'global-mercator'
 
 const tile = [10, 15, 8] // x, y, zoom
 
-mercator.tileToBBox(tile)
+tileToBBox(tile)
 // [ -165.937, -82.853, -164.531, -82.676 ]
 ```
 

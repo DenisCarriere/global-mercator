@@ -36,12 +36,42 @@ export type Quadkey = string
 export type GridLevel = [number[], number[], number]
 
 /**
+ * Hash for Map ID
+ *
+ * @param {Tile} tile [x, y, z]
+ * @returns {number} hash
+ * @example
+ * const id = hash([312, 480, 4])
+ * //=5728
+ */
+export function hash(tile: Tile): number {
+  const [x, y, z] = tile
+  return (1 << z) * ((1 << z) + x) + y
+}
+
+/**
+ * Converts BBox to Center
+ *
+ * @param {BBox} bbox - [west, south, east, north] coordinates
+ * @return {LngLat} center
+ * @example
+ * const center = bboxToCenter([90, -45, 85, -50])
+ * //= [ 87.5, -47.5 ]
+ */
+export function bboxToCenter(bbox: BBox): LngLat {
+  const [west, south, east, north] = bbox
+  const lng = (west - east) / 2 + east
+  const lat = (south - north) / 2 + north
+  return [lng, lat]
+}
+
+/**
  * Converts {@link LngLat} coordinates to {@link Meters} coordinates.
  *
  * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
  * @returns {Meters} Meters coordinates
  * @example
- * const meters = mercator.lngLatToMeters([126, 37])
+ * const meters = lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
 export function lngLatToMeters(lnglat: LngLat): Meters {
@@ -58,7 +88,7 @@ export function lngLatToMeters(lnglat: LngLat): Meters {
  * @param {Meters} meters Meters in Mercator [x, y]
  * @returns {LngLat} LngLat coordinates
  * @example
- * const lnglat = mercator.metersToLngLat([14026255, 4439106])
+ * const lnglat = metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
 export function metersToLngLat(meters: Meters): LngLat {
@@ -77,7 +107,7 @@ export function metersToLngLat(meters: Meters): LngLat {
  * @param {number} zoom Zoom level
  * @returns {Pixels} Pixels coordinates
  * @example
- * const pixels = mercator.metersToPixels([14026255, 4439106], 13)
+ * const pixels = metersToPixels([14026255, 4439106], 13)
  * //=[ 1782579.1, 1280877.3, 13 ]
  */
 export function metersToPixels(meters: Meters, zoom: number): Pixels {
@@ -96,7 +126,7 @@ export function metersToPixels(meters: Meters, zoom: number): Pixels {
  * @param {number} zoom Zoom level
  * @returns {Tile} TMS Tile
  * @example
- * const tile = mercator.lngLatToTile([126, 37], 13)
+ * const tile = lngLatToTile([126, 37], 13)
  * //=[ 6963, 5003, 13 ]
  */
 export function lngLatToTile(lnglat: LngLat, zoom: number): Tile {
@@ -112,7 +142,7 @@ export function lngLatToTile(lnglat: LngLat, zoom: number): Tile {
  * @param {number} zoom Zoom level
  * @returns {Google} Google (XYZ) Tile
  * @example
- * const google = mercator.lngLatToGoogle([126, 37], 13)
+ * const google = lngLatToGoogle([126, 37], 13)
  * //=[ 6963, 3188, 13 ]
  */
 export function lngLatToGoogle(lnglat: LngLat, zoom: number): Google {
@@ -128,7 +158,7 @@ export function lngLatToGoogle(lnglat: LngLat, zoom: number): Google {
  * @param {number} zoom Zoom level
  * @returns {Tile} TMS Tile
  * @example
- * const tile = mercator.metersToTile([14026255, 4439106], 13)
+ * const tile = metersToTile([14026255, 4439106], 13)
  * //=[ 6963, 5003, 13 ]
  */
 export function metersToTile(meters: Meters, zoom: number): Tile {
@@ -143,7 +173,7 @@ export function metersToTile(meters: Meters, zoom: number): Tile {
  * @param {Pixels} pixels Pixels [x, y, zoom]
  * @returns {Meters} Meters coordinates
  * @example
- * const meters = mercator.pixelsToMeters([1782579, 1280877, 13])
+ * const meters = pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
 export function pixelsToMeters(pixels: Pixels): Meters {
@@ -161,7 +191,7 @@ export function pixelsToMeters(pixels: Pixels): Meters {
  * @param {Pixels} pixels Pixels [x, y, zoom]
  * @returns {Tile} TMS Tile
  * @example
- * const tile = mercator.pixelsToTile([1782579, 1280877, 13])
+ * const tile = pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
 export function pixelsToTile(pixels: Pixels): Tile {
@@ -183,7 +213,7 @@ export function pixelsToTile(pixels: Pixels): Tile {
  * @param {number} zoom Zoom level
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * const bbox = mercator.tileToBBoxMeters([6963, 5003, 13])
+ * const bbox = tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
 export function tileToBBoxMeters(tile: Tile): BBox {
@@ -203,7 +233,7 @@ export function tileToBBoxMeters(tile: Tile): BBox {
  * @param {number} zoom Zoom level
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * const bbox = mercator.tileToBBox([6963, 5003, 13])
+ * const bbox = tileToBBox([6963, 5003, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
 export function tileToBBox(tile: Tile): BBox {
@@ -223,7 +253,7 @@ export function tileToBBox(tile: Tile): BBox {
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * const bbox = mercator.googleToBBoxMeters([6963, 3188, 13])
+ * const bbox = googleToBBoxMeters([6963, 3188, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
 export function googleToBBoxMeters(google: Google): BBox {
@@ -237,7 +267,7 @@ export function googleToBBoxMeters(google: Google): BBox {
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * const bbox = mercator.googleToBBox([6963, 3188, 13])
+ * const bbox = googleToBBox([6963, 3188, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
 export function googleToBBox(google: Google): BBox {
@@ -251,7 +281,7 @@ export function googleToBBox(google: Google): BBox {
  * @param {Tile} tile Tile [x, y, zoom]
  * @returns {Google} Google (XYZ) Tile
  * @example
- * const google = mercator.tileToGoogle([6963, 5003, 13])
+ * const google = tileToGoogle([6963, 5003, 13])
  * //=[ 6963, 3188, 13 ]
  */
 export function tileToGoogle(tile: Tile): Google {
@@ -270,7 +300,7 @@ export function tileToGoogle(tile: Tile): Google {
  * @param {Google} google Google [x, y, zoom]
  * @returns {Tile} TMS Tile
  * @example
- * const tile = mercator.googleToTile([6963, 3188, 13])
+ * const tile = googleToTile([6963, 3188, 13])
  * //=[ 6963, 5003, 13 ]
  */
 export function googleToTile(google: Google): Tile {
@@ -287,7 +317,7 @@ export function googleToTile(google: Google): Tile {
  * @param {Google} google Google [x, y, zoom]
  * @returns {string} Microsoft's Quadkey schema
  * @example
- * const quadkey = mercator.googleToQuadkey([6963, 3188, 13])
+ * const quadkey = googleToQuadkey([6963, 3188, 13])
  * //='1321102330211'
  */
 export function googleToQuadkey(google: Google): string {
@@ -301,7 +331,7 @@ export function googleToQuadkey(google: Google): string {
  * @param {Tile} tile Tile [x, y, zoom]
  * @returns {string} Microsoft's Quadkey schema
  * @example
- * const quadkey = mercator.tileToQuadkey([6963, 5003, 13])
+ * const quadkey = tileToQuadkey([6963, 5003, 13])
  * //='1321102330211'
  */
 export function tileToQuadkey(tile: Tile): string {
@@ -329,7 +359,7 @@ export function tileToQuadkey(tile: Tile): string {
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Tile} TMS Tile
  * @example
- * const tile = mercator.quadkeyToTile('1321102330211')
+ * const tile = quadkeyToTile('1321102330211')
  * //=[ 6963, 5003, 13 ]
  */
 export function quadkeyToTile(quadkey: string): Tile {
@@ -343,7 +373,7 @@ export function quadkeyToTile(quadkey: string): Tile {
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Google} Google (XYZ) Tile
  * @example
- * const google = mercator.quadkeyToGoogle('1321102330211')
+ * const google = quadkeyToGoogle('1321102330211')
  * //=[ 6963, 3188, 13 ]
  */
 export function quadkeyToGoogle(quadkey: string): Google {
@@ -380,7 +410,7 @@ export function quadkeyToGoogle(quadkey: string): Google {
  * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * const meters = mercator.bboxToMeters([ 125, 35, 127, 37 ])
+ * const meters = bboxToMeters([ 125, 35, 127, 37 ])
  * //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
  */
 export function bboxToMeters(bbox: BBox): BBox {
@@ -397,8 +427,8 @@ export function bboxToMeters(bbox: BBox): BBox {
  * @param {number} maxZoom Maximum Zoom
  * @returns {IterableIterator<Tile>} Iterable Tiles from BBox
  * @example
- * const iterable = mercator.grid([-180.0, -90.0, 180, 90], 3, 8)
- * const {value, done} = grid.next()
+ * const iterable = grid([-180.0, -90.0, 180, 90], 3, 8)
+ * const {value, done} = iterable.next()
  * //=value
  * //=done
  */
@@ -421,7 +451,7 @@ export function * grid(bbox: BBox, minZoom: number, maxZoom: number): IterableIt
  * @param {number} size Maximum size for bulk Tiles
  * @returns {IterableIterator<Tile[]>} Bulk iterable Tiles from BBox
  * @example
- * const grid = mercator.gridBulk([-180.0, -90.0, 180, 90], 3, 8, 5000)
+ * const grid = gridBulk([-180.0, -90.0, 180, 90], 3, 8, 5000)
  * const {value, done} = grid.next()
  * //=value
  * //=done
@@ -453,7 +483,7 @@ export function * gridBulk(bbox: BBox, minZoom: number, maxZoom: number, size: n
  * @param {number} maxZoom Maximum Zoom
  * @returns {GridLevel[]} Grid Level
  * @example
- * const levels = mercator.gridLevels([-180.0, -90.0, 180, 90], 3, 8)
+ * const levels = gridLevels([-180.0, -90.0, 180, 90], 3, 8)
  * //=levels
  */
 export function gridLevels(bbox: BBox, minZoom: number, maxZoom: number): GridLevel[] {
@@ -481,7 +511,7 @@ export function gridLevels(bbox: BBox, minZoom: number, maxZoom: number): GridLe
  * @param {number} maxZoom Maximum Zoom
  * @returns {number} Total tiles from BBox
  * @example
- * const count = mercator.gridCount([-180.0, -90.0, 180, 90], 3, 8)
+ * const count = gridCount([-180.0, -90.0, 180, 90], 3, 8)
  * //=563136
  */
 export function gridCount(bbox: BBox, minZoom: number, maxZoom: number): number {
@@ -499,11 +529,11 @@ export function gridCount(bbox: BBox, minZoom: number, maxZoom: number): number 
  * @throws {Error} Will throw an error if TMS Tile is not valid.
  * @returns {Tile} TMS Tile
  * @example
- * mercator.validateTile([60, 80, 12])
+ * validateTile([60, 80, 12])
  * //=[60, 80, 12]
- * mercator.validateTile([60, -43, 5])
+ * validateTile([60, -43, 5])
  * //= Error: Tile <y> must not be less than 0
- * mercator.validateTile([25, 60, 3])
+ * validateTile([25, 60, 3])
  * //= Error: Illegal parameters for tile
  */
 export function validateTile(tile: Tile): Tile {
@@ -555,9 +585,9 @@ export function validateZoom(zoom: number) {
  * @throws {Error} Will throw an error if Meters is not valid.
  * @returns {number[]} Meters coordinates
  * @example
- * mercator.validateMeters([-115, 44])
+ * validateMeters([-115, 44])
  * //= [ -115, 44 ]
- * mercator.validateMeters([-230, 999000000])
+ * validateMeters([-230, 999000000])
  * //= Error: Meters [y] cannot be greater than 20037508.342789244
  */
 export function validateMeters(meters: Meters): Meters {
@@ -590,9 +620,9 @@ export function validateMeters(meters: Meters): Meters {
  * @throws {Error} Will throw an error if LngLat is not valid.
  * @returns {LngLat} LngLat coordinates
  * @example
- * mercator.validateLngLat([-115, 44])
+ * validateLngLat([-115, 44])
  * //= [ -115, 44 ]
- * mercator.validateLngLat([-225, 44])
+ * validateLngLat([-225, 44])
  * //= Error: LngLat [lng] must be within -180 to 180 degrees
  */
 export function validateLngLat(lnglat: LngLat): LngLat {
@@ -631,7 +661,7 @@ export function validatePixels(pixels: Pixels): Pixels {
  * @param {number} zoom zoom level
  * @returns {number} resolution
  * @example
- * const res = mercator.resolution(13)
+ * const res = resolution(13)
  * //=19.109257071294063
  */
 export function resolution(zoom: number): number {
