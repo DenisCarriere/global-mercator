@@ -8,7 +8,7 @@
 
 A set of tools geospatial tools to help with TMS, Google (XYZ) Tiles.
 
-> This library is insipered by GDAL2Tiles, Google Summer of Code 2007 & 2008
+> This library is insipered by GDAL2Tiles, Google Summer of Code 2007 & 2008.
 
 Another great simplistic tile library is [`tilebelt`](https://github.com/mapbox/tilebelt).
 
