@@ -5,27 +5,27 @@ export const originShift = 2 * Math.PI * 6378137 / 2.0
 /**
  * LngLat [lng, lat]
  */
-export type LngLat = [number, number] | number[]
+export type LngLat = [number, number]
 /**
  * Meters [x, y]
  */
-export type Meters = [number, number] | number[]
+export type Meters = [number, number]
 /**
  * Pixels [x, y, zoom]
  */
-export type Pixels = [number, number, number] | number[]
+export type Pixels = [number, number, number]
 /**
  * BBox extent in [minX, minY, maxX, maxY] order
  */
-export type BBox = [number, number, number, number] | number[]
+export type BBox = [number, number, number, number]
 /**
  * Google [x, y, zoom]
  */
-export type Google = [number, number, number] | number[]
+export type Google = [number, number, number]
 /**
  * Tile [x, y, zoom]
  */
-export type Tile = [number, number, number] | number[]
+export type Tile = [number, number, number]
 /**
  * Microsoft's Quadkey schema
  */
@@ -425,14 +425,14 @@ export function bboxToMeters(bbox: BBox): BBox {
  * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @param {number} minZoom Minimum Zoom
  * @param {number} maxZoom Maximum Zoom
- * @returns {IterableIterator<Tile>} Iterable Tiles from BBox
+ * @returns {Iterator<Tile>} Iterable Tiles from BBox
  * @example
  * const iterable = grid([-180.0, -90.0, 180, 90], 3, 8)
  * const {value, done} = iterable.next()
  * //=value
  * //=done
  */
-export function * grid(bbox: BBox, minZoom: number, maxZoom: number): IterableIterator<Tile> {
+export function * grid(bbox: BBox, minZoom: number, maxZoom: number): Iterator<Tile> {
   for (const [tile_columns, tile_rows, zoom] of gridLevels(bbox, minZoom, maxZoom)) {
     for (const tile_row of tile_rows) {
       for (const tile_column of tile_columns) {
@@ -449,14 +449,14 @@ export function * grid(bbox: BBox, minZoom: number, maxZoom: number): IterableIt
  * @param {number} minZoom Minimum Zoom
  * @param {number} maxZoom Maximum Zoom
  * @param {number} size Maximum size for bulk Tiles
- * @returns {IterableIterator<Tile[]>} Bulk iterable Tiles from BBox
+ * @returns {Iterator<Tile[]>} Bulk iterable Tiles from BBox
  * @example
  * const grid = gridBulk([-180.0, -90.0, 180, 90], 3, 8, 5000)
  * const {value, done} = grid.next()
  * //=value
  * //=done
  */
-export function * gridBulk(bbox: BBox, minZoom: number, maxZoom: number, size: number): IterableIterator<Tile[]> {
+export function * gridBulk(bbox: BBox, minZoom: number, maxZoom: number, size: number): Iterator<Tile[]> {
   const iterable = grid(bbox, minZoom, maxZoom)
   let container: Tile[] = []
   let i = 0

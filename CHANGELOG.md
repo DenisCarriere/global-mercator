@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0 - 2016-12-25
+
+- Add bboxToCenter & hash function
+- Enforce strict [number, number] instead of number[]
+
 ## 1.4.0 - 2016-12-4
 
 - Replace test tools for Jest

@@ -1,11 +1,11 @@
 {
   "name": "global-mercator",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "npm run lint && jest --coverage",
+    "test": "npm run lint && jest test.js --coverage",
     "docs": "tsc && cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md --shallow >> README.md && cat CHANGELOG.md >> README.md",
     "lint": "tsc && tslint index.ts index.test.ts && documentation lint index.js"
   },

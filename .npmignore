@@ -1,12 +1,15 @@
 test
 test*
-coverage
+coverage/
+node_modules/
 documentation.yml
 yarn.lock
 tsconfig.json
 tslint.json
 HEADER.md
 CHANGELOG.md
+circle.yml
 .nyc_output
 .vscode
 .travis.yml
+.gitignore

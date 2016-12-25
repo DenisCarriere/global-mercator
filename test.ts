@@ -124,7 +124,6 @@ describe('quadkey', () => {
   test('Throws Error quadkeyToTile', () => expect(() => mercator.quadkeyToTile(QUADKEY_BAD)).toThrow())
 })
 
-
 /**
  * Google
  */

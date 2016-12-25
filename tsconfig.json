@@ -6,8 +6,9 @@
         "noImplicitAny": true,
         "removeComments": false,
         "preserveConstEnums": true,
-        "sourceMap": true,
-        "noEmitOnError": true
+        "sourceMap": false,
+        "noEmitOnError": true,
+        "outDir": "dist/"
     },
     "exclude": [
         "node_modules"
