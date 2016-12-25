@@ -444,7 +444,7 @@ const {value, done} = iterable.next()
 //=done
 ```
 
-Returns **IterableIterator&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>** Iterable Tiles from BBox
+Returns **Iterator&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>** Iterable Tiles from BBox
 
 # gridBulk
 
@@ -466,7 +466,7 @@ const {value, done} = grid.next()
 //=done
 ```
 
-Returns **IterableIterator&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>>** Bulk iterable Tiles from BBox
+Returns **Iterator&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>>** Bulk iterable Tiles from BBox
 
 # gridLevels
 
@@ -603,7 +603,7 @@ Validates [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coord
 -   `pixels` **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels [x, y, zoom]
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels Y
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Zoom level
+-   `zoom` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Zoom level
 
 **Examples**
 
@@ -615,6 +615,11 @@ validatePixels([-115, 44])
 
 Returns **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels coordinates
 # Changelog
+
+## 1.5.0 - 2016-12-25
+
+- Add bboxToCenter & hash function
+- Enforce strict [number, number] instead of number[]
 
 ## 1.4.0 - 2016-12-4
 

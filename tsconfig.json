@@ -7,8 +7,7 @@
         "removeComments": false,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "noEmitOnError": true,
-        "outDir": "dist/"
+        "noEmitOnError": true
     },
     "exclude": [
         "node_modules"
