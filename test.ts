@@ -14,10 +14,10 @@ const BBOX: mercator.BBox = [-75.01464843750001, 44.99588261816546, -74.97070312
 /**
  * Test approximate number in array
  *
- * @param {Array<number>} array1
- * @param {Array<number>} array2
+ * @param {number[]} array1
+ * @param {number[]} array2
  */
-function toBeCloseToArray(array1: Array<number>, array2: Array<number>) {
+function toBeCloseToArray(array1: number[], array2: number[]) {
   array1.map((value, index) => {
     expect(value).toBeCloseTo(array2[index], 2)
   })
@@ -146,10 +146,6 @@ describe('validate', () => {
   })
 
   test('validateMeters', () => {
-    // t.throws(() => mercator.validateMeters([200000, 999150000]), 'Meters [y] cannot be greater than 20037508.342789244')
-    // t.throws(() => mercator.validateMeters([200000, -999150000]), 'Meters [y] cannot be less than -20037508.342789244')
-    // t.throws(() => mercator.validateMeters([999200000, 150000]), 'Meters [x] cannot be greater than 20037508.342789244')
-    // t.throws(() => mercator.validateMeters([-999200000, -150000]), 'Meters [x] cannot be less than -20037508.342789244')
     expect(mercator.validateMeters(METERS)).toEqual(METERS)
   })
 

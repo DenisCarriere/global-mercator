@@ -433,10 +433,10 @@ export function bboxToMeters(bbox: BBox): BBox {
  * //=done
  */
 export function * grid(bbox: BBox, minZoom: number, maxZoom: number): Iterator<Tile> {
-  for (const [tile_columns, tile_rows, zoom] of gridLevels(bbox, minZoom, maxZoom)) {
-    for (const tile_row of tile_rows) {
-      for (const tile_column of tile_columns) {
-        yield [tile_column, tile_row, zoom]
+  for (const [columns, rows, zoom] of gridLevels(bbox, minZoom, maxZoom)) {
+    for (const row of rows) {
+      for (const column of columns) {
+        yield [column, row, zoom]
       }
     }
   }
@@ -496,9 +496,9 @@ export function gridLevels(bbox: BBox, minZoom: number, maxZoom: number): GridLe
     let maxty = Math.max(t1[1], t2[1])
     let mintx = Math.min(t1[0], t2[0])
     let maxtx = Math.max(t1[0], t2[0])
-    const tile_rows: number[] = range(minty, maxty + 1)
-    const tile_columns: number[] = range(mintx, maxtx + 1)
-    levels.push([tile_columns, tile_rows, zoom])
+    const rows: number[] = range(minty, maxty + 1)
+    const columns: number[] = range(mintx, maxtx + 1)
+    levels.push([columns, rows, zoom])
   }
   return levels
 }
@@ -516,8 +516,8 @@ export function gridLevels(bbox: BBox, minZoom: number, maxZoom: number): GridLe
  */
 export function gridCount(bbox: BBox, minZoom: number, maxZoom: number): number {
   let count = 0
-  for (const [tile_columns, tile_rows] of gridLevels(bbox, minZoom, maxZoom)) {
-    count += tile_rows.length * tile_columns.length
+  for (const [columns, rows] of gridLevels(bbox, minZoom, maxZoom)) {
+    count += rows.length * columns.length
   }
   return count
 }
@@ -675,7 +675,7 @@ export function resolution(zoom: number): number {
  * @param {number} [start=0] Start
  * @param {number} stop Stop
  * @param {number} [step=1] Step
- * @returns {Array<number>} range
+ * @returns {number[]} range
  * @example
  * range(3)
  * //=[ 0, 1, 2 ]
@@ -684,7 +684,7 @@ export function resolution(zoom: number): number {
  * range(6, 3, -1)
  * //=[ 6, 5, 4 ]
  */
-export function range(start: number, stop?: number, step?: number) {
+export function range(start: number, stop?: number, step?: number): number[] {
   if (stop == null) {
     stop = start || 0
     start = 0
