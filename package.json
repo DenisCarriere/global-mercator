@@ -6,7 +6,7 @@
   "jsnext:main": "index.js",
   "scripts": {
     "test": "npm run lint && jest test.js --coverage",
-    "docs": "tsc && cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md --shallow >> README.md && cat CHANGELOG.md >> README.md",
+    "docs": "tsc && cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md --shallow --no-markdown-toc >> README.md && cat CHANGELOG.md >> README.md",
     "lint": "tsc && tslint index.ts test.ts && documentation lint index.js"
   },
   "repository": {
@@ -56,5 +56,8 @@
   "testEnvironment": "node",
   "jest": {
     "verbose": true
+  },
+  "dependencies": {
+    "documentation": "^4.0.0-beta.18"
   }
 }
