@@ -4,6 +4,7 @@
 ### 1.6.0 - 2017-01-05
 
 - BBox reduced decimal precision to 6
+- bboxToCenter toFixed(6)
 - Lat & Lng decimal toFixed(6)
 - Meters toFixed(1)
 

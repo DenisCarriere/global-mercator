@@ -60,8 +60,10 @@ export function hash(tile: Tile): number {
  */
 export function bboxToCenter(bbox: BBox): LngLat {
   const [west, south, east, north] = bbox
-  const lng = (west - east) / 2 + east
-  const lat = (south - north) / 2 + north
+  let lng = (west - east) / 2 + east
+  let lat = (south - north) / 2 + north
+  lng = Number(lng.toFixed(6))
+  lat = Number(lat.toFixed(6))
   return [lng, lat]
 }
 
