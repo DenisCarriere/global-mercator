@@ -5,11 +5,11 @@ const TILE: mercator.Tile = [2389, 5245, 13]
 const GOOGLE: mercator.Google = [2389, 2946, 13]
 const QUADKEY = '0302321010121'
 const QUADKEY_BAD = '030486861'
-const LNGLAT: mercator.LngLat = [-75.00005722045897, 44.99988840247]
-const METERS: mercator.Meters = [-8348968.179247875, 5621503.917462073]
+const LNGLAT: mercator.LngLat = [-75.000057, 44.999888]
+const METERS: mercator.Meters = [-8348968.179248, 5621503.917462]
 const PIXELS: mercator.Pixels = [611669, 1342753, 13]
-const BBOX_METERS: mercator.BBox = [-8350592.466098936, 5620873.311978721, -8345700.496288682, 5625765.281788976]
-const BBOX: mercator.BBox = [-75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546]
+const BBOX_METERS: mercator.BBox = [-8350592.466099, 5620873.311979, -8345700.496289, 5625765.281789]
+const BBOX: mercator.BBox = [-75.014648, 44.995883, -74.970703, 45.026950]
 
 /**
  * Test approximate number in array
@@ -17,9 +17,9 @@ const BBOX: mercator.BBox = [-75.01464843750001, 44.99588261816546, -74.97070312
  * @param {number[]} array1
  * @param {number[]} array2
  */
-function toBeCloseToArray(array1: number[], array2: number[]) {
+function toBeCloseToArray(array1: number[], array2: number[], precision: number = 2) {
   array1.map((value, index) => {
-    expect(value).toBeCloseTo(array2[index], 2)
+    expect(value).toBeCloseTo(array2[index], precision)
   })
 }
 
@@ -28,7 +28,7 @@ function toBeCloseToArray(array1: number[], array2: number[]) {
  */
 describe('bbox', () => {
   test('bboxToCenter', () => expect(mercator.bboxToCenter([90, -45, 85, -50])).toEqual([87.5, -47.5]))
-  test('bboxToMeters', () => toBeCloseToArray(mercator.bboxToMeters(BBOX), BBOX_METERS))
+  test('bboxToMeters', () => toBeCloseToArray(mercator.bboxToMeters(BBOX), BBOX_METERS, 0))
 })
 
 /**
@@ -47,7 +47,7 @@ describe('utils', () => {
  */
 describe('lnglat', () => {
   test('lngLatToMeters', () => {
-    toBeCloseToArray(mercator.lngLatToMeters(LNGLAT), METERS)
+    toBeCloseToArray(mercator.lngLatToMeters(LNGLAT), METERS, 0)
   })
 
   test('lngLatToGoogle', () => {
@@ -88,7 +88,7 @@ describe('pixels', () => {
     expect(mercator.pixelsToTile([0, 0, 0])).toEqual([0, 0, 0])
   })
 
-  test('pixelsToMeters', () => toBeCloseToArray(mercator.pixelsToMeters(PIXELS), METERS))
+  test('pixelsToMeters', () => toBeCloseToArray(mercator.pixelsToMeters(PIXELS), METERS, 0))
 })
 
 /**
@@ -101,7 +101,7 @@ describe('tile', () => {
   })
 
   test('tileToBBoxMeters', () => {
-    toBeCloseToArray(mercator.tileToBBoxMeters(TILE), BBOX_METERS)
+    toBeCloseToArray(mercator.tileToBBoxMeters(TILE), BBOX_METERS, 0)
   })
 
   test('tileToGoogle', () => {
@@ -129,7 +129,7 @@ describe('quadkey', () => {
  */
 describe('google', () => {
   test('googleToBbox', () => toBeCloseToArray(mercator.googleToBBox(GOOGLE), BBOX))
-  test('googleToBBoxMeters', () => toBeCloseToArray(mercator.googleToBBoxMeters(GOOGLE), BBOX_METERS))
+  test('googleToBBoxMeters', () => toBeCloseToArray(mercator.googleToBBoxMeters(GOOGLE), BBOX_METERS, 0))
   test('googleToQuadKey', () => expect(mercator.googleToQuadkey(GOOGLE)).toEqual(QUADKEY))
   test('googleToTile', () => expect(mercator.googleToTile(GOOGLE)).toEqual(TILE))
 })

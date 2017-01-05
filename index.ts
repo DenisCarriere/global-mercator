@@ -79,6 +79,8 @@ export function lngLatToMeters(lnglat: LngLat): Meters {
   let x: number = lng * originShift / 180.0
   let y: number = Math.log(Math.tan((90 + lat) * Math.PI / 360.0 )) / (Math.PI / 180.0)
   y = y * originShift / 180.0
+  x = Number(x.toFixed(1))
+  y = Number(y.toFixed(1))
   return [x, y]
 }
 
@@ -96,7 +98,8 @@ export function metersToLngLat(meters: Meters): LngLat {
   let lng = (x / originShift) * 180.0
   let lat = (y / originShift) * 180.0
   lat = 180 / Math.PI * (2 * Math.atan( Math.exp( lat * Math.PI / 180.0)) - Math.PI / 2.0)
-
+  lng = Number(lng.toFixed(6))
+  lat = Number(lat.toFixed(6))
   return [lng, lat]
 }
 
@@ -179,9 +182,10 @@ export function metersToTile(meters: Meters, zoom: number): Tile {
 export function pixelsToMeters(pixels: Pixels): Meters {
   const [px, py, zoom] = validatePixels(pixels)
   const res = resolution(zoom)
-  const mx = px * res - originShift
-  const my = py * res - originShift
-
+  let mx = px * res - originShift
+  let my = py * res - originShift
+  mx = Number(mx.toFixed(1))
+  my = Number(my.toFixed(1))
   return [mx, my]
 }
 

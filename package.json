@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run lint && jest test.js --coverage",
     "docs": "tsc && cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md --shallow >> README.md && cat CHANGELOG.md >> README.md",
-    "lint": "tsc && tslint index.ts index.test.ts && documentation lint index.js"
+    "lint": "tsc && tslint index.ts test.ts && documentation lint index.js"
   },
   "repository": {
     "type": "git",
@@ -53,5 +53,8 @@
     "meters",
     "quadkey"
   ],
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "jest": {
+    "verbose": true
+  }
 }
