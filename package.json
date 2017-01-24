@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "jsnext:main": "index.js",
@@ -57,7 +57,5 @@
   "jest": {
     "verbose": true
   },
-  "dependencies": {
-    "documentation": "^4.0.0-beta.18"
-  }
+  "dependencies": {}
 }
