@@ -3,7 +3,6 @@
   "version": "1.7.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
-  "jsnext:main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
@@ -12,7 +11,7 @@
   "scripts": {
     "test": "npm run lint && jest --coverage",
     "lint": "standard",
-    "docs": "documentation readme index.js --section=Usage"
+    "docs": "documentation readme index.js --section=API"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "@types/jest": "^16.0.2",
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
+    "standard": "^8.6.0",
     "typescript": "^2.1.4"
   },
   "keywords": [
