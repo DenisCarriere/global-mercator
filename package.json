@@ -27,11 +27,9 @@
   },
   "homepage": "https://github.com/DenisCarriere/global-mercator#readme",
   "devDependencies": {
-    "@types/jest": "^16.0.2",
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
-    "standard": "^8.6.0",
-    "typescript": "^2.1.4"
+    "standard": "^8.6.0"
   },
   "keywords": [
     "gis",
