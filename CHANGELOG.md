@@ -1,6 +1,10 @@
 
 ## Changelog
 
+### 1.7.0 - 2017-01-24
+
+- Refactoring entire codebase to standard Javascript
+
 ### 1.6.0 - 2017-01-05
 
 - BBox reduced decimal precision to 6

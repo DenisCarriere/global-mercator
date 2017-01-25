@@ -1,10 +1,12 @@
 # [Global Mercator](https://www.npmjs.com/package/global-mercator)
 
 [![Build Status](https://travis-ci.org/DenisCarriere/global-mercator.svg?branch=master)](https://travis-ci.org/DenisCarriere/global-mercator)
-[![CircleCI](https://circleci.com/gh/DenisCarriere/global-mercator.svg?style=svg)](https://circleci.com/gh/DenisCarriere/global-mercator)
 [![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/global-mercator/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/global-mercator?branch=master)
 [![npm version](https://badge.fury.io/js/global-mercator.svg)](https://badge.fury.io/js/global-mercator)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/global-mercator/master/LICENSE)
+
+<!-- Line Break -->
+[![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 A set of tools geospatial tools to help with TMS, Google (XYZ) Tiles.
 
@@ -31,43 +33,43 @@ tileToBBox(tile)
 
 ## Features
 
-| Function                                                  | Description |
-|-----------------------------------------------------------|:------------|
-| [lngLatToMeters(LngLat)](#lnglattometers)                 | Converts LngLat coordinates to Meters coordinates.
-| [metersToLngLat(Meters)](#meterstolnglat)                 | Converts Meters coordinates to LngLat coordinates.
-| [metersToPixels(Meters, zoom)](#meterstopixels)           | Converts Meters coordinates to Pixels coordinates.
-| [lngLatToTile(LngLat, zoom)](#lnglattotile)               | Converts LngLat coordinates to TMS Tile.
-| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)           | Converts LngLat coordinates to Google (XYZ) Tile.
-| [metersToTile(Meters, zoom)](#meterstotile)               | Converts Meters coordinates to TMS Tile.
-| [pixelsToMeters(Pixels)](#pixelstometers)                 | Converts Pixels coordinates to Meters coordinates.
-| [pixelsToTile(Pixels)](#pixelstotile)                     | Converts Pixels coordinates to TMS Tile.
-| [tileToBBoxMeters(tile)](#tiletobboxmeters)               | Converts TMS Tile to bbox in Meters coordinates.
-| [tileToBBox(tile)](#tiletobbox)                           | Converts TMS Tile to bbox in LngLat coordinates.
-| [googleToBBoxMeters(google)](#googletobboxmeters)         | Converts Google (XYZ) Tile to bbox in Meters coordinates.
-| [googleToBBox(google)](#googletobbox)                     | Converts Google (XYZ) Tile to bbox in LngLat coordinates.
-| [tileToGoogle(tile)](#tiletogoogle)                       | Converts TMS Tile to Google (XYZ) Tile.
-| [googleToTile(google)](#googletotile)                     | Converts Google (XYZ) Tile to TMS Tile.
-| [googleToQuadkey(google)](#googletoquadkey)               | Converts Google (XYZ) Tile to Quadkey.
-| [tileToQuadkey(tile)](#tiletoquadkey)                     | Converts TMS Tile to QuadKey.
-| [quadkeyToTile(quadkey)](#quadkeytotile)                  | Converts Quadkey to TMS Tile.
-| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)              | Converts Quadkey to Google (XYZ) Tile.
-| [bboxToMeters(bbox)](#bboxtometers)                       | Converts BBox from LngLat coordinates to Meters coordinates
-| [grid(BBox, minZoom, maxZoom)](#grid)                     | Creates an Iterator of Tiles from a given BBox
-| [gridBulk(BBox, minZoom, maxZoom, size)](#gridbulk)       | Creates a bulk Iterator of Tiles from a given BBox
-| [gridLevels(BBox, minZoom, maxZoom)](#gridlevels)         | Creates a grid level pattern of arrays
-| [gridCount(BBox, minZoom, maxZoom)](#gridcount)           | Counts the total amount of tiles from a given BBox
+| Function                                            | Description                                                 |
+| --------------------------------------------------- | :---------------------------------------------------------- |
+| [lngLatToMeters(LngLat)](#lnglattometers)           | Converts LngLat coordinates to Meters coordinates.          |
+| [metersToLngLat(Meters)](#meterstolnglat)           | Converts Meters coordinates to LngLat coordinates.          |
+| [metersToPixels(Meters, zoom)](#meterstopixels)     | Converts Meters coordinates to Pixels coordinates.          |
+| [lngLatToTile(LngLat, zoom)](#lnglattotile)         | Converts LngLat coordinates to TMS Tile.                    |
+| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)     | Converts LngLat coordinates to Google (XYZ) Tile.           |
+| [metersToTile(Meters, zoom)](#meterstotile)         | Converts Meters coordinates to TMS Tile.                    |
+| [pixelsToMeters(Pixels)](#pixelstometers)           | Converts Pixels coordinates to Meters coordinates.          |
+| [pixelsToTile(Pixels)](#pixelstotile)               | Converts Pixels coordinates to TMS Tile.                    |
+| [tileToBBoxMeters(tile)](#tiletobboxmeters)         | Converts TMS Tile to bbox in Meters coordinates.            |
+| [tileToBBox(tile)](#tiletobbox)                     | Converts TMS Tile to bbox in LngLat coordinates.            |
+| [googleToBBoxMeters(google)](#googletobboxmeters)   | Converts Google (XYZ) Tile to bbox in Meters coordinates.   |
+| [googleToBBox(google)](#googletobbox)               | Converts Google (XYZ) Tile to bbox in LngLat coordinates.   |
+| [tileToGoogle(tile)](#tiletogoogle)                 | Converts TMS Tile to Google (XYZ) Tile.                     |
+| [googleToTile(google)](#googletotile)               | Converts Google (XYZ) Tile to TMS Tile.                     |
+| [googleToQuadkey(google)](#googletoquadkey)         | Converts Google (XYZ) Tile to Quadkey.                      |
+| [tileToQuadkey(tile)](#tiletoquadkey)               | Converts TMS Tile to QuadKey.                               |
+| [quadkeyToTile(quadkey)](#quadkeytotile)            | Converts Quadkey to TMS Tile.                               |
+| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)        | Converts Quadkey to Google (XYZ) Tile.                      |
+| [bboxToMeters(bbox)](#bboxtometers)                 | Converts BBox from LngLat coordinates to Meters coordinates |
+| [grid(BBox, minZoom, maxZoom)](#grid)               | Creates an Iterator of Tiles from a given BBox              |
+| [gridBulk(BBox, minZoom, maxZoom, size)](#gridbulk) | Creates a bulk Iterator of Tiles from a given BBox          |
+| [gridLevels(BBox, minZoom, maxZoom)](#gridlevels)   | Creates a grid level pattern of arrays                      |
+| [gridCount(BBox, minZoom, maxZoom)](#gridcount)     | Counts the total amount of tiles from a given BBox          |
 
 ## Usage
 
 <!-- Generated by documentation.js. Update this documentation by updating the source code. -->
 
-## hash
+### hash
 
 Hash for Map ID
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** [x, y, z]
+-   `tile` **Tile** [x, y, z]
 
 **Examples**
 
@@ -78,13 +80,13 @@ const id = hash([312, 480, 4])
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** hash
 
-## bboxToCenter
+### bboxToCenter
 
 Converts BBox to Center
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** [west, south, east, north] coordinates
+-   `bbox` **BBox** [west, south, east, north] coordinates
 
 **Examples**
 
@@ -93,15 +95,15 @@ const center = bboxToCenter([90, -45, 85, -50])
 //= [ 87.5, -47.5 ]
 ```
 
-Returns **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** center
+Returns **LngLat** center
 
-## lngLatToMeters
+### lngLatToMeters
 
-Converts [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
+Converts [LngLat](LngLat) coordinates to [Meters](Meters) coordinates.
 
 **Parameters**
 
--   `lnglat` **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 
 **Examples**
 
@@ -110,15 +112,15 @@ const meters = lngLatToMeters([126, 37])
 //=[ 14026255.8, 4439106.7 ]
 ```
 
-Returns **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters coordinates
+Returns **Meters** Meters coordinates
 
-## metersToLngLat
+### metersToLngLat
 
-Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+Converts [Meters](Meters) coordinates to [LngLat](LngLat) coordinates.
 
 **Parameters**
 
--   `meters` **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters in Mercator [x, y]
+-   `meters` **Meters** Meters in Mercator [x, y]
 
 **Examples**
 
@@ -127,15 +129,15 @@ const lnglat = metersToLngLat([14026255, 4439106])
 //=[ 126, 37 ]
 ```
 
-Returns **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** LngLat coordinates
+Returns **LngLat** LngLat coordinates
 
-## metersToPixels
+### metersToPixels
 
-Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates.
+Converts [Meters](Meters) coordinates to [Pixels](Pixels) coordinates.
 
 **Parameters**
 
--   `meters` **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters in Mercator [x, y]
+-   `meters` **Meters** Meters in Mercator [x, y]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
@@ -145,15 +147,15 @@ const pixels = metersToPixels([14026255, 4439106], 13)
 //=[ 1782579.1, 1280877.3, 13 ]
 ```
 
-Returns **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels coordinates
+Returns **Pixels** Pixels coordinates
 
-## lngLatToTile
+### lngLatToTile
 
-Converts [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Converts [LngLat](LngLat) coordinates to TMS [Tile](Tile).
 
 **Parameters**
 
--   `lnglat` **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
@@ -163,15 +165,15 @@ const tile = lngLatToTile([126, 37], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## lngLatToGoogle
+### lngLatToGoogle
 
-Converts [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
+Converts [LngLat](LngLat) coordinates to [Google](Google) (XYZ) Tile.
 
 **Parameters**
 
--   `lnglat` **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
@@ -181,15 +183,15 @@ const google = lngLatToGoogle([126, 37], 13)
 //=[ 6963, 3188, 13 ]
 ```
 
-Returns **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google (XYZ) Tile
+Returns **Google** Google (XYZ) Tile
 
-## metersToTile
+### metersToTile
 
-Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Converts [Meters](Meters) coordinates to TMS [Tile](Tile).
 
 **Parameters**
 
--   `meters` **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters in Mercator [x, y]
+-   `meters` **Meters** Meters in Mercator [x, y]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
@@ -199,15 +201,15 @@ const tile = metersToTile([14026255, 4439106], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## pixelsToMeters
+### pixelsToMeters
 
-Converts [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
+Converts [Pixels](Pixels) coordinates to [Meters](Meters) coordinates.
 
 **Parameters**
 
--   `pixels` **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels [x, y, zoom]
+-   `pixels` **Pixels** Pixels [x, y, zoom]
 
 **Examples**
 
@@ -216,15 +218,15 @@ const meters = pixelsToMeters([1782579, 1280877, 13])
 //=[ 14026252.0, 4439099.5 ]
 ```
 
-Returns **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters coordinates
+Returns **Meters** Meters coordinates
 
-## pixelsToTile
+### pixelsToTile
 
-Converts [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Converts [Pixels](Pixels) coordinates to TMS [Tile](Tile).
 
 **Parameters**
 
--   `pixels` **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels [x, y, zoom]
+-   `pixels` **Pixels** Pixels [x, y, zoom]
 
 **Examples**
 
@@ -233,15 +235,15 @@ const tile = pixelsToTile([1782579, 1280877, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## tileToBBoxMeters
+### tileToBBoxMeters
 
-Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [bbox](bbox) in [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
+Converts TMS [Tile](Tile) to [bbox](bbox) in [Meters](Meters) coordinates.
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** Tile [x, y, zoom]
+-   `tile` **Tile** Tile [x, y, zoom]
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
@@ -253,15 +255,15 @@ const bbox = tileToBBoxMeters([6963, 5003, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
-Returns **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** bbox extent in [minX, minY, maxX, maxY] order
+Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-## tileToBBox
+### tileToBBox
 
-Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [bbox](bbox) in [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+Converts TMS [Tile](Tile) to [bbox](bbox) in [LngLat](LngLat) coordinates.
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** Tile [x, y, zoom]
+-   `tile` **Tile** Tile [x, y, zoom]
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
@@ -273,15 +275,15 @@ const bbox = tileToBBox([6963, 5003, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
-Returns **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** bbox extent in [minX, minY, maxX, maxY] order
+Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-## googleToBBoxMeters
+### googleToBBoxMeters
 
-Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [bbox](bbox) in [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
+Converts [Google](Google) (XYZ) Tile to [bbox](bbox) in [Meters](Meters) coordinates.
 
 **Parameters**
 
--   `google` **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google [x, y, zoom]
+-   `google` **Google** Google [x, y, zoom]
 
 **Examples**
 
@@ -290,15 +292,15 @@ const bbox = googleToBBoxMeters([6963, 3188, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
-Returns **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** bbox extent in [minX, minY, maxX, maxY] order
+Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-## googleToBBox
+### googleToBBox
 
-Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [bbox](bbox) in [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+Converts [Google](Google) (XYZ) Tile to [bbox](bbox) in [LngLat](LngLat) coordinates.
 
 **Parameters**
 
--   `google` **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google [x, y, zoom]
+-   `google` **Google** Google [x, y, zoom]
 
 **Examples**
 
@@ -307,15 +309,15 @@ const bbox = googleToBBox([6963, 3188, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
-Returns **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** bbox extent in [minX, minY, maxX, maxY] order
+Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-## tileToGoogle
+### tileToGoogle
 
-Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
+Converts TMS [Tile](Tile) to [Google](Google) (XYZ) Tile.
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** Tile [x, y, zoom]
+-   `tile` **Tile** Tile [x, y, zoom]
 
 **Examples**
 
@@ -324,15 +326,15 @@ const google = tileToGoogle([6963, 5003, 13])
 //=[ 6963, 3188, 13 ]
 ```
 
-Returns **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google (XYZ) Tile
+Returns **Google** Google (XYZ) Tile
 
-## googleToTile
+### googleToTile
 
-Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Converts [Google](Google) (XYZ) Tile to TMS [Tile](Tile).
 
 **Parameters**
 
--   `google` **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google [x, y, zoom]
+-   `google` **Google** Google [x, y, zoom]
 
 **Examples**
 
@@ -341,15 +343,15 @@ const tile = googleToTile([6963, 3188, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## googleToQuadkey
+### googleToQuadkey
 
-Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx).
+Converts [Google](Google) (XYZ) Tile to [Quadkey](Quadkey).
 
 **Parameters**
 
--   `google` **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google [x, y, zoom]
+-   `google` **Google** Google [x, y, zoom]
 
 **Examples**
 
@@ -360,13 +362,13 @@ const quadkey = googleToQuadkey([6963, 3188, 13])
 
 Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Microsoft's Quadkey schema
 
-## tileToQuadkey
+### tileToQuadkey
 
-Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [QuadKey](QuadKey).
+Converts TMS [Tile](Tile) to [QuadKey](QuadKey).
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** Tile [x, y, zoom]
+-   `tile` **Tile** Tile [x, y, zoom]
 
 **Examples**
 
@@ -377,9 +379,9 @@ const quadkey = tileToQuadkey([6963, 5003, 13])
 
 Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Microsoft's Quadkey schema
 
-## quadkeyToTile
+### quadkeyToTile
 
-Converts [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx) to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Converts [Quadkey](Quadkey) to TMS [Tile](Tile).
 
 **Parameters**
 
@@ -392,11 +394,11 @@ const tile = quadkeyToTile('1321102330211')
 //=[ 6963, 5003, 13 ]
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## quadkeyToGoogle
+### quadkeyToGoogle
 
-Converts [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx) to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
+Converts [Quadkey](Quadkey) to [Google](Google) (XYZ) Tile.
 
 **Parameters**
 
@@ -409,15 +411,15 @@ const google = quadkeyToGoogle('1321102330211')
 //=[ 6963, 3188, 13 ]
 ```
 
-Returns **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google (XYZ) Tile
+Returns **Google** Google (XYZ) Tile
 
-## bboxToMeters
+### bboxToMeters
 
-Converts [BBox](http://geojson.org/geojson-spec.html#bounding-boxes) from [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates
+Converts [BBox](BBox) from [LngLat](LngLat) coordinates to [Meters](Meters) coordinates
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** extent in [minX, minY, maxX, maxY] order
+-   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
 
 **Examples**
 
@@ -426,15 +428,15 @@ const meters = bboxToMeters([ 125, 35, 127, 37 ])
 //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
 ```
 
-Returns **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** bbox extent in [minX, minY, maxX, maxY] order
+Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-## grid
+### grid
 
 Creates an Iterator of Tiles from a given BBox
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** extent in [minX, minY, maxX, maxY] order
+-   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
 -   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
 -   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
 
@@ -447,15 +449,15 @@ const {value, done} = iterable.next()
 //=done
 ```
 
-Returns **Iterator&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>** Iterable Tiles from BBox
+Returns **Iterator&lt;Tile>** Iterable Tiles from BBox
 
-## gridBulk
+### gridBulk
 
 Creates a bulk Iterator of Tiles from a given BBox
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** extent in [minX, minY, maxX, maxY] order
+-   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
 -   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
 -   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
 -   `size` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum size for bulk Tiles
@@ -469,15 +471,15 @@ const {value, done} = grid.next()
 //=done
 ```
 
-Returns **Iterator&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)>>** Bulk iterable Tiles from BBox
+Returns **Iterator&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Tile>>** Bulk iterable Tiles from BBox
 
-## gridLevels
+### gridLevels
 
 Creates a grid level pattern of arrays
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** extent in [minX, minY, maxX, maxY] order
+-   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
 -   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
 -   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
 
@@ -490,13 +492,13 @@ const levels = gridLevels([-180.0, -90.0, 180, 90], 3, 8)
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;GridLevel>** Grid Level
 
-## gridCount
+### gridCount
 
 Counts the total amount of tiles from a given BBox
 
 **Parameters**
 
--   `bbox` **[BBox](http://geojson.org/geojson-spec.html#bounding-boxes)** extent in [minX, minY, maxX, maxY] order
+-   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
 -   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
 -   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
 
@@ -509,13 +511,13 @@ const count = gridCount([-180.0, -90.0, 180, 90], 3, 8)
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Total tiles from BBox
 
-## validateTile
+### validateTile
 
-Validates TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
+Validates TMS [Tile](Tile).
 
 **Parameters**
 
--   `tile` **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** Tile [x, y, zoom]
+-   `tile` **Tile** Tile [x, y, zoom]
 
 **Examples**
 
@@ -530,11 +532,11 @@ validateTile([25, 60, 3])
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if TMS Tile is not valid.
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **Tile** TMS Tile
 
-## validateZoom
+### validateZoom
 
-Validates [Zoom](http://wiki.openstreetmap.org/wiki/Zoom_levels) level.
+Validates [Zoom](Zoom) level.
 
 **Parameters**
 
@@ -555,34 +557,13 @@ validateZoom(32)
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** zoom Zoom level
 
-## validateMeters
+### validateLngLat
 
-Validates [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
-
-**Parameters**
-
--   `meters` **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** Meters in Mercator [x, y]
-
-**Examples**
-
-```javascript
-validateMeters([-115, 44])
-//= [ -115, 44 ]
-validateMeters([-230, 999000000])
-//= Error: Meters [y] cannot be greater than 20037508.342789244
-```
-
--   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if Meters is not valid.
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** Meters coordinates
-
-## validateLngLat
-
-Validates [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+Validates [LngLat](LngLat) coordinates.
 
 **Parameters**
 
--   `lnglat` **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 
 **Examples**
 
@@ -595,15 +576,15 @@ validateLngLat([-225, 44])
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if LngLat is not valid.
 
-Returns **[LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System)** LngLat coordinates
+Returns **LngLat** LngLat coordinates
 
-## validatePixels
+### validatePixels
 
-Validates [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates.
+Validates [Pixels](Pixels) coordinates.
 
 **Parameters**
 
--   `pixels` **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels [x, y, zoom]
+-   `pixels` **Pixels** Pixels [x, y, zoom]
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Zoom level
@@ -616,62 +597,4 @@ validatePixels([-115, 44])
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if Pixels is not valid.
 
-Returns **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** Pixels coordinates
-
-## Changelog
-
-### 1.6.0 - 2017-01-05
-
-- BBox reduced decimal precision to 6
-- bboxToCenter toFixed(6)
-- Lat & Lng decimal toFixed(6)
-- Meters toFixed(1)
-
-### 1.5.0 - 2016-12-25
-
-- Add bboxToCenter & hash function
-- Enforce strict [number, number] instead of number[]
-
-### 1.4.0 - 2016-12-4
-
-- Replace test tools for Jest
-- Added Circle CI testing
-
-### 1.3.5 - 2016-10-25
-
-Reduce library size by 430% (350KB to 80KB)
-
-### 1.3.1 - 2016-10-14
-
-- Update typings to allow `number[]`
-- Enforcing validation with `validateLngLat`, `validateMeters` & `validateTile`
-- Reviewed entire documentation
-- Dropped zoom `@param` from functions with only LatLng & Meters.
-
-```javascript
-lngLatToMeters([lng, lat, zoom])
-// Changed to
-lngLatToMeters([lng, lat])
-
-metersToLngLat([x, y, zoom])
-// Changed to
-metersToLngLat([x, y])
-```
-
-### 1.2.0 - 2016-10-13
-
-Added new features:
-
-- `grid` - Creates an Iterator of Tiles from a given BBox
-- `gridBulk` - Creates a bulk Iterator of Tiles from a given BBox
-- `gridLevels` - Creates a grid level pattern of arrays
-- `gridCount` - Counts the total amount of tiles from a given BBox
-
-### 1.1.0 - 2016-10-03
-
-- Remove Default export
-- Modules compiles only to ES6
-
-### 1.0.0 - 2016-10-01
-
-First Stable release was created
+Returns **Pixels** Pixels coordinates

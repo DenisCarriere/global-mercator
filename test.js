@@ -1,15 +1,15 @@
-import * as mercator from './index'
+const mercator = require('.')
 
 const ZOOM = 13
-const TILE: mercator.Tile = [2389, 5245, 13]
-const GOOGLE: mercator.Google = [2389, 2946, 13]
+const TILE = [2389, 5245, 13]
+const GOOGLE = [2389, 2946, 13]
 const QUADKEY = '0302321010121'
 const QUADKEY_BAD = '030486861'
-const LNGLAT: mercator.LngLat = [-75.000057, 44.999888]
-const METERS: mercator.Meters = [-8348968.179248, 5621503.917462]
-const PIXELS: mercator.Pixels = [611669, 1342753, 13]
-const BBOX_METERS: mercator.BBox = [-8350592.466099, 5620873.311979, -8345700.496289, 5625765.281789]
-const BBOX: mercator.BBox = [-75.014648, 44.995883, -74.970703, 45.026950]
+const LNGLAT = [-75.000057, 44.999888]
+const METERS = [-8348968.179248, 5621503.917462]
+const PIXELS = [611669, 1342753, 13]
+const BBOX_METERS = [-8350592.466099, 5620873.311979, -8345700.496289, 5625765.281789]
+const BBOX = [-75.014648, 44.995883, -74.970703, 45.026950]
 
 /**
  * Test approximate number in array
@@ -17,7 +17,7 @@ const BBOX: mercator.BBox = [-75.014648, 44.995883, -74.970703, 45.026950]
  * @param {number[]} array1
  * @param {number[]} array2
  */
-function toBeCloseToArray(array1: number[], array2: number[], precision: number = 2) {
+function toBeCloseToArray (array1, array2, precision = 2) {
   array1.map((value, index) => {
     expect(value).toBeCloseTo(array2[index], precision)
   })
@@ -143,10 +143,6 @@ describe('validate', () => {
     expect(() => mercator.validateLngLat([120, 220])).toThrow()
     expect(() => mercator.validateLngLat([-220, 45])).toThrow()
     expect(() => mercator.validateLngLat([220, 45])).toThrow()
-  })
-
-  test('validateMeters', () => {
-    expect(mercator.validateMeters(METERS)).toEqual(METERS)
   })
 
   test('validateZoom', () => {
