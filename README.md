@@ -19,13 +19,13 @@ Another great simplistic tile library is [`tilebelt`](https://github.com/mapbox/
 **npm**
 
 ```bash
-$ npm install --save osmify
+$ npm install --save global-mercator
 ```
 
 **web browser ([ES6](https://kangax.github.io/compat-table/es6))**
 
 ```html
-<script src="https://unpkg.com/osmify/osmify.js"></script>
+<script src="https://unpkg.com/global-mercator/global-mercator.min.js"></script>
 ```
 ## Quickstart
 
