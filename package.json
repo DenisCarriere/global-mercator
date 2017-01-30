@@ -6,12 +6,16 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "global-mercator.js",
+    "global-mercator.min.js"
   ],
   "scripts": {
+    "prepublish": "npm run test && npm run build",
     "test": "npm run lint && jest --coverage",
     "lint": "standard",
-    "docs": "documentation readme index.js --section=API"
+    "docs": "documentation readme index.js --section=API",
+    "build": "browserify index.js -s mercator > global-mercator.js && uglifyjs global-mercator.js -c -m > global-mercator.min.js"
   },
   "repository": {
     "type": "git",
@@ -27,10 +31,13 @@
   },
   "homepage": "https://github.com/DenisCarriere/global-mercator#readme",
   "devDependencies": {
+    "browserify": "^14.0.0",
     "coveralls": "^2.11.15",
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
-    "standard": "^8.6.0"
+    "standard": "^8.6.0",
+    "typescript": "^2.1.5",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony"
   },
   "keywords": [
     "gis",
@@ -57,8 +64,7 @@
     "quadkey"
   ],
   "jest": {
-    "verbose": true,
-    "collectCoverage": true
+    "verbose": true
   },
   "testEnvironment": "node",
   "standard": {

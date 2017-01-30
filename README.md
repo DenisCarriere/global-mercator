@@ -16,16 +16,21 @@ Another great simplistic tile library is [`tilebelt`](https://github.com/mapbox/
 
 ## Install
 
+**npm**
+
 ```bash
-$ npm install --save global-mercator
+$ npm install --save osmify
 ```
 
+**web browser ([ES6](https://kangax.github.io/compat-table/es6))**
+
+```html
+<script src="https://unpkg.com/osmify/osmify.min.js"></script>
+```
 ## Quickstart
 
 ```javascript
-const mercator = require('global-mercator')
-
-const tile = [10, 15, 8] // x, y, zoom
+var tile = [10, 15, 8] // [x, y, zoom]
 mercator.tileToBBox(tile)
 // [ -165.937, -82.853, -164.531, -82.676 ]
 ```

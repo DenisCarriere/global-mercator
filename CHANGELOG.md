@@ -1,6 +1,10 @@
 
 ## Changelog
 
+### 1.8.0 - 2017-01-30
+
+- Publish web browser support for ES6.
+
 ### 1.7.0 - 2017-01-24
 
 - Refactoring entire codebase to standard Javascript
