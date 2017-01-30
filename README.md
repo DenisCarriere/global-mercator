@@ -25,7 +25,7 @@ $ npm install --save osmify
 **web browser ([ES6](https://kangax.github.io/compat-table/es6))**
 
 ```html
-<script src="https://unpkg.com/osmify/osmify.min.js"></script>
+<script src="https://unpkg.com/osmify/osmify.js"></script>
 ```
 ## Quickstart
 
