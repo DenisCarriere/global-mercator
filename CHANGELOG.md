@@ -1,6 +1,10 @@
 
 ## Changelog
 
+### 1.9.0 - 2017-02-17
+
+- Add validation to test undefined tiles and throw error
+
 ### 1.8.0 - 2017-01-30
 
 - Publish web browser support for ES6.

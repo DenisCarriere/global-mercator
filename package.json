@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "types": "index.d.ts",
@@ -17,19 +17,8 @@
     "docs": "documentation readme index.js --section=API",
     "build": "browserify index.js -s mercator > global-mercator.js && uglifyjs global-mercator.js -c -m > global-mercator.min.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DenisCarriere/global-mercator.git"
-  },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
-  "contributors": [
-    "Denis Carriere <carriere.denis@gmail.com>"
-  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DenisCarriere/global-mercator/issues"
-  },
-  "homepage": "https://github.com/DenisCarriere/global-mercator#readme",
   "devDependencies": {
     "browserify": "^14.0.0",
     "coveralls": "^2.11.15",

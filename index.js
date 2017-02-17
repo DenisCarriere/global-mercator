@@ -547,17 +547,12 @@ module.exports.gridCount = gridCount
 function validateTile (tile) {
   const [tx, ty, zoom] = tile
   validateZoom(zoom)
-  if (tx < 0) {
-    const message = '<x> must not be less than 0'
-    throw new Error(message)
-  } else if (ty < 0) {
-    const message = '<y> must not be less than 0'
-    throw new Error(message)
-  }
+  if (tx === undefined) { throw new Error('<x> is required') }
+  if (ty === undefined) { throw new Error('<y> is required') }
+  if (tx < 0) { throw new Error('<x> must not be less than 0') }
+  if (ty < 0) { throw new Error('<y> must not be less than 0') }
   const maxCount = Math.pow(2, zoom)
-  if (tx >= maxCount || ty >= maxCount) {
-    throw new Error('Illegal parameters for tile')
-  }
+  if (tx >= maxCount || ty >= maxCount) { throw new Error('Illegal parameters for tile') }
   return tile
 }
 module.exports.validateTile = validateTile
@@ -577,13 +572,9 @@ module.exports.validateTile = validateTile
  * //= Error: <zoom> cannot be greater than 30
  */
 function validateZoom (zoom) {
-  if (zoom < 0) {
-    const message = '<zoom> cannot be less than 0'
-    throw new Error(message)
-  } else if (zoom > 30) {
-    const message = '<zoom> cannot be greater than 30'
-    throw new Error(message)
-  }
+  if (zoom === undefined) { throw new Error('<zoom> is required') }
+  if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
+  if (zoom > 30) { throw new Error('<zoom> cannot be greater than 30') }
   return zoom
 }
 module.exports.validateZoom = validateZoom
