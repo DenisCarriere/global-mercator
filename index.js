@@ -231,7 +231,7 @@ module.exports.tileToBBoxMeters = tileToBBoxMeters
 function tileToBBox (tile) {
   const [tx, ty, zoom] = validateTile(tile)
   if (zoom === 0) {
-    return [-180, -85.05112877980659, 180, 85.05112877980659]
+    return [-180, -85.051129, 180, 85.051129]
   }
   const [mx1, my1, mx2, my2] = tileToBBoxMeters([tx, ty, zoom])
   const min = metersToLngLat([mx1, my1, zoom])

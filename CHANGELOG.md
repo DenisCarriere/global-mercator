@@ -3,7 +3,9 @@
 
 ### 1.9.0 - 2017-02-17
 
-- Add validation to test undefined tiles and throw error
+- Update fixed bbox if zoom level = 0
+- Add validation to latlng
+- Add validation to tiles
 
 ### 1.8.0 - 2017-01-30
 
