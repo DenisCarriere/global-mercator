@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "types": "index.d.ts",

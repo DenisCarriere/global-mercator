@@ -547,8 +547,8 @@ module.exports.gridCount = gridCount
 function validateTile (tile) {
   const [tx, ty, zoom] = tile
   validateZoom(zoom)
-  if (tx === undefined) { throw new Error('<x> is required') }
-  if (ty === undefined) { throw new Error('<y> is required') }
+  if (tx === undefined || tx === null) { throw new Error('<x> is required') }
+  if (ty === undefined || ty === null) { throw new Error('<y> is required') }
   if (tx < 0) { throw new Error('<x> must not be less than 0') }
   if (ty < 0) { throw new Error('<y> must not be less than 0') }
   const maxCount = Math.pow(2, zoom)
@@ -572,7 +572,7 @@ module.exports.validateTile = validateTile
  * //= Error: <zoom> cannot be greater than 30
  */
 function validateZoom (zoom) {
-  if (zoom === undefined) { throw new Error('<zoom> is required') }
+  if (zoom === undefined || zoom === null) { throw new Error('<zoom> is required') }
   if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
   if (zoom > 30) { throw new Error('<zoom> cannot be greater than 30') }
   return zoom
@@ -593,13 +593,10 @@ module.exports.validateZoom = validateZoom
  */
 function validateLngLat (lnglat) {
   const [lng, lat] = lnglat
-  if (lat < -90 || lat > 90) {
-    const message = 'LngLat [lat] must be within -90 to 90 degrees'
-    throw new Error(message)
-  } else if (lng < -180 || lng > 180) {
-    const message = 'LngLat [lng] must be within -180 to 180 degrees'
-    throw new Error(message)
-  }
+  if (lat === undefined || lat === null) { throw new Error('<lat> is required') }
+  if (lng === undefined || lng === null) { throw new Error('<lng> is required') }
+  if (lat < -90 || lat > 90) { throw new Error('LngLat <lat> must be within -90 to 90 degrees') }
+  if (lng < -180 || lng > 180) { throw new Error('LngLat <lng> must be within -180 to 180 degrees') }
   return [lng, lat]
 }
 module.exports.validateLngLat = validateLngLat
