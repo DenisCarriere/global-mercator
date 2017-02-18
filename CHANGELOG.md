@@ -6,6 +6,7 @@
 - Convert project to support Rollup (ES6 next modules)
 - Add `tileSize` @param 
 - Dropped Grid methods (BREAKS backwards compatibility - Major release 2.X)
+- Support browser, nodejs & commonjs
 
 ### 1.9.0 - 2017-02-17
 
