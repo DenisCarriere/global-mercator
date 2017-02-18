@@ -21,7 +21,7 @@ Another great simplistic tile library is [`tilebelt`](https://github.com/mapbox/
 $ npm install --save global-mercator
 ```
 
-**web browser ([ES6](https://kangax.github.io/compat-table/es6))**
+**web browser ([ES5](https://kangax.github.io/compat-table/es5))**
 
 ```html
 <script src="https://unpkg.com/global-mercator/global-mercator.min.js"></script>
