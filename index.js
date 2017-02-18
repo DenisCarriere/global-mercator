@@ -1,5 +1,8 @@
 var originShift = 2 * Math.PI * 6378137 / 2.0
-function initialResolution (tileSize) { return 2 * Math.PI * 6378137 / tileSize || 256 }
+function initialResolution (tileSize) {
+  tileSize = tileSize || 256
+  return 2 * Math.PI * 6378137 / tileSize
+}
 
 /**
  * Hash tile for unique id key
