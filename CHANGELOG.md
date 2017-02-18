@@ -1,6 +1,12 @@
 
 ## Changelog
 
+### 2.0.0 - 2017-02.18
+
+- Convert project to support Rollup (ES6 next modules)
+- Add `tileSize` @param 
+- Dropped Grid methods (BREAKS backwards compatibility - Major release 2.X)
+
 ### 1.9.0 - 2017-02-17
 
 - Update fixed bbox if zoom level = 0

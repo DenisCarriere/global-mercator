@@ -5,7 +5,6 @@
 [![npm version](https://badge.fury.io/js/global-mercator.svg)](https://badge.fury.io/js/global-mercator)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/global-mercator/master/LICENSE)
 
-<!-- Line Break -->
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 A set of tools geospatial tools to help with TMS, Google (XYZ) Tiles.
@@ -27,6 +26,7 @@ $ npm install --save global-mercator
 ```html
 <script src="https://unpkg.com/global-mercator/global-mercator.min.js"></script>
 ```
+
 ## Quickstart
 
 ```javascript
@@ -37,31 +37,31 @@ mercator.tileToBBox(tile)
 
 ## Features
 
-| Function                                            | Description                                                 |
-| --------------------------------------------------- | :---------------------------------------------------------- |
-| [lngLatToMeters(LngLat)](#lnglattometers)           | Converts LngLat coordinates to Meters coordinates.          |
-| [metersToLngLat(Meters)](#meterstolnglat)           | Converts Meters coordinates to LngLat coordinates.          |
-| [metersToPixels(Meters, zoom)](#meterstopixels)     | Converts Meters coordinates to Pixels coordinates.          |
-| [lngLatToTile(LngLat, zoom)](#lnglattotile)         | Converts LngLat coordinates to TMS Tile.                    |
-| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)     | Converts LngLat coordinates to Google (XYZ) Tile.           |
-| [metersToTile(Meters, zoom)](#meterstotile)         | Converts Meters coordinates to TMS Tile.                    |
-| [pixelsToMeters(Pixels)](#pixelstometers)           | Converts Pixels coordinates to Meters coordinates.          |
-| [pixelsToTile(Pixels)](#pixelstotile)               | Converts Pixels coordinates to TMS Tile.                    |
-| [tileToBBoxMeters(tile)](#tiletobboxmeters)         | Converts TMS Tile to bbox in Meters coordinates.            |
-| [tileToBBox(tile)](#tiletobbox)                     | Converts TMS Tile to bbox in LngLat coordinates.            |
-| [googleToBBoxMeters(google)](#googletobboxmeters)   | Converts Google (XYZ) Tile to bbox in Meters coordinates.   |
-| [googleToBBox(google)](#googletobbox)               | Converts Google (XYZ) Tile to bbox in LngLat coordinates.   |
-| [tileToGoogle(tile)](#tiletogoogle)                 | Converts TMS Tile to Google (XYZ) Tile.                     |
-| [googleToTile(google)](#googletotile)               | Converts Google (XYZ) Tile to TMS Tile.                     |
-| [googleToQuadkey(google)](#googletoquadkey)         | Converts Google (XYZ) Tile to Quadkey.                      |
-| [tileToQuadkey(tile)](#tiletoquadkey)               | Converts TMS Tile to QuadKey.                               |
-| [quadkeyToTile(quadkey)](#quadkeytotile)            | Converts Quadkey to TMS Tile.                               |
-| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)        | Converts Quadkey to Google (XYZ) Tile.                      |
-| [bboxToMeters(bbox)](#bboxtometers)                 | Converts BBox from LngLat coordinates to Meters coordinates |
-| [grid(BBox, minZoom, maxZoom)](#grid)               | Creates an Iterator of Tiles from a given BBox              |
-| [gridBulk(BBox, minZoom, maxZoom, size)](#gridbulk) | Creates a bulk Iterator of Tiles from a given BBox          |
-| [gridLevels(BBox, minZoom, maxZoom)](#gridlevels)   | Creates a grid level pattern of arrays                      |
-| [gridCount(BBox, minZoom, maxZoom)](#gridcount)     | Counts the total amount of tiles from a given BBox          |
+| Function                                          | Description                                               |
+| ------------------------------------------------- | :-------------------------------------------------------- |
+| [lngLatToMeters(LngLat)](#lnglattometers)         | Converts LngLat coordinates to Meters coordinates.        |
+| [metersToLngLat(Meters)](#meterstolnglat)         | Converts Meters coordinates to LngLat coordinates.        |
+| [metersToPixels(Meters, zoom)](#meterstopixels)   | Converts Meters coordinates to Pixels coordinates.        |
+| [lngLatToTile(LngLat, zoom)](#lnglattotile)       | Converts LngLat coordinates to TMS Tile.                  |
+| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)   | Converts LngLat coordinates to Google (XYZ) Tile.         |
+| [metersToTile(Meters, zoom)](#meterstotile)       | Converts Meters coordinates to TMS Tile.                  |
+| [pixelsToMeters(Pixels)](#pixelstometers)         | Converts Pixels coordinates to Meters coordinates.        |
+| [pixelsToTile(Pixels)](#pixelstotile)             | Converts Pixels coordinates to TMS Tile.                  |
+| [tileToBBoxMeters(tile)](#tiletobboxmeters)       | Converts TMS Tile to bbox in Meters coordinates.          |
+| [tileToBBox(tile)](#tiletobbox)                   | Converts TMS Tile to bbox in LngLat coordinates.          |
+| [googleToBBoxMeters(google)](#googletobboxmeters) | Converts Google (XYZ) Tile to bbox in Meters coordinates. |
+| [googleToBBox(google)](#googletobbox)             | Converts Google (XYZ) Tile to bbox in LngLat coordinates. |
+| [tileToGoogle(tile)](#tiletogoogle)               | Converts TMS Tile to Google (XYZ) Tile.                   |
+| [googleToTile(google)](#googletotile)             | Converts Google (XYZ) Tile to TMS Tile.                   |
+| [googleToQuadkey(google)](#googletoquadkey)       | Converts Google (XYZ) Tile to Quadkey.                    |
+| [tileToQuadkey(tile)](#tiletoquadkey)             | Converts TMS Tile to QuadKey.                             |
+| [quadkeyToTile(quadkey)](#quadkeytotile)          | Converts Quadkey to TMS Tile.                             |
+| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)      | Converts Quadkey to Google (XYZ) Tile.                    |
+| [hash(tile)](#hash)                               | Hash tile for unique id key                               |
+| [validateTile(tile)](#validatetile)               | Validates TMS Tile                                        |
+| [validateZoom(zoom)](#validatezoom)               | Validates Zoom level                                      |
+| [validateLngLat(LngLat)](#validatelnglat)         | Validates LngLat coordinates                              |
+| [validatePixels(Pixels)](#validatepixels)         | Validates Pixels coordinates                              |
 
 ## API
 
@@ -69,7 +69,7 @@ mercator.tileToBBox(tile)
 
 ### hash
 
-Hash for Map ID
+Hash tile for unique id key
 
 **Parameters**
 
@@ -103,7 +103,7 @@ Returns **LngLat** center
 
 ### lngLatToMeters
 
-Converts [LngLat](LngLat) coordinates to [Meters](Meters) coordinates.
+Converts LngLat coordinates to Meters coordinates.
 
 **Parameters**
 
@@ -120,7 +120,7 @@ Returns **Meters** Meters coordinates
 
 ### metersToLngLat
 
-Converts [Meters](Meters) coordinates to [LngLat](LngLat) coordinates.
+Converts Meters coordinates to LngLat coordinates.
 
 **Parameters**
 
@@ -137,12 +137,13 @@ Returns **LngLat** LngLat coordinates
 
 ### metersToPixels
 
-Converts [Meters](Meters) coordinates to [Pixels](Pixels) coordinates.
+Converts Meters coordinates to Pixels coordinates.
 
 **Parameters**
 
 -   `meters` **Meters** Meters in Mercator [x, y]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `tileSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Tile size (optional, default `256`)
 
 **Examples**
 
@@ -155,7 +156,7 @@ Returns **Pixels** Pixels coordinates
 
 ### lngLatToTile
 
-Converts [LngLat](LngLat) coordinates to TMS [Tile](Tile).
+Converts LngLat coordinates to TMS Tile.
 
 **Parameters**
 
@@ -173,7 +174,7 @@ Returns **Tile** TMS Tile
 
 ### lngLatToGoogle
 
-Converts [LngLat](LngLat) coordinates to [Google](Google) (XYZ) Tile.
+Converts LngLat coordinates to Google (XYZ) Tile.
 
 **Parameters**
 
@@ -191,7 +192,7 @@ Returns **Google** Google (XYZ) Tile
 
 ### metersToTile
 
-Converts [Meters](Meters) coordinates to TMS [Tile](Tile).
+Converts Meters coordinates to TMS Tile.
 
 **Parameters**
 
@@ -209,11 +210,12 @@ Returns **Tile** TMS Tile
 
 ### pixelsToMeters
 
-Converts [Pixels](Pixels) coordinates to [Meters](Meters) coordinates.
+Converts Pixels coordinates to Meters coordinates.
 
 **Parameters**
 
 -   `pixels` **Pixels** Pixels [x, y, zoom]
+-   `tileSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Tile size (optional, default `256`)
 
 **Examples**
 
@@ -226,11 +228,12 @@ Returns **Meters** Meters coordinates
 
 ### pixelsToTile
 
-Converts [Pixels](Pixels) coordinates to TMS [Tile](Tile).
+Converts Pixels coordinates to TMS Tile.
 
 **Parameters**
 
 -   `pixels` **Pixels** Pixels [x, y, zoom]
+-   `tileSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Tile size (optional, default `256`)
 
 **Examples**
 
@@ -243,7 +246,7 @@ Returns **Tile** TMS Tile
 
 ### tileToBBoxMeters
 
-Converts TMS [Tile](Tile) to [bbox](bbox) in [Meters](Meters) coordinates.
+Converts TMS Tile to bbox in Meters coordinates.
 
 **Parameters**
 
@@ -251,6 +254,7 @@ Converts TMS [Tile](Tile) to [bbox](bbox) in [Meters](Meters) coordinates.
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `tileSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Tile size (optional, default `256`)
 
 **Examples**
 
@@ -263,7 +267,7 @@ Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
 ### tileToBBox
 
-Converts TMS [Tile](Tile) to [bbox](bbox) in [LngLat](LngLat) coordinates.
+Converts TMS Tile to bbox in LngLat coordinates.
 
 **Parameters**
 
@@ -283,7 +287,7 @@ Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
 ### googleToBBoxMeters
 
-Converts [Google](Google) (XYZ) Tile to [bbox](bbox) in [Meters](Meters) coordinates.
+Converts Google (XYZ) Tile to bbox in Meters coordinates.
 
 **Parameters**
 
@@ -300,7 +304,7 @@ Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
 ### googleToBBox
 
-Converts [Google](Google) (XYZ) Tile to [bbox](bbox) in [LngLat](LngLat) coordinates.
+Converts Google (XYZ) Tile to bbox in LngLat coordinates.
 
 **Parameters**
 
@@ -317,7 +321,7 @@ Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
 ### tileToGoogle
 
-Converts TMS [Tile](Tile) to [Google](Google) (XYZ) Tile.
+Converts TMS Tile to Google (XYZ) Tile.
 
 **Parameters**
 
@@ -334,7 +338,7 @@ Returns **Google** Google (XYZ) Tile
 
 ### googleToTile
 
-Converts [Google](Google) (XYZ) Tile to TMS [Tile](Tile).
+Converts Google (XYZ) Tile to TMS Tile.
 
 **Parameters**
 
@@ -351,7 +355,7 @@ Returns **Tile** TMS Tile
 
 ### googleToQuadkey
 
-Converts [Google](Google) (XYZ) Tile to [Quadkey](Quadkey).
+Converts Google (XYZ) Tile to Quadkey.
 
 **Parameters**
 
@@ -368,7 +372,7 @@ Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ### tileToQuadkey
 
-Converts TMS [Tile](Tile) to [QuadKey](QuadKey).
+Converts TMS Tile to QuadKey.
 
 **Parameters**
 
@@ -385,7 +389,7 @@ Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ### quadkeyToTile
 
-Converts [Quadkey](Quadkey) to TMS [Tile](Tile).
+Converts Quadkey to TMS Tile.
 
 **Parameters**
 
@@ -402,7 +406,7 @@ Returns **Tile** TMS Tile
 
 ### quadkeyToGoogle
 
-Converts [Quadkey](Quadkey) to [Google](Google) (XYZ) Tile.
+Converts Quadkey to Google (XYZ) Tile.
 
 **Parameters**
 
@@ -419,7 +423,7 @@ Returns **Google** Google (XYZ) Tile
 
 ### bboxToMeters
 
-Converts [BBox](BBox) from [LngLat](LngLat) coordinates to [Meters](Meters) coordinates
+Converts BBox from LngLat coordinates to Meters coordinates
 
 **Parameters**
 
@@ -434,90 +438,9 @@ const meters = bboxToMeters([ 125, 35, 127, 37 ])
 
 Returns **BBox** bbox extent in [minX, minY, maxX, maxY] order
 
-### grid
-
-Creates an Iterator of Tiles from a given BBox
-
-**Parameters**
-
--   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
--   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
--   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
-
-**Examples**
-
-```javascript
-const iterable = grid([-180.0, -90.0, 180, 90], 3, 8)
-const {value, done} = iterable.next()
-//=value
-//=done
-```
-
-Returns **Iterator&lt;Tile>** Iterable Tiles from BBox
-
-### gridBulk
-
-Creates a bulk Iterator of Tiles from a given BBox
-
-**Parameters**
-
--   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
--   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
--   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
--   `size` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum size for bulk Tiles
-
-**Examples**
-
-```javascript
-const grid = gridBulk([-180.0, -90.0, 180, 90], 3, 8, 5000)
-const {value, done} = grid.next()
-//=value
-//=done
-```
-
-Returns **Iterator&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Tile>>** Bulk iterable Tiles from BBox
-
-### gridLevels
-
-Creates a grid level pattern of arrays
-
-**Parameters**
-
--   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
--   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
--   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
-
-**Examples**
-
-```javascript
-const levels = gridLevels([-180.0, -90.0, 180, 90], 3, 8)
-//=levels
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;GridLevel>** Grid Level
-
-### gridCount
-
-Counts the total amount of tiles from a given BBox
-
-**Parameters**
-
--   `bbox` **BBox** extent in [minX, minY, maxX, maxY] order
--   `minZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Minimum Zoom
--   `maxZoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Maximum Zoom
-
-**Examples**
-
-```javascript
-const count = gridCount([-180.0, -90.0, 180, 90], 3, 8)
-//=563136
-```
-
-Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Total tiles from BBox
-
 ### validateTile
 
-Validates TMS [Tile](Tile).
+Validates TMS Tile.
 
 **Parameters**
 
@@ -540,7 +463,7 @@ Returns **Tile** TMS Tile
 
 ### validateZoom
 
-Validates [Zoom](Zoom) level.
+Validates Zoom level
 
 **Parameters**
 
@@ -563,7 +486,7 @@ Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ### validateLngLat
 
-Validates [LngLat](LngLat) coordinates.
+Validates LngLat coordinates
 
 **Parameters**
 
@@ -584,7 +507,7 @@ Returns **LngLat** LngLat coordinates
 
 ### validatePixels
 
-Validates [Pixels](Pixels) coordinates.
+Validates Pixels coordinates
 
 **Parameters**
 

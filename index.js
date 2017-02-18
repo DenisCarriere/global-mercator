@@ -1,9 +1,8 @@
-const tileSize = 256
-const initialResolution = 2 * Math.PI * 6378137 / tileSize
 const originShift = 2 * Math.PI * 6378137 / 2.0
+function initialResolution (tileSize = 256) { return 2 * Math.PI * 6378137 / tileSize }
 
 /**
- * Hash for Map ID
+ * Hash tile for unique id key
  *
  * @param {Tile} tile [x, y, z]
  * @returns {number} hash
@@ -11,11 +10,10 @@ const originShift = 2 * Math.PI * 6378137 / 2.0
  * const id = hash([312, 480, 4])
  * //=5728
  */
-function hash (tile) {
+export function hash (tile) {
   const [x, y, z] = tile
   return (1 << z) * ((1 << z) + x) + y
 }
-module.exports.hash = hash
 
 /**
  * Converts BBox to Center
@@ -26,7 +24,7 @@ module.exports.hash = hash
  * const center = bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
-function bboxToCenter (bbox) {
+export function bboxToCenter (bbox) {
   const [west, south, east, north] = bbox
   let lng = (west - east) / 2 + east
   let lat = (south - north) / 2 + north
@@ -34,10 +32,9 @@ function bboxToCenter (bbox) {
   lat = Number(lat.toFixed(6))
   return [lng, lat]
 }
-module.exports.bboxToCenter = bboxToCenter
 
 /**
- * Converts {@link LngLat} coordinates to {@link Meters} coordinates.
+ * Converts LngLat coordinates to Meters coordinates.
  *
  * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
  * @returns {Meters} Meters coordinates
@@ -45,7 +42,7 @@ module.exports.bboxToCenter = bboxToCenter
  * const meters = lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
-function lngLatToMeters (lnglat) {
+export function lngLatToMeters (lnglat) {
   const [lng, lat] = validateLngLat(lnglat)
   let x = lng * originShift / 180.0
   let y = Math.log(Math.tan((90 + lat) * Math.PI / 360.0)) / (Math.PI / 180.0)
@@ -54,10 +51,9 @@ function lngLatToMeters (lnglat) {
   y = Number(y.toFixed(1))
   return [x, y]
 }
-module.exports.lngLatToMeters = lngLatToMeters
 
 /**
- * Converts {@link Meters} coordinates to {@link LngLat} coordinates.
+ * Converts Meters coordinates to LngLat coordinates.
  *
  * @param {Meters} meters Meters in Mercator [x, y]
  * @returns {LngLat} LngLat coordinates
@@ -65,7 +61,7 @@ module.exports.lngLatToMeters = lngLatToMeters
  * const lnglat = metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
-function metersToLngLat (meters) {
+export function metersToLngLat (meters) {
   const [x, y] = meters
   let lng = (x / originShift) * 180.0
   let lat = (y / originShift) * 180.0
@@ -74,29 +70,28 @@ function metersToLngLat (meters) {
   lat = Number(lat.toFixed(6))
   return [lng, lat]
 }
-module.exports.metersToLngLat = metersToLngLat
 
 /**
- * Converts {@link Meters} coordinates to {@link Pixels} coordinates.
+ * Converts Meters coordinates to Pixels coordinates.
  *
  * @param {Meters} meters Meters in Mercator [x, y]
  * @param {number} zoom Zoom level
+ * @param {number} [tileSize=256] Tile size
  * @returns {Pixels} Pixels coordinates
  * @example
  * const pixels = metersToPixels([14026255, 4439106], 13)
  * //=[ 1782579.1, 1280877.3, 13 ]
  */
-function metersToPixels (meters, zoom) {
+export function metersToPixels (meters, zoom, tileSize) {
   const [x, y] = meters
-  const res = resolution(zoom)
+  const res = resolution(zoom, tileSize)
   const px = (x + originShift) / res
   const py = (y + originShift) / res
   return [px, py, zoom]
 }
-module.exports.metersToPixels = metersToPixels
 
 /**
- * Converts {@link LngLat} coordinates to TMS {@link Tile}.
+ * Converts LngLat coordinates to TMS Tile.
  *
  * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
  * @param {number} zoom Zoom level
@@ -112,7 +107,7 @@ export function lngLatToTile (lnglat, zoom) {
 }
 
 /**
- * Converts {@link LngLat} coordinates to {@link Google} (XYZ) Tile.
+ * Converts LngLat coordinates to Google (XYZ) Tile.
  *
  * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
  * @param {number} zoom Zoom level
@@ -130,7 +125,7 @@ export function lngLatToGoogle (lnglat, zoom) {
 }
 
 /**
- * Converts {@link Meters} coordinates to TMS {@link Tile}.
+ * Converts Meters coordinates to TMS Tile.
  *
  * @param {Meters} meters Meters in Mercator [x, y]
  * @param {number} zoom Zoom level
@@ -148,17 +143,18 @@ export function metersToTile (meters, zoom) {
 }
 
 /**
- * Converts {@link Pixels} coordinates to {@link Meters} coordinates.
+ * Converts Pixels coordinates to Meters coordinates.
  *
  * @param {Pixels} pixels Pixels [x, y, zoom]
+ * @param {number} [tileSize=256] Tile size
  * @returns {Meters} Meters coordinates
  * @example
  * const meters = pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-export function pixelsToMeters (pixels) {
+export function pixelsToMeters (pixels, tileSize) {
   const [px, py, zoom] = validatePixels(pixels)
-  const res = resolution(zoom)
+  const res = resolution(zoom, tileSize)
   let mx = px * res - originShift
   let my = py * res - originShift
   mx = Number(mx.toFixed(1))
@@ -167,15 +163,16 @@ export function pixelsToMeters (pixels) {
 }
 
 /**
- * Converts {@link Pixels} coordinates to TMS {@link Tile}.
+ * Converts Pixels coordinates to TMS Tile.
  *
  * @param {Pixels} pixels Pixels [x, y, zoom]
+ * @param {number} [tileSize=256] Tile size
  * @returns {Tile} TMS Tile
  * @example
  * const tile = pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
-export function pixelsToTile (pixels) {
+export function pixelsToTile (pixels, tileSize = 256) {
   const [px, py, zoom] = validatePixels(pixels)
   if (zoom === 0) {
     return [0, 0, 0]
@@ -192,18 +189,19 @@ export function pixelsToTile (pixels) {
 }
 
 /**
- * Converts TMS {@link Tile} to {@link bbox} in {@link Meters} coordinates.
+ * Converts TMS Tile to bbox in Meters coordinates.
  *
  * @param {Tile} tile Tile [x, y, zoom]
  * @param {number} x TMS Tile X
  * @param {number} y TMS Tile Y
  * @param {number} zoom Zoom level
+ * @param {number} [tileSize=256] Tile size
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * const bbox = tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-export function tileToBBoxMeters (tile) {
+export function tileToBBoxMeters (tile, tileSize = 256) {
   const [tx, ty, zoom] = validateTile(tile)
   let min = pixelsToMeters([tx * tileSize, ty * tileSize, zoom])
   let max = pixelsToMeters([(tx + 1) * tileSize, (ty + 1) * tileSize, zoom])
@@ -211,7 +209,7 @@ export function tileToBBoxMeters (tile) {
 }
 
 /**
- * Converts TMS {@link Tile} to {@link bbox} in {@link LngLat} coordinates.
+ * Converts TMS Tile to bbox in LngLat coordinates.
  *
  * @param {Tile} tile Tile [x, y, zoom]
  * @param {number} x TMS Tile X
@@ -234,7 +232,7 @@ export function tileToBBox (tile) {
 }
 
 /**
- * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link Meters} coordinates.
+ * Converts Google (XYZ) Tile to bbox in Meters coordinates.
  *
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
@@ -248,7 +246,7 @@ export function googleToBBoxMeters (google) {
 }
 
 /**
- * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link LngLat} coordinates.
+ * Converts Google (XYZ) Tile to bbox in LngLat coordinates.
  *
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
@@ -262,7 +260,7 @@ export function googleToBBox (google) {
 }
 
 /**
- * Converts TMS {@link Tile} to {@link Google} (XYZ) Tile.
+ * Converts TMS Tile to Google (XYZ) Tile.
  *
  * @param {Tile} tile Tile [x, y, zoom]
  * @returns {Google} Google (XYZ) Tile
@@ -281,7 +279,7 @@ export function tileToGoogle (tile) {
 }
 
 /**
- * Converts {@link Google} (XYZ) Tile to TMS {@link Tile}.
+ * Converts Google (XYZ) Tile to TMS Tile.
  *
  * @param {Google} google Google [x, y, zoom]
  * @returns {Tile} TMS Tile
@@ -297,7 +295,7 @@ export function googleToTile (google) {
 }
 
 /**
- * Converts {@link Google} (XYZ) Tile to {@link Quadkey}.
+ * Converts Google (XYZ) Tile to Quadkey.
  *
  * @param {Google} google Google [x, y, zoom]
  * @returns {string} Microsoft's Quadkey schema
@@ -311,7 +309,7 @@ export function googleToQuadkey (google) {
 }
 
 /**
- * Converts TMS {@link Tile} to {@link QuadKey}.
+ * Converts TMS Tile to QuadKey.
  *
  * @param {Tile} tile Tile [x, y, zoom]
  * @returns {string} Microsoft's Quadkey schema
@@ -342,7 +340,7 @@ export function tileToQuadkey (tile) {
 }
 
 /**
- * Converts {@link Quadkey} to TMS {@link Tile}.
+ * Converts Quadkey to TMS Tile.
  *
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Tile} TMS Tile
@@ -356,7 +354,7 @@ export function quadkeyToTile (quadkey) {
 }
 
 /**
- * Converts {@link Quadkey} to {@link Google} (XYZ) Tile.
+ * Converts Quadkey to Google (XYZ) Tile.
  *
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Google} Google (XYZ) Tile
@@ -391,7 +389,7 @@ export function quadkeyToGoogle (quadkey) {
 }
 
 /**
- * Converts {@link BBox} from {@link LngLat} coordinates to {@link Meters} coordinates
+ * Converts BBox from LngLat coordinates to Meters coordinates
  *
  * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
@@ -406,7 +404,7 @@ export function bboxToMeters (bbox) {
 }
 
 /**
- * Validates TMS {@link Tile}.
+ * Validates TMS Tile.
  *
  * @param {Tile} tile Tile [x, y, zoom]
  * @throws {Error} Will throw an error if TMS Tile is not valid.
@@ -432,7 +430,7 @@ export function validateTile (tile) {
 }
 
 /**
- * Validates {@link Zoom} level.
+ * Validates Zoom level
  *
  * @param {number} zoom Zoom level
  * @throws {Error} Will throw an error if zoom is not valid.
@@ -453,7 +451,7 @@ export function validateZoom (zoom) {
 }
 
 /**
- * Validates {@link LngLat} coordinates.
+ * Validates LngLat coordinates
  *
  * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
  * @throws {Error} Will throw an error if LngLat is not valid.
@@ -474,7 +472,7 @@ export function validateLngLat (lnglat) {
 }
 
 /**
- * Validates {@link Pixels} coordinates.
+ * Validates Pixels coordinates
  *
  * @param {Pixels} pixels Pixels [x, y, zoom]
  * @param {number} x Pixels X
@@ -495,13 +493,14 @@ export function validatePixels (pixels) {
  *
  * @private
  * @param {number} zoom zoom level
+ * @param {number} [tileSize=256] Tile size
  * @returns {number} resolution
  * @example
  * const res = resolution(13)
  * //=19.109257071294063
  */
-export function resolution (zoom) {
-  return initialResolution / Math.pow(2, zoom)
+export function resolution (zoom, tileSize) {
+  return initialResolution(tileSize) / Math.pow(2, zoom)
 }
 
 /**

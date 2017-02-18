@@ -9,6 +9,7 @@
     "index.d.ts",
     "index.js",
     "global-mercator.js",
+    "global-mercator.js.map",
     "global-mercator.min.js"
   ],
   "scripts": {
@@ -28,7 +29,7 @@
     "rollup": "^0.41.4",
     "standard": "^8.6.0",
     "typescript": "^2.1.5",
-    "uglify-js": "^2.7.5"
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony"
   },
   "keywords": [
     "gis",
