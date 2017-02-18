@@ -161,25 +161,3 @@ describe('validate', () => {
 
   test('validatePixels', () => expect(mercator.validatePixels(PIXELS)).toEqual(PIXELS))
 })
-
-/**
- * Grid
- */
-describe('grid', () => {
-  test('simple', () => {
-    const iterable = mercator.grid([-180.0, -90.0, 180, 90], 3, 21)
-    expect(iterable.next().value).toEqual([0, 0, 3])
-  })
-
-  test('bulk', () => {
-    const iterable = mercator.gridBulk([-180.0, -90.0, 180, 90], 3, 5, 5)
-    while (true) {
-      const { value, done } = iterable.next()
-      if (done) { break }
-      expect(typeof value).toBe(typeof [])
-    }
-  })
-
-  test('count', () => expect(mercator.gridCount([-180.0, -90.0, 180, 90], 3, 21)).toBe(37773648480704))
-  test('levels', () => expect(mercator.gridLevels([-180.0, -90.0, 180, 90], 3, 21).length).toBe(19))
-})

@@ -11,7 +11,7 @@ export declare type Quadkey = string;
 export declare type GridLevel = [number[], number[], number];
 
 /**
- * Functions
+ * Methods
  */
 export declare function hash(tile: Tile): number;
 export declare function bboxToCenter(bbox: BBox): LngLat;
@@ -34,10 +34,6 @@ export declare function tileToQuadkey(tile: Tile): string;
 export declare function quadkeyToTile(quadkey: string): Tile;
 export declare function quadkeyToGoogle(quadkey: string): Google;
 export declare function bboxToMeters(bbox: BBox): BBox;
-export declare function grid(bbox: BBox, minZoom: number, maxZoom: number): Iterator<Tile>;
-export declare function gridBulk(bbox: BBox, minZoom: number, maxZoom: number, size: number): Iterator<Tile[]>;
-export declare function gridLevels(bbox: BBox, minZoom: number, maxZoom: number): GridLevel[];
-export declare function gridCount(bbox: BBox, minZoom: number, maxZoom: number): number;
 export declare function validateTile(tile: Tile): Tile;
 export declare function validateZoom(zoom: number): number;
 export declare function validateLngLat(lnglat: LngLat): LngLat;

@@ -105,12 +105,11 @@ module.exports.metersToPixels = metersToPixels
  * const tile = lngLatToTile([126, 37], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function lngLatToTile (lnglat, zoom) {
+export function lngLatToTile (lnglat, zoom) {
   const meters = lngLatToMeters(validateLngLat(lnglat))
   const pixels = metersToPixels(meters, zoom)
   return pixelsToTile(pixels)
 }
-module.exports.lngLatToTile = lngLatToTile
 
 /**
  * Converts {@link LngLat} coordinates to {@link Google} (XYZ) Tile.
@@ -122,14 +121,13 @@ module.exports.lngLatToTile = lngLatToTile
  * const google = lngLatToGoogle([126, 37], 13)
  * //=[ 6963, 3188, 13 ]
  */
-function lngLatToGoogle (lnglat, zoom) {
+export function lngLatToGoogle (lnglat, zoom) {
   if (zoom === 0) {
     return [0, 0, 0]
   }
   const tile = lngLatToTile(validateLngLat(lnglat), zoom)
   return tileToGoogle(tile)
 }
-module.exports.lngLatToGoogle = lngLatToGoogle
 
 /**
  * Converts {@link Meters} coordinates to TMS {@link Tile}.
@@ -141,14 +139,13 @@ module.exports.lngLatToGoogle = lngLatToGoogle
  * const tile = metersToTile([14026255, 4439106], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function metersToTile (meters, zoom) {
+export function metersToTile (meters, zoom) {
   if (zoom === 0) {
     return [0, 0, 0]
   }
   const pixels = metersToPixels(meters, zoom)
   return pixelsToTile(pixels)
 }
-module.exports.metersToTile = metersToTile
 
 /**
  * Converts {@link Pixels} coordinates to {@link Meters} coordinates.
@@ -159,7 +156,7 @@ module.exports.metersToTile = metersToTile
  * const meters = pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-function pixelsToMeters (pixels) {
+export function pixelsToMeters (pixels) {
   const [px, py, zoom] = validatePixels(pixels)
   const res = resolution(zoom)
   let mx = px * res - originShift
@@ -168,7 +165,6 @@ function pixelsToMeters (pixels) {
   my = Number(my.toFixed(1))
   return [mx, my]
 }
-module.exports.pixelsToMeters = pixelsToMeters
 
 /**
  * Converts {@link Pixels} coordinates to TMS {@link Tile}.
@@ -179,7 +175,7 @@ module.exports.pixelsToMeters = pixelsToMeters
  * const tile = pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function pixelsToTile (pixels) {
+export function pixelsToTile (pixels) {
   const [px, py, zoom] = validatePixels(pixels)
   if (zoom === 0) {
     return [0, 0, 0]
@@ -194,7 +190,6 @@ function pixelsToTile (pixels) {
   }
   return [tx, ty, zoom]
 }
-module.exports.pixelsToTile = pixelsToTile
 
 /**
  * Converts TMS {@link Tile} to {@link bbox} in {@link Meters} coordinates.
@@ -208,13 +203,12 @@ module.exports.pixelsToTile = pixelsToTile
  * const bbox = tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function tileToBBoxMeters (tile) {
+export function tileToBBoxMeters (tile) {
   const [tx, ty, zoom] = validateTile(tile)
   let min = pixelsToMeters([tx * tileSize, ty * tileSize, zoom])
   let max = pixelsToMeters([(tx + 1) * tileSize, (ty + 1) * tileSize, zoom])
   return [min[0], min[1], max[0], max[1]]
 }
-module.exports.tileToBBoxMeters = tileToBBoxMeters
 
 /**
  * Converts TMS {@link Tile} to {@link bbox} in {@link LngLat} coordinates.
@@ -228,7 +222,7 @@ module.exports.tileToBBoxMeters = tileToBBoxMeters
  * const bbox = tileToBBox([6963, 5003, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function tileToBBox (tile) {
+export function tileToBBox (tile) {
   const [tx, ty, zoom] = validateTile(tile)
   if (zoom === 0) {
     return [-180, -85.051129, 180, 85.051129]
@@ -238,7 +232,6 @@ function tileToBBox (tile) {
   const max = metersToLngLat([mx2, my2, zoom])
   return [min[0], min[1], max[0], max[1]]
 }
-module.exports.tileToBBox = tileToBBox
 
 /**
  * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link Meters} coordinates.
@@ -249,11 +242,10 @@ module.exports.tileToBBox = tileToBBox
  * const bbox = googleToBBoxMeters([6963, 3188, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function googleToBBoxMeters (google) {
+export function googleToBBoxMeters (google) {
   const Tile = googleToTile(google)
   return tileToBBoxMeters(Tile)
 }
-module.exports.googleToBBoxMeters = googleToBBoxMeters
 
 /**
  * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link LngLat} coordinates.
@@ -264,11 +256,10 @@ module.exports.googleToBBoxMeters = googleToBBoxMeters
  * const bbox = googleToBBox([6963, 3188, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function googleToBBox (google) {
+export function googleToBBox (google) {
   const Tile = googleToTile(google)
   return tileToBBox(Tile)
 }
-module.exports.googleToBBox = googleToBBox
 
 /**
  * Converts TMS {@link Tile} to {@link Google} (XYZ) Tile.
@@ -279,7 +270,7 @@ module.exports.googleToBBox = googleToBBox
  * const google = tileToGoogle([6963, 5003, 13])
  * //=[ 6963, 3188, 13 ]
  */
-function tileToGoogle (tile) {
+export function tileToGoogle (tile) {
   const [tx, ty, zoom] = validateTile(tile)
   if (zoom === 0) {
     return [0, 0, 0]
@@ -288,7 +279,6 @@ function tileToGoogle (tile) {
   const y = (Math.pow(2, zoom) - 1) - ty
   return [x, y, zoom]
 }
-module.exports.tileToGoogle = tileToGoogle
 
 /**
  * Converts {@link Google} (XYZ) Tile to TMS {@link Tile}.
@@ -299,13 +289,12 @@ module.exports.tileToGoogle = tileToGoogle
  * const tile = googleToTile([6963, 3188, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function googleToTile (google) {
+export function googleToTile (google) {
   const [x, y, zoom] = google
   const tx = x
   const ty = Math.pow(2, zoom) - y - 1
   return [tx, ty, zoom]
 }
-module.exports.googleToTile = googleToTile
 
 /**
  * Converts {@link Google} (XYZ) Tile to {@link Quadkey}.
@@ -316,11 +305,10 @@ module.exports.googleToTile = googleToTile
  * const quadkey = googleToQuadkey([6963, 3188, 13])
  * //='1321102330211'
  */
-function googleToQuadkey (google) {
+export function googleToQuadkey (google) {
   const Tile = googleToTile(google)
   return tileToQuadkey(Tile)
 }
-module.exports.googleToQuadkey = googleToQuadkey
 
 /**
  * Converts TMS {@link Tile} to {@link QuadKey}.
@@ -331,7 +319,7 @@ module.exports.googleToQuadkey = googleToQuadkey
  * const quadkey = tileToQuadkey([6963, 5003, 13])
  * //='1321102330211'
  */
-function tileToQuadkey (tile) {
+export function tileToQuadkey (tile) {
   let [tx, ty, zoom] = validateTile(tile)
   // Zoom 0 does not exist for Quadkey
   if (zoom === 0) {
@@ -352,7 +340,6 @@ function tileToQuadkey (tile) {
   })
   return quadkey
 }
-module.exports.tileToQuadkey = tileToQuadkey
 
 /**
  * Converts {@link Quadkey} to TMS {@link Tile}.
@@ -363,11 +350,10 @@ module.exports.tileToQuadkey = tileToQuadkey
  * const tile = quadkeyToTile('1321102330211')
  * //=[ 6963, 5003, 13 ]
  */
-function quadkeyToTile (quadkey) {
+export function quadkeyToTile (quadkey) {
   const Google = quadkeyToGoogle(quadkey)
   return googleToTile(Google)
 }
-module.exports.quadkeyToTile = quadkeyToTile
 
 /**
  * Converts {@link Quadkey} to {@link Google} (XYZ) Tile.
@@ -378,7 +364,7 @@ module.exports.quadkeyToTile = quadkeyToTile
  * const google = quadkeyToGoogle('1321102330211')
  * //=[ 6963, 3188, 13 ]
  */
-function quadkeyToGoogle (quadkey) {
+export function quadkeyToGoogle (quadkey) {
   let x = 0
   let y = 0
   const zoom = quadkey.length
@@ -403,7 +389,6 @@ function quadkeyToGoogle (quadkey) {
   })
   return [x, y, zoom]
 }
-module.exports.quadkeyToGoogle = quadkeyToGoogle
 
 /**
  * Converts {@link BBox} from {@link LngLat} coordinates to {@link Meters} coordinates
@@ -414,121 +399,11 @@ module.exports.quadkeyToGoogle = quadkeyToGoogle
  * const meters = bboxToMeters([ 125, 35, 127, 37 ])
  * //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
  */
-function bboxToMeters (bbox) {
+export function bboxToMeters (bbox) {
   const min = lngLatToMeters([bbox[0], bbox[1]])
   const max = lngLatToMeters([bbox[2], bbox[3]])
   return [min[0], min[1], max[0], max[1]]
 }
-module.exports.bboxToMeters = bboxToMeters
-
-/**
- * Creates an Iterator of Tiles from a given BBox
- *
- * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
- * @param {number} minZoom Minimum Zoom
- * @param {number} maxZoom Maximum Zoom
- * @returns {Iterator<Tile>} Iterable Tiles from BBox
- * @example
- * const iterable = grid([-180.0, -90.0, 180, 90], 3, 8)
- * const {value, done} = iterable.next()
- * //=value
- * //=done
- */
-function * grid (bbox, minZoom, maxZoom) {
-  for (const [columns, rows, zoom] of gridLevels(bbox, minZoom, maxZoom)) {
-    for (const row of rows) {
-      for (const column of columns) {
-        yield [column, row, zoom]
-      }
-    }
-  }
-}
-module.exports.grid = grid
-
-/**
- * Creates a bulk Iterator of Tiles from a given BBox
- *
- * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
- * @param {number} minZoom Minimum Zoom
- * @param {number} maxZoom Maximum Zoom
- * @param {number} size Maximum size for bulk Tiles
- * @returns {Iterator<Tile[]>} Bulk iterable Tiles from BBox
- * @example
- * const grid = gridBulk([-180.0, -90.0, 180, 90], 3, 8, 5000)
- * const {value, done} = grid.next()
- * //=value
- * //=done
- */
-function* gridBulk (bbox, minZoom, maxZoom, size) {
-  const iterable = grid(bbox, minZoom, maxZoom)
-  let container = []
-  let i = 0
-  while (true) {
-    i++
-    const { value, done } = iterable.next()
-    if (value) {
-      container.push(value)
-    }
-    if (i % size === 0) {
-      yield container
-      container = []
-    }
-    if (done) {
-      yield container
-      break
-    }
-  }
-}
-module.exports.gridBulk = gridBulk
-
-/**
- * Creates a grid level pattern of arrays
- *
- * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
- * @param {number} minZoom Minimum Zoom
- * @param {number} maxZoom Maximum Zoom
- * @returns {GridLevel[]} Grid Level
- * @example
- * const levels = gridLevels([-180.0, -90.0, 180, 90], 3, 8)
- * //=levels
- */
-function gridLevels (bbox, minZoom, maxZoom) {
-  const levels = []
-  for (let zoom of range(minZoom, maxZoom + 1)) {
-    let [x1, y1, x2, y2] = bbox
-    let t1 = lngLatToTile([x1, y1], zoom)
-    let t2 = lngLatToTile([x2, y2], zoom)
-    let minty = Math.min(t1[1], t2[1])
-    let maxty = Math.max(t1[1], t2[1])
-    let mintx = Math.min(t1[0], t2[0])
-    let maxtx = Math.max(t1[0], t2[0])
-    const rows = range(minty, maxty + 1)
-    const columns = range(mintx, maxtx + 1)
-    levels.push([columns, rows, zoom])
-  }
-  return levels
-}
-module.exports.gridLevels = gridLevels
-
-/**
- * Counts the total amount of tiles from a given BBox
- *
- * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
- * @param {number} minZoom Minimum Zoom
- * @param {number} maxZoom Maximum Zoom
- * @returns {number} Total tiles from BBox
- * @example
- * const count = gridCount([-180.0, -90.0, 180, 90], 3, 8)
- * //=563136
- */
-function gridCount (bbox, minZoom, maxZoom) {
-  let count = 0
-  for (const [columns, rows] of gridLevels(bbox, minZoom, maxZoom)) {
-    count += rows.length * columns.length
-  }
-  return count
-}
-module.exports.gridCount = gridCount
 
 /**
  * Validates TMS {@link Tile}.
@@ -544,7 +419,7 @@ module.exports.gridCount = gridCount
  * validateTile([25, 60, 3])
  * //= Error: Illegal parameters for tile
  */
-function validateTile (tile) {
+export function validateTile (tile) {
   const [tx, ty, zoom] = tile
   validateZoom(zoom)
   if (tx === undefined || tx === null) { throw new Error('<x> is required') }
@@ -555,7 +430,6 @@ function validateTile (tile) {
   if (tx >= maxCount || ty >= maxCount) { throw new Error('Illegal parameters for tile') }
   return tile
 }
-module.exports.validateTile = validateTile
 
 /**
  * Validates {@link Zoom} level.
@@ -571,13 +445,12 @@ module.exports.validateTile = validateTile
  * validateZoom(32)
  * //= Error: <zoom> cannot be greater than 30
  */
-function validateZoom (zoom) {
+export function validateZoom (zoom) {
   if (zoom === undefined || zoom === null) { throw new Error('<zoom> is required') }
   if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
   if (zoom > 30) { throw new Error('<zoom> cannot be greater than 30') }
   return zoom
 }
-module.exports.validateZoom = validateZoom
 
 /**
  * Validates {@link LngLat} coordinates.
@@ -591,7 +464,7 @@ module.exports.validateZoom = validateZoom
  * validateLngLat([-225, 44])
  * //= Error: LngLat [lng] must be within -180 to 180 degrees
  */
-function validateLngLat (lnglat) {
+export function validateLngLat (lnglat) {
   const [lng, lat] = lnglat
   if (lat === undefined || lat === null) { throw new Error('<lat> is required') }
   if (lng === undefined || lng === null) { throw new Error('<lng> is required') }
@@ -599,7 +472,6 @@ function validateLngLat (lnglat) {
   if (lng < -180 || lng > 180) { throw new Error('LngLat <lng> must be within -180 to 180 degrees') }
   return [lng, lat]
 }
-module.exports.validateLngLat = validateLngLat
 
 /**
  * Validates {@link Pixels} coordinates.
@@ -613,11 +485,10 @@ module.exports.validateLngLat = validateLngLat
  * @example
  * validatePixels([-115, 44])
  */
-function validatePixels (pixels) {
+export function validatePixels (pixels) {
   // TODO
   return pixels
 }
-module.exports.validatePixels = validatePixels
 
 /**
  * Retrieve resolution based on zoom level
@@ -629,10 +500,9 @@ module.exports.validatePixels = validatePixels
  * const res = resolution(13)
  * //=19.109257071294063
  */
-function resolution (zoom) {
+export function resolution (zoom) {
   return initialResolution / Math.pow(2, zoom)
 }
-module.exports.resolution = resolution
 
 /**
  * Generate an integer Array containing an arithmetic progression.
@@ -650,7 +520,7 @@ module.exports.resolution = resolution
  * range(6, 3, -1)
  * //=[ 6, 5, 4 ]
  */
-function range (start, stop, step) {
+export function range (start, stop, step) {
   if (stop == null) {
     stop = start || 0
     start = 0
@@ -665,4 +535,3 @@ function range (start, stop, step) {
   }
   return range
 }
-module.exports.range = range

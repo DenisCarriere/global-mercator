@@ -1,8 +1,9 @@
 {
   "name": "global-mercator",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
-  "main": "index.js",
+  "main": "global-mercator.js",
+  "jsnext:main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
@@ -11,22 +12,23 @@
     "global-mercator.min.js"
   ],
   "scripts": {
-    "prepublish": "npm run test && npm run build",
-    "test": "npm run lint && jest --coverage",
+    "prepublish": "npm run test && npm run uglify",
+    "test": "npm run lint && npm run build && jest --coverage",
     "lint": "standard",
     "docs": "documentation readme index.js --section=API",
-    "build": "browserify index.js -s mercator > global-mercator.js && uglifyjs global-mercator.js -c -m > global-mercator.min.js"
+    "build": "rollup -c rollup.config.js",
+    "uglify": "uglifyjs global-mercator.js -c -m -o global-mercator.min.js"
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^14.0.0",
     "coveralls": "^2.11.15",
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
+    "rollup": "^0.41.4",
     "standard": "^8.6.0",
     "typescript": "^2.1.5",
-    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony"
+    "uglify-js": "^2.7.5"
   },
   "keywords": [
     "gis",
@@ -58,5 +60,9 @@
   "testEnvironment": "node",
   "standard": {
     "env": "jest"
+  },
+  "dependencies": {
+    "global-mercator": "^1.9.2",
+    "lodash.range": "^3.2.0"
   }
 }
