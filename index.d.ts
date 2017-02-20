@@ -8,7 +8,6 @@ export declare type BBox = [number, number, number, number];
 export declare type Google = [number, number, number];
 export declare type Tile = [number, number, number];
 export declare type Quadkey = string;
-export declare type GridLevel = [number[], number[], number];
 
 /**
  * Methods

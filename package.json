@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "dist/global-mercator.js",
   "browser": "dist/global-mercator.browser.js",
