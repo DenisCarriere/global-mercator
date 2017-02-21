@@ -587,23 +587,23 @@ export function range (start, stop, step) {
  */
 export function maxBBox (array) {
   // Single BBox
-  if (array[0] && array.length === 4 && array[0][0] === undefined) {
+  if (array && array[0] && array.length === 4 && array[0][0] === undefined) {
     return array
   }
 
   // Multiple BBox
-  if (array[0] && array[0][0] !== undefined) {
+  if (array && array[0] && array[0][0] !== undefined) {
     var west = array[0][0]
     var south = array[0][1]
     var east = array[0][2]
     var north = array[0][3]
 
-    for (const bbox of array) {
+    array.map(function (bbox) {
       if (bbox[0] < west) { west = bbox[0] }
       if (bbox[1] < south) { south = bbox[1] }
       if (bbox[2] > east) { east = bbox[2] }
       if (bbox[3] > north) { north = bbox[3] }
-    }
+    })
     return [west, south, east, north]
   }
 }
