@@ -39,3 +39,4 @@ export declare function validateLngLat(lnglat: LngLat): LngLat;
 export declare function validatePixels(pixels: Pixels): Pixels;
 export declare function resolution(zoom: number): number;
 export declare function range(start: number, stop?: number, step?: number): number[];
+export declare function maxBBox(array: BBox|BBox[]): BBox

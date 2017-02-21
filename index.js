@@ -575,3 +575,35 @@ export function range (start, stop, step) {
   }
   return range
 }
+
+/**
+ * Maximum extent of BBox
+ *
+ * @param {BBox|BBox[]} array BBox [west, south, east, north]
+ * @returns {BBox} Maximum BBox
+ * @example
+ * var bbox = maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
+ * //=[-110, -30, 120, 80]
+ */
+export function maxBBox (array) {
+  // Single BBox
+  if (array[0] && array.length === 4 && array[0][0] === undefined) {
+    return array
+  }
+
+  // Multiple BBox
+  if (array[0] && array[0][0] !== undefined) {
+    var west = array[0][0]
+    var south = array[0][1]
+    var east = array[0][2]
+    var north = array[0][3]
+
+    for (const bbox of array) {
+      if (bbox[0] < west) { west = bbox[0] }
+      if (bbox[1] < south) { south = bbox[1] }
+      if (bbox[2] > east) { east = bbox[2] }
+      if (bbox[3] > north) { north = bbox[3] }
+    }
+    return [west, south, east, north]
+  }
+}

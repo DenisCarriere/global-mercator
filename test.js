@@ -144,20 +144,26 @@ describe('validate', () => {
     expect(() => mercator.validateLngLat([-220, 45])).toThrow()
     expect(() => mercator.validateLngLat([220, 45])).toThrow()
   })
-
   test('validateZoom', () => {
     expect(() => mercator.validateZoom(-2)).toThrow()
     expect(() => mercator.validateZoom(35)).toThrow()
   })
-
   test('validateTile', () => {
     expect(() => mercator.validateTile([-10, 30, 5])).toThrow()
     expect(() => mercator.validateTile([30, -10, 5])).toThrow()
     expect(() => mercator.validateTile([25, 60, 3])).toThrow()
     expect(mercator.validateTile(TILE)).toEqual(TILE)
   })
-
   test('validateLngLat', () => expect(mercator.validateLngLat(LNGLAT)).toEqual(LNGLAT))
-
   test('validatePixels', () => expect(mercator.validatePixels(PIXELS)).toEqual(PIXELS))
+})
+
+/**
+ * maxBBox
+ */
+describe('maxBBox', () => {
+  test('null', () => expect(mercator.maxBBox(null)).toEqual(undefined))
+  test('undefined', () => expect(mercator.maxBBox(undefined)).toEqual(undefined))
+  test('single', () => expect(mercator.maxBBox([-20, -30, 20, 30])).toEqual([-20, -30, 20, 30]))
+  test('multiple', () => expect(mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])).toEqual([-110, -30, 120, 80]))
 })

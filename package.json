@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "dist/global-mercator.js",
   "browser": "dist/global-mercator.browser.js",
@@ -22,7 +22,9 @@
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
+    "benchmark": "^2.1.3",
     "coveralls": "^2.11.15",
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",

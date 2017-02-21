@@ -1,50 +1,55 @@
 
-## Changelog
+# Changelog
 
-### 2.0.0 - 2017-02.18
+## 2.1.0 - 2017-02-21
+
+- Added `maxBBox` method
+- Added Benchmark performance testing
+
+## 2.0.0 - 2017-02.18
 
 - Convert to ES5
 - Convert project to support Rollup
-- Add `tileSize` @param 
+- Add `tileSize` @param
 - Dropped Grid methods (BREAKS backwards compatibility - Major release 2.X)
 - Support browser, nodejs & commonjs
 
-### 1.9.0 - 2017-02-17
+## 1.9.0 - 2017-02-17
 
 - Update fixed bbox if zoom level = 0
 - Add validation to latlng
 - Add validation to tiles
 
-### 1.8.0 - 2017-01-30
+## 1.8.0 - 2017-01-30
 
 - Publish web browser support for ES6.
 
-### 1.7.0 - 2017-01-24
+## 1.7.0 - 2017-01-24
 
 - Refactoring entire codebase to standard Javascript
 
-### 1.6.0 - 2017-01-05
+## 1.6.0 - 2017-01-05
 
 - BBox reduced decimal precision to 6
 - bboxToCenter toFixed(6)
 - Lat & Lng decimal toFixed(6)
 - Meters toFixed(1)
 
-### 1.5.0 - 2016-12-25
+## 1.5.0 - 2016-12-25
 
 - Add bboxToCenter & hash function
 - Enforce strict [number, number] instead of number[]
 
-### 1.4.0 - 2016-12-4
+## 1.4.0 - 2016-12-4
 
 - Replace test tools for Jest
 - Added Circle CI testing
 
-### 1.3.5 - 2016-10-25
+## 1.3.5 - 2016-10-25
 
 Reduce library size by 430% (350KB to 80KB)
 
-### 1.3.1 - 2016-10-14
+## 1.3.1 - 2016-10-14
 
 - Update typings to allow `number[]`
 - Enforcing validation with `validateLngLat`, `validateMeters` & `validateTile`
@@ -61,7 +66,7 @@ metersToLngLat([x, y, zoom])
 metersToLngLat([x, y])
 ```
 
-### 1.2.0 - 2016-10-13
+## 1.2.0 - 2016-10-13
 
 Added new features:
 
@@ -70,11 +75,11 @@ Added new features:
 - `gridLevels` - Creates a grid level pattern of arrays
 - `gridCount` - Counts the total amount of tiles from a given BBox
 
-### 1.1.0 - 2016-10-03
+## 1.1.0 - 2016-10-03
 
 - Remove Default export
 - Modules compiles only to ES6
 
-### 1.0.0 - 2016-10-01
+## 1.0.0 - 2016-10-01
 
 First Stable release was created
