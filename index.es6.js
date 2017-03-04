@@ -13,7 +13,7 @@ function initialResolution (tileSize) {
  * var id = mercator.hash([312, 480, 4])
  * //=5728
  */
-function hash (tile) {
+export function hash (tile) {
   var x = tile[0]
   var y = tile[1]
   var z = tile[2]
@@ -29,7 +29,7 @@ function hash (tile) {
  * var center = mercator.bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
-function bboxToCenter (bbox) {
+export function bboxToCenter (bbox) {
   var west = bbox[0]
   var south = bbox[1]
   var east = bbox[2]
@@ -50,7 +50,7 @@ function bboxToCenter (bbox) {
  * var meters = mercator.lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
-function lngLatToMeters (lnglat) {
+export function lngLatToMeters (lnglat) {
   validateLngLat(lnglat)
   var lng = lnglat[0]
   var lat = lnglat[1]
@@ -71,7 +71,7 @@ function lngLatToMeters (lnglat) {
  * var lnglat = mercator.metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
-function metersToLngLat (meters) {
+export function metersToLngLat (meters) {
   var x = meters[0]
   var y = meters[1]
   var lng = (x / originShift) * 180.0
@@ -93,7 +93,7 @@ function metersToLngLat (meters) {
  * var pixels = mercator.metersToPixels([14026255, 4439106], 13)
  * //=[ 1782579.1, 1280877.3, 13 ]
  */
-function metersToPixels (meters, zoom, tileSize) {
+export function metersToPixels (meters, zoom, tileSize) {
   var x = meters[0]
   var y = meters[1]
   var res = resolution(zoom, tileSize)
@@ -112,7 +112,7 @@ function metersToPixels (meters, zoom, tileSize) {
  * var tile = mercator.lngLatToTile([126, 37], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function lngLatToTile (lnglat, zoom) {
+export function lngLatToTile (lnglat, zoom) {
   var meters = lngLatToMeters(validateLngLat(lnglat))
   var pixels = metersToPixels(meters, zoom)
   return pixelsToTile(pixels)
@@ -128,7 +128,7 @@ function lngLatToTile (lnglat, zoom) {
  * var google = mercator.lngLatToGoogle([126, 37], 13)
  * //=[ 6963, 3188, 13 ]
  */
-function lngLatToGoogle (lnglat, zoom) {
+export function lngLatToGoogle (lnglat, zoom) {
   if (zoom === 0) {
     return [0, 0, 0]
   }
@@ -146,7 +146,7 @@ function lngLatToGoogle (lnglat, zoom) {
  * var tile = mercator.metersToTile([14026255, 4439106], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function metersToTile (meters, zoom) {
+export function metersToTile (meters, zoom) {
   if (zoom === 0) {
     return [0, 0, 0]
   }
@@ -164,7 +164,7 @@ function metersToTile (meters, zoom) {
  * var meters = mercator.pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-function pixelsToMeters (pixels, tileSize) {
+export function pixelsToMeters (pixels, tileSize) {
   validatePixels(pixels)
   var px = pixels[0]
   var py = pixels[1]
@@ -187,7 +187,7 @@ function pixelsToMeters (pixels, tileSize) {
  * var tile = mercator.pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function pixelsToTile (pixels, tileSize) {
+export function pixelsToTile (pixels, tileSize) {
   tileSize = tileSize || 256
   validatePixels(pixels)
   var px = pixels[0]
@@ -220,7 +220,7 @@ function pixelsToTile (pixels, tileSize) {
  * var bbox = mercator.tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function tileToBBoxMeters (tile, tileSize) {
+export function tileToBBoxMeters (tile, tileSize) {
   tileSize = tileSize || 256
   validateTile(tile)
   var tx = tile[0]
@@ -243,7 +243,7 @@ function tileToBBoxMeters (tile, tileSize) {
  * var bbox = mercator.tileToBBox([6963, 5003, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function tileToBBox (tile) {
+export function tileToBBox (tile) {
   validateTile(tile)
   var tx = tile[0]
   var ty = tile[1]
@@ -270,7 +270,7 @@ function tileToBBox (tile) {
  * var bbox = mercator.googleToBBoxMeters([6963, 3188, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function googleToBBoxMeters (google) {
+export function googleToBBoxMeters (google) {
   var Tile = googleToTile(google)
   return tileToBBoxMeters(Tile)
 }
@@ -284,7 +284,7 @@ function googleToBBoxMeters (google) {
  * var bbox = mercator.googleToBBox([6963, 3188, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function googleToBBox (google) {
+export function googleToBBox (google) {
   var Tile = googleToTile(google)
   return tileToBBox(Tile)
 }
@@ -298,7 +298,7 @@ function googleToBBox (google) {
  * var google = mercator.tileToGoogle([6963, 5003, 13])
  * //=[ 6963, 3188, 13 ]
  */
-function tileToGoogle (tile) {
+export function tileToGoogle (tile) {
   validateTile(tile)
   var tx = tile[0]
   var ty = tile[1]
@@ -320,7 +320,7 @@ function tileToGoogle (tile) {
  * var tile = mercator.googleToTile([6963, 3188, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function googleToTile (google) {
+export function googleToTile (google) {
   var x = google[0]
   var y = google[1]
   var zoom = google[2]
@@ -338,7 +338,7 @@ function googleToTile (google) {
  * var quadkey = mercator.googleToQuadkey([6963, 3188, 13])
  * //='1321102330211'
  */
-function googleToQuadkey (google) {
+export function googleToQuadkey (google) {
   var Tile = googleToTile(google)
   return tileToQuadkey(Tile)
 }
@@ -352,7 +352,7 @@ function googleToQuadkey (google) {
  * var quadkey = mercator.tileToQuadkey([6963, 5003, 13])
  * //='1321102330211'
  */
-function tileToQuadkey (tile) {
+export function tileToQuadkey (tile) {
   validateTile(tile)
   var tx = tile[0]
   var ty = tile[1]
@@ -386,7 +386,7 @@ function tileToQuadkey (tile) {
  * var tile = mercator.quadkeyToTile('1321102330211')
  * //=[ 6963, 5003, 13 ]
  */
-function quadkeyToTile (quadkey) {
+export function quadkeyToTile (quadkey) {
   var Google = quadkeyToGoogle(quadkey)
   return googleToTile(Google)
 }
@@ -400,7 +400,7 @@ function quadkeyToTile (quadkey) {
  * var google = mercator.quadkeyToGoogle('1321102330211')
  * //=[ 6963, 3188, 13 ]
  */
-function quadkeyToGoogle (quadkey) {
+export function quadkeyToGoogle (quadkey) {
   var x = 0
   var y = 0
   var zoom = quadkey.length
@@ -435,7 +435,7 @@ function quadkeyToGoogle (quadkey) {
  * var meters = mercator.bboxToMeters([ 125, 35, 127, 37 ])
  * //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
  */
-function bboxToMeters (bbox) {
+export function bboxToMeters (bbox) {
   var min = lngLatToMeters([bbox[0], bbox[1]])
   var max = lngLatToMeters([bbox[2], bbox[3]])
   return [min[0], min[1], max[0], max[1]]
@@ -455,7 +455,7 @@ function bboxToMeters (bbox) {
  * mercator.validateTile([25, 60, 3])
  * //= Error: Illegal parameters for tile
  */
-function validateTile (tile) {
+export function validateTile (tile) {
   var tx = tile[0]
   var ty = tile[1]
   var zoom = tile[2]
@@ -483,7 +483,7 @@ function validateTile (tile) {
  * mercator.validateZoom(32)
  * //= Error: <zoom> cannot be greater than 30
  */
-function validateZoom (zoom) {
+export function validateZoom (zoom) {
   if (zoom === undefined || zoom === null) { throw new Error('<zoom> is required') }
   if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
   if (zoom > 30) { throw new Error('<zoom> cannot be greater than 30') }
@@ -502,7 +502,7 @@ function validateZoom (zoom) {
  * mercator.validateLngLat([-225, 44])
  * //= Error: LngLat [lng] must be within -180 to 180 degrees
  */
-function validateLngLat (lnglat) {
+export function validateLngLat (lnglat) {
   var lng = lnglat[0]
   var lat = lnglat[1]
   if (lat === undefined || lat === null) { throw new Error('<lat> is required') }
@@ -524,7 +524,7 @@ function validateLngLat (lnglat) {
  * @example
  * mercator.validatePixels([-115, 44])
  */
-function validatePixels (pixels) {
+export function validatePixels (pixels) {
   // TODO
   return pixels
 }
@@ -540,7 +540,7 @@ function validatePixels (pixels) {
  * var res = mercator.resolution(13)
  * //=19.109257071294063
  */
-function resolution (zoom, tileSize) {
+export function resolution (zoom, tileSize) {
   return initialResolution(tileSize) / Math.pow(2, zoom)
 }
 
@@ -560,7 +560,7 @@ function resolution (zoom, tileSize) {
  * mercator.range(6, 3, -1)
  * //=[ 6, 5, 4 ]
  */
-function range (start, stop, step) {
+export function range (start, stop, step) {
   if (stop == null) {
     stop = start || 0
     start = 0
@@ -585,7 +585,7 @@ function range (start, stop, step) {
  * var bbox = mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
  * //=[-110, -30, 120, 80]
  */
-function maxBBox (array) {
+export function maxBBox (array) {
   // Single BBox
   if (array && array[0] && array.length === 4 && array[0][0] === undefined) {
     return array
@@ -606,35 +606,4 @@ function maxBBox (array) {
     })
     return [west, south, east, north]
   }
-}
-
-module.exports = {
-  hash,
-  bboxToCenter,
-  lngLatToMeters,
-  metersToLngLat,
-  metersToPixels,
-  lngLatToTile,
-  lngLatToGoogle,
-  metersToTile,
-  pixelsToMeters,
-  pixelsToTile,
-  tileToBBoxMeters,
-  tileToBBox,
-  googleToBBoxMeters,
-  googleToBBox,
-  tileToGoogle,
-  googleToTile,
-  googleToQuadkey,
-  tileToQuadkey,
-  quadkeyToTile,
-  quadkeyToGoogle,
-  bboxToMeters,
-  validateTile,
-  validateZoom,
-  validateLngLat,
-  validatePixels,
-  resolution,
-  range,
-  maxBBox
 }

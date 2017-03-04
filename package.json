@@ -3,19 +3,22 @@
   "version": "2.2.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
+  "jsnext:main": "index.es6.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
     "index.js"
   ],
   "scripts": {
-    "prepublish": "npm run test && npm run rollup",
-    "pretest": "npm run lint",
+    "prepublish": "npm run test",
+    "pretest": "npm run lint && npm run rollup",
     "test": "jest --coverage",
     "lint": "standard",
     "bench": "node bench.js",
     "docs": "documentation readme index.js --section=API",
-    "rollup": "rollup -c rollup.config.js"
+    "rollup": "npm run rollup:browser && npm run rollup:cjs",
+    "rollup:browser": "rollup -c docs/rollup.config.js",
+    "rollup:cjs": "rollup -c rollup.config.js"
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
@@ -26,11 +29,6 @@
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
     "rollup": "^0.41.4",
-    "rollup-plugin-commonjs": "^7.0.0",
-    "rollup-plugin-json": "^2.1.0",
-    "rollup-plugin-node-builtins": "^2.1.0",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^2.0.0",
     "standard": "^8.6.0",
     "typescript": "^2.1.5",
     "uglify-js": "^2.7.5"

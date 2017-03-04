@@ -24,7 +24,7 @@ $ npm install --save global-mercator
 **web browser ([ES5](https://kangax.github.io/compat-table/es5))**
 
 ```html
-<script src="https://unpkg.com/global-mercator/global-mercator.min.js"></script>
+<script src="https://unpkg.com/global-mercator/global-mercator.js"></script>
 ```
 
 ## Quickstart

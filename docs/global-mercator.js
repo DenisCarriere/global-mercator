@@ -1,4 +1,4 @@
-var mercator = (function () {
+(function (exports) {
 var originShift = 2 * Math.PI * 6378137 / 2.0;
 function initialResolution (tileSize) {
   tileSize = tileSize || 256;
@@ -609,37 +609,33 @@ function maxBBox (array) {
   }
 }
 
-var index = {
-  hash,
-  bboxToCenter,
-  lngLatToMeters,
-  metersToLngLat,
-  metersToPixels,
-  lngLatToTile,
-  lngLatToGoogle,
-  metersToTile,
-  pixelsToMeters,
-  pixelsToTile,
-  tileToBBoxMeters,
-  tileToBBox,
-  googleToBBoxMeters,
-  googleToBBox,
-  tileToGoogle,
-  googleToTile,
-  googleToQuadkey,
-  tileToQuadkey,
-  quadkeyToTile,
-  quadkeyToGoogle,
-  bboxToMeters,
-  validateTile,
-  validateZoom,
-  validateLngLat,
-  validatePixels,
-  resolution,
-  range,
-  maxBBox
-};
+exports.hash = hash;
+exports.bboxToCenter = bboxToCenter;
+exports.lngLatToMeters = lngLatToMeters;
+exports.metersToLngLat = metersToLngLat;
+exports.metersToPixels = metersToPixels;
+exports.lngLatToTile = lngLatToTile;
+exports.lngLatToGoogle = lngLatToGoogle;
+exports.metersToTile = metersToTile;
+exports.pixelsToMeters = pixelsToMeters;
+exports.pixelsToTile = pixelsToTile;
+exports.tileToBBoxMeters = tileToBBoxMeters;
+exports.tileToBBox = tileToBBox;
+exports.googleToBBoxMeters = googleToBBoxMeters;
+exports.googleToBBox = googleToBBox;
+exports.tileToGoogle = tileToGoogle;
+exports.googleToTile = googleToTile;
+exports.googleToQuadkey = googleToQuadkey;
+exports.tileToQuadkey = tileToQuadkey;
+exports.quadkeyToTile = quadkeyToTile;
+exports.quadkeyToGoogle = quadkeyToGoogle;
+exports.bboxToMeters = bboxToMeters;
+exports.validateTile = validateTile;
+exports.validateZoom = validateZoom;
+exports.validateLngLat = validateLngLat;
+exports.validatePixels = validatePixels;
+exports.resolution = resolution;
+exports.range = range;
+exports.maxBBox = maxBBox;
 
-return index;
-
-}());
+}((this.mercator = this.mercator || {})));
