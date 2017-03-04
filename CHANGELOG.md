@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 2.2.0 - 2017-03-04
+
+- Convert to pure ES5 module (no exports)
+- Modify rollup config
+- Output browser bundle to `docs/`
+
 ## 2.1.0 - 2017-02-21
 
 - Added `maxBBox` method

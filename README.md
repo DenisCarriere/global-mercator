@@ -77,7 +77,7 @@ Hash tile for unique id key
 **Examples**
 
 ```javascript
-var id = hash([312, 480, 4])
+var id = mercator.hash([312, 480, 4])
 //=5728
 ```
 
@@ -94,7 +94,7 @@ Converts BBox to Center
 **Examples**
 
 ```javascript
-var center = bboxToCenter([90, -45, 85, -50])
+var center = mercator.bboxToCenter([90, -45, 85, -50])
 //= [ 87.5, -47.5 ]
 ```
 
@@ -111,7 +111,7 @@ Converts LngLat coordinates to Meters coordinates.
 **Examples**
 
 ```javascript
-var meters = lngLatToMeters([126, 37])
+var meters = mercator.lngLatToMeters([126, 37])
 //=[ 14026255.8, 4439106.7 ]
 ```
 
@@ -128,7 +128,7 @@ Converts Meters coordinates to LngLat coordinates.
 **Examples**
 
 ```javascript
-var lnglat = metersToLngLat([14026255, 4439106])
+var lnglat = mercator.metersToLngLat([14026255, 4439106])
 //=[ 126, 37 ]
 ```
 
@@ -147,7 +147,7 @@ Converts Meters coordinates to Pixels coordinates.
 **Examples**
 
 ```javascript
-var pixels = metersToPixels([14026255, 4439106], 13)
+var pixels = mercator.metersToPixels([14026255, 4439106], 13)
 //=[ 1782579.1, 1280877.3, 13 ]
 ```
 
@@ -165,7 +165,7 @@ Converts LngLat coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = lngLatToTile([126, 37], 13)
+var tile = mercator.lngLatToTile([126, 37], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -183,7 +183,7 @@ Converts LngLat coordinates to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = lngLatToGoogle([126, 37], 13)
+var google = mercator.lngLatToGoogle([126, 37], 13)
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -201,7 +201,7 @@ Converts Meters coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = metersToTile([14026255, 4439106], 13)
+var tile = mercator.metersToTile([14026255, 4439106], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -219,7 +219,7 @@ Converts Pixels coordinates to Meters coordinates.
 **Examples**
 
 ```javascript
-var meters = pixelsToMeters([1782579, 1280877, 13])
+var meters = mercator.pixelsToMeters([1782579, 1280877, 13])
 //=[ 14026252.0, 4439099.5 ]
 ```
 
@@ -237,7 +237,7 @@ Converts Pixels coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = pixelsToTile([1782579, 1280877, 13])
+var tile = mercator.pixelsToTile([1782579, 1280877, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -258,7 +258,7 @@ Converts TMS Tile to bbox in Meters coordinates.
 **Examples**
 
 ```javascript
-var bbox = tileToBBoxMeters([6963, 5003, 13])
+var bbox = mercator.tileToBBoxMeters([6963, 5003, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
@@ -278,7 +278,7 @@ Converts TMS Tile to bbox in LngLat coordinates.
 **Examples**
 
 ```javascript
-var bbox = tileToBBox([6963, 5003, 13])
+var bbox = mercator.tileToBBox([6963, 5003, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
@@ -295,7 +295,7 @@ Converts Google (XYZ) Tile to bbox in Meters coordinates.
 **Examples**
 
 ```javascript
-var bbox = googleToBBoxMeters([6963, 3188, 13])
+var bbox = mercator.googleToBBoxMeters([6963, 3188, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
@@ -312,7 +312,7 @@ Converts Google (XYZ) Tile to bbox in LngLat coordinates.
 **Examples**
 
 ```javascript
-var bbox = googleToBBox([6963, 3188, 13])
+var bbox = mercator.googleToBBox([6963, 3188, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
@@ -329,7 +329,7 @@ Converts TMS Tile to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = tileToGoogle([6963, 5003, 13])
+var google = mercator.tileToGoogle([6963, 5003, 13])
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -346,7 +346,7 @@ Converts Google (XYZ) Tile to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = googleToTile([6963, 3188, 13])
+var tile = mercator.googleToTile([6963, 3188, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -363,7 +363,7 @@ Converts Google (XYZ) Tile to Quadkey.
 **Examples**
 
 ```javascript
-var quadkey = googleToQuadkey([6963, 3188, 13])
+var quadkey = mercator.googleToQuadkey([6963, 3188, 13])
 //='1321102330211'
 ```
 
@@ -380,7 +380,7 @@ Converts TMS Tile to QuadKey.
 **Examples**
 
 ```javascript
-var quadkey = tileToQuadkey([6963, 5003, 13])
+var quadkey = mercator.tileToQuadkey([6963, 5003, 13])
 //='1321102330211'
 ```
 
@@ -397,7 +397,7 @@ Converts Quadkey to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = quadkeyToTile('1321102330211')
+var tile = mercator.quadkeyToTile('1321102330211')
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -414,7 +414,7 @@ Converts Quadkey to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = quadkeyToGoogle('1321102330211')
+var google = mercator.quadkeyToGoogle('1321102330211')
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -431,7 +431,7 @@ Converts BBox from LngLat coordinates to Meters coordinates
 **Examples**
 
 ```javascript
-var meters = bboxToMeters([ 125, 35, 127, 37 ])
+var meters = mercator.bboxToMeters([ 125, 35, 127, 37 ])
 //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
 ```
 
@@ -448,11 +448,11 @@ Validates TMS Tile.
 **Examples**
 
 ```javascript
-validateTile([60, 80, 12])
+mercator.validateTile([60, 80, 12])
 //=[60, 80, 12]
-validateTile([60, -43, 5])
+mercator.validateTile([60, -43, 5])
 //= Error: Tile <y> must not be less than 0
-validateTile([25, 60, 3])
+mercator.validateTile([25, 60, 3])
 //= Error: Illegal parameters for tile
 ```
 
@@ -475,7 +475,7 @@ mercator.validateZoom(12)
 //=12
 mercator.validateZoom(-4)
 //= Error: <zoom> cannot be less than 0
-validateZoom(32)
+mercator.validateZoom(32)
 //= Error: <zoom> cannot be greater than 30
 ```
 
@@ -494,9 +494,9 @@ Validates LngLat coordinates
 **Examples**
 
 ```javascript
-validateLngLat([-115, 44])
+mercator.validateLngLat([-115, 44])
 //= [ -115, 44 ]
-validateLngLat([-225, 44])
+mercator.validateLngLat([-225, 44])
 //= Error: LngLat [lng] must be within -180 to 180 degrees
 ```
 
@@ -518,7 +518,7 @@ Validates Pixels coordinates
 **Examples**
 
 ```javascript
-validatePixels([-115, 44])
+mercator.validatePixels([-115, 44])
 ```
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if Pixels is not valid.
@@ -536,7 +536,7 @@ Maximum extent of BBox
 **Examples**
 
 ```javascript
-var bbox = maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
+var bbox = mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
 //=[-110, -30, 120, 80]
 ```
 

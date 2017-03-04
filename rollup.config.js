@@ -1,14 +1,20 @@
-import nodeResolve from 'rollup-plugin-node-resolve'
-const pkg = require('./package.json')
+import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
+import builtins from 'rollup-plugin-node-builtins'
+import globals from 'rollup-plugin-node-globals'
+import json from 'rollup-plugin-json'
 
 export default {
   entry: 'index.js',
-  moduleName: 'globalMercator',
-  sourceMap: true,
-  plugins: [nodeResolve({jsnext: true})],
-  targets: [
-    { dest: pkg['main'], format: 'cjs' },
-    { dest: pkg['browser'], format: 'umd' },
-    { dest: pkg['jsnext:main'], format: 'es' }
-  ]
+  dest: 'docs/global-mercator.min.js',
+  format: 'iife',
+  plugins: [
+    json(),
+    resolve(),
+    commonjs(),
+    globals(),
+    builtins()
+  ],
+  useStrict: false,
+  moduleName: 'mercator'
 }

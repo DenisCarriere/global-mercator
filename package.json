@@ -1,24 +1,21 @@
 {
   "name": "global-mercator",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
-  "main": "dist/global-mercator.js",
-  "browser": "dist/global-mercator.browser.js",
-  "module": "dist/global-mercator.es.js",
-  "jsnext:main": "dist/global-mercator.es.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js",
-    "dist"
+    "index.js"
   ],
   "scripts": {
-    "prepublish": "npm run test && npm run uglify",
-    "test": "npm run lint && npm run build && jest --coverage",
+    "prepublish": "npm run test && npm run rollup",
+    "pretest": "npm run lint",
+    "test": "jest --coverage",
     "lint": "standard",
+    "bench": "node bench.js",
     "docs": "documentation readme index.js --section=API",
-    "build": "rollup -c rollup.config.js",
-    "uglify": "uglifyjs dist/global-mercator.browser.js -c -m -o dist/global-mercator.browser.min.js"
+    "rollup": "rollup -c rollup.config.js"
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
@@ -29,6 +26,10 @@
     "documentation": "^4.0.0-beta.18",
     "jest-cli": "^18.0.0",
     "rollup": "^0.41.4",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-json": "^2.1.0",
+    "rollup-plugin-node-builtins": "^2.1.0",
+    "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "standard": "^8.6.0",
     "typescript": "^2.1.5",
