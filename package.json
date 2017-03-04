@@ -64,6 +64,7 @@
   },
   "testEnvironment": "node",
   "standard": {
-    "env": "jest"
+    "env": "jest",
+    "ignore": ["docs"]
   }
 }
