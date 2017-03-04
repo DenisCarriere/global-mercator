@@ -10,15 +10,13 @@
     "index.js"
   ],
   "scripts": {
-    "prepublish": "npm run test",
-    "pretest": "npm run lint && npm run rollup",
+    "prepublish": "npm run test && npm run rollup",
+    "pretest": "npm run lint",
     "test": "jest --coverage",
     "lint": "standard",
     "bench": "node bench.js",
     "docs": "documentation readme index.js --section=API",
-    "rollup": "npm run rollup:browser && npm run rollup:cjs",
-    "rollup:browser": "rollup -c docs/rollup.config.js",
-    "rollup:cjs": "rollup -c rollup.config.js"
+    "rollup": "rollup -c docs/rollup.config.js"
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
@@ -63,6 +61,6 @@
   "testEnvironment": "node",
   "standard": {
     "env": "jest",
-    "ignore": ["docs"]
+    "ignore": ["global-mercator.min.js"]
   }
 }

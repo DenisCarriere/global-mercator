@@ -1,6 +1,6 @@
 module.exports = {
-  entry: 'index.es6.js',
-  dest: 'docs/global-mercator.js',
+  entry: 'index.js',
+  dest: 'docs/global-mercator.min.js',
   format: 'iife',
   useStrict: false,
   moduleName: 'mercator'
