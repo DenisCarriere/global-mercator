@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.3.0 - 2017-03-06
+
+- Add `validate` as param
+
 ## 2.2.0 - 2017-03-04
 
 - Bundle to UMD

@@ -107,6 +107,7 @@ Converts LngLat coordinates to Meters coordinates.
 **Parameters**
 
 -   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates LatLng coordinates (optional, default `false`)
 
 **Examples**
 
@@ -161,6 +162,7 @@ Converts LngLat coordinates to TMS Tile.
 
 -   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates LatLng coordinates (optional, default `false`)
 
 **Examples**
 
@@ -179,6 +181,7 @@ Converts LngLat coordinates to Google (XYZ) Tile.
 
 -   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates LatLng coordinates (optional, default `false`)
 
 **Examples**
 
@@ -215,6 +218,7 @@ Converts Pixels coordinates to Meters coordinates.
 
 -   `pixels` **Pixels** Pixels [x, y, zoom]
 -   `tileSize` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Tile size (optional, default `256`)
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Pixels coordinates (optional, default `false`)
 
 **Examples**
 
@@ -233,6 +237,7 @@ Converts Pixels coordinates to TMS Tile.
 
 -   `pixels` **Pixels** Pixels [x, y, zoom]
 -   `tileSize` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Tile size (optional, default `256`)
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Pixels coordinates (optional, default `false`)
 
 **Examples**
 
@@ -254,6 +259,7 @@ Converts TMS Tile to bbox in Meters coordinates.
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 -   `tileSize` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Tile size (optional, default `256`)
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Tile (optional, default `false`)
 
 **Examples**
 
@@ -274,6 +280,7 @@ Converts TMS Tile to bbox in LngLat coordinates.
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile X
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Tile (optional, default `false`)
 
 **Examples**
 
@@ -325,6 +332,7 @@ Converts TMS Tile to Google (XYZ) Tile.
 **Parameters**
 
 -   `tile` **Tile** Tile [x, y, zoom]
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Tile (optional, default `false`)
 
 **Examples**
 
@@ -376,6 +384,7 @@ Converts TMS Tile to QuadKey.
 **Parameters**
 
 -   `tile` **Tile** Tile [x, y, zoom]
+-   `validate` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** validates Tile (optional, default `false`)
 
 **Examples**
 

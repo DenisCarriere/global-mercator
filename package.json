@@ -1,13 +1,13 @@
 {
   "name": "global-mercator",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
-  "jsnext:main": "index.es6.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "docs"
   ],
   "scripts": {
     "prepublish": "npm run test && npm run rollup",
