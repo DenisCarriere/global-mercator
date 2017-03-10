@@ -1,9 +1,14 @@
 
 # Changelog
 
+## 2.4.0 - 2017-03-10
+
+- Remove `throw Error` in Lat & Lng validation process
+- Handle Lat & Lng with +/-180 degrees
+
 ## 2.3.0 - 2017-03-06
 
-- Add `validate` as param
+- Add `validate` as optional `false` param
 
 ## 2.2.0 - 2017-03-04
 

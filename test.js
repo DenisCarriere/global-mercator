@@ -139,10 +139,24 @@ describe('google', () => {
  */
 describe('validate', () => {
   test('Throws Error Bad LngLat', () => {
-    expect(() => mercator.validateLngLat([-120, 220])).toThrow()
-    expect(() => mercator.validateLngLat([120, 220])).toThrow()
-    expect(() => mercator.validateLngLat([-220, 45])).toThrow()
-    expect(() => mercator.validateLngLat([220, 45])).toThrow()
+    expect(mercator.validateLngLat([0, -110])[1]).toEqual(-85)
+    expect(mercator.validateLngLat([0, 110])[1]).toEqual(85)
+    expect(mercator.validateLngLat([90, 80])[0]).toBe(90)
+    expect(mercator.validateLngLat([180, 80])[0]).toBe(180)
+    expect(mercator.validateLngLat([270, 80])[0]).toBe(-90)
+    expect(mercator.validateLngLat([360, 80])[0]).toBe(0)
+    expect(mercator.validateLngLat([450, 80])[0]).toBe(90)
+    expect(mercator.validateLngLat([540, 80])[0]).toBe(180)
+    expect(mercator.validateLngLat([630, 80])[0]).toBe(-90)
+    expect(mercator.validateLngLat([720, 80])[0]).toBe(0)
+    expect(mercator.validateLngLat([-90, 80])[0]).toBe(-90)
+    expect(mercator.validateLngLat([-180, 80])[0]).toBe(-180)
+    expect(mercator.validateLngLat([-270, 80])[0]).toBe(90)
+    expect(mercator.validateLngLat([-360, 80])[0]).toBe(0)
+    expect(mercator.validateLngLat([-450, 80])[0]).toBe(-90)
+    expect(mercator.validateLngLat([-540, 80])[0]).toBe(-180)
+    expect(mercator.validateLngLat([-630, 80])[0]).toBe(90)
+    expect(mercator.validateLngLat([-720, 80])[0]).toBe(0)
   })
   test('validateZoom', () => {
     expect(() => mercator.validateZoom(-2)).toThrow()
@@ -155,7 +169,6 @@ describe('validate', () => {
     expect(mercator.validateTile(TILE)).toEqual(TILE)
   })
   test('validateLngLat', () => expect(mercator.validateLngLat(LNGLAT)).toEqual(LNGLAT))
-  test('validatePixels', () => expect(mercator.validatePixels(PIXELS)).toEqual(PIXELS))
 })
 
 /**
