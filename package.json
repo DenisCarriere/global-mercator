@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "types": "index.d.ts",
@@ -10,28 +10,18 @@
     "docs"
   ],
   "scripts": {
-    "prepublish": "npm run test && npm run rollup",
+    "prepublish": "npm run test && npm run build && npm run docs",
     "pretest": "npm run lint",
-    "test": "jest --coverage",
-    "lint": "standard",
+    "test": "jest --coverage --verbose",
     "bench": "node bench.js",
-    "docs": "documentation readme index.js --section=API",
-    "rollup": "rollup -c docs/rollup.config.js"
+    "lint": "standard index.js",
+    "build": "npm run rollup && npm run uglify",
+    "docs": "documentation readme index.js --shallow --section=API --markdown-toc",
+    "rollup": "rollup -c rollup.config.js",
+    "uglify": "uglifyjs docs/global-mercator.js -c -m > docs/global-mercator.min.js"
   },
   "author": "Denis Carriere <carriere.denis@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
-    "benchmark": "^2.1.3",
-    "coveralls": "^2.11.15",
-    "documentation": "^4.0.0-beta.18",
-    "jest-cli": "^18.0.0",
-    "rollup": "^0.41.4",
-    "rollup-plugin-commonjs": "^8.0.0",
-    "standard": "^8.6.0",
-    "typescript": "^2.1.5",
-    "uglify-js": "^2.7.5"
-  },
   "keywords": [
     "gis",
     "geo",
@@ -56,14 +46,20 @@
     "meters",
     "quadkey"
   ],
-  "jest": {
-    "verbose": true
+  "devDependencies": {
+    "benchmark": "^2.1.3",
+    "documentation": "^4.0.0-beta.18",
+    "jest-cli": "^19.0.2",
+    "rollup": "^0.41.4",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.1.0",
+    "rollup-plugin-node-builtins": "^2.1.0",
+    "rollup-plugin-node-globals": "^1.1.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3",
+    "typescript": "^2.1.5",
+    "uglify-js": "^2.7.5"
   },
-  "testEnvironment": "node",
-  "standard": {
-    "env": "jest",
-    "ignore": [
-      "global-mercator.min.js"
-    ]
-  }
+  "dependencies": {}
 }

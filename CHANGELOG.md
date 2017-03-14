@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 2.5.0 - 2017-03-18
+
+- Add minified build using Uglifyjs
+- Improve lat & lng validation
+- Add automated Table of Contents
+
 ## 2.4.0 - 2017-03-10
 
 - Remove `throw Error` in Lat & Lng validation process

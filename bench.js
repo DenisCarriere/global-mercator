@@ -10,6 +10,26 @@ const METERS = [-8348968.179248, 5621503.917462]
 const PIXELS = [611669, 1342753, 13]
 const BBOX = [-75.014648, 44.995883, -74.970703, 45.026950]
 
+/**
+ * bboxToCenter x 965,664 ops/sec ±1.91% (88 runs sampled)
+ * bboxToMeters x 422,599 ops/sec ±1.01% (91 runs sampled)
+ * hash x 43,542,539 ops/sec ±1.10% (90 runs sampled)
+ * lngLatToMeters x 827,780 ops/sec ±1.01% (92 runs sampled)
+ * lngLatToGoogle x 717,760 ops/sec ±0.81% (89 runs sampled)
+ * lngLatToTile x 760,254 ops/sec ±0.87% (90 runs sampled)
+ * metersToLngLat x 888,073 ops/sec ±1.00% (91 runs sampled)
+ * metersToPixels x 24,727,823 ops/sec ±0.99% (88 runs sampled)
+ * metersToTile x 14,025,048 ops/sec ±1.15% (88 runs sampled)
+ * pixelsToTile x 17,233,422 ops/sec ±0.81% (89 runs sampled)
+ * tileToBBox x 222,543 ops/sec ±0.88% (88 runs sampled)
+ * tileToBBoxMeters x 459,586 ops/sec ±0.98% (90 runs sampled)
+ * tileToGoogle x 18,522,013 ops/sec ±1.12% (90 runs sampled)
+ * tileToQuadkey x 135,456 ops/sec ±1.01% (88 runs sampled)
+ * quadkeyToGoogle x 146,996 ops/sec ±0.91% (89 runs sampled)
+ * googleToBBox x 224,943 ops/sec ±0.88% (91 runs sampled)
+ * range x 2,906,181 ops/sec ±1.04% (89 runs sampled)
+ */
+
 const suite = new Benchmark.Suite('global-mercator')
 suite
   .add('bboxToCenter', () => mercator.bboxToCenter([90, -45, 85, -50]))

@@ -1,4 +1,4 @@
-const mercator = require('.')
+const mercator = require('./')
 
 const ZOOM = 13
 const TILE = [2389, 5245, 13]
@@ -139,8 +139,8 @@ describe('google', () => {
  */
 describe('validate', () => {
   test('Throws Error Bad LngLat', () => {
-    expect(mercator.validateLngLat([0, -110])[1]).toEqual(-85)
-    expect(mercator.validateLngLat([0, 110])[1]).toEqual(85)
+    expect(mercator.validateLngLat([0, -110])[1]).toEqual(70)
+    expect(mercator.validateLngLat([0, 110])[1]).toEqual(-70)
     expect(mercator.validateLngLat([90, 80])[0]).toBe(90)
     expect(mercator.validateLngLat([180, 80])[0]).toBe(180)
     expect(mercator.validateLngLat([270, 80])[0]).toBe(-90)
