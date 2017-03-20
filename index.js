@@ -1,3 +1,6 @@
+var latitude = require('bbox-dateline').latitude
+var longitude = require('bbox-dateline').longitude
+
 var originShift = 2 * Math.PI * 6378137 / 2.0
 function initialResolution (tileSize) {
   tileSize = tileSize || 256
@@ -529,7 +532,7 @@ function validateLngLat (lnglat, validate) {
 
   // Global Mercator does not support latitudes within 85 to 90 degrees
   if (lat > 85) lat = 85
-  if (lng < -85) lat = -85
+  if (lat < -85) lat = -85
   return [lng, lat]
 }
 
@@ -612,50 +615,6 @@ function maxBBox (array) {
   }
 }
 
-/**
- * Modifies a Latitude to fit within +/-90 degrees.
- *
- * @param {number} lat latitude to modify
- * @returns {number} modified latitude
- * @example
- * dateline.latitude(100)
- * //= -80
- */
-function latitude (lat) {
-  if (lat === null || lat === undefined) throw new Error('lat is required')
-
-  // Latitudes cannot extends beyond +/-90 degrees
-  if (lat > 90 || lat < -90) {
-    lat = lat % 180
-    if (lat > 90) lat = -180 + lat
-    if (lat < -90) lat = 180 + lat
-    if (lat === -0) lat = 0
-  }
-  return lat
-}
-
-/**
- * Modifies a Longitude to fit within +/-180 degrees.
- *
- * @param {number} lng longitude to modify
- * @returns {number} modified longitude
- * @example
- * dateline.longitude(190)
- * //= -170
- */
-function longitude (lng) {
-  if (lng === null || lng === undefined) throw new Error('lng is required')
-
-  // lngitudes cannot extends beyond +/-90 degrees
-  if (lng > 180 || lng < -180) {
-    lng = lng % 360
-    if (lng > 180) lng = -360 + lng
-    if (lng < -180) lng = 360 + lng
-    if (lng === -0) lng = 0
-  }
-  return lng
-}
-
 module.exports = {
   hash: hash,
   bboxToCenter: bboxToCenter,
@@ -683,7 +642,5 @@ module.exports = {
   validateLngLat: validateLngLat,
   resolution: resolution,
   range: range,
-  maxBBox: maxBBox,
-  latitude: latitude,
-  longitude: longitude
+  maxBBox: maxBBox
 }

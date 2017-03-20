@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "main": "index.js",
   "types": "index.d.ts",
@@ -16,7 +16,7 @@
     "bench": "node bench.js",
     "lint": "standard index.js",
     "build": "npm run rollup && npm run uglify",
-    "docs": "documentation readme index.js --shallow --section=API --markdown-toc",
+    "docs": "documentation readme index.js --shallow --section=API",
     "rollup": "rollup -c rollup.config.js",
     "uglify": "uglifyjs docs/global-mercator.js -c -m > docs/global-mercator.min.js"
   },
@@ -61,5 +61,7 @@
     "typescript": "^2.1.5",
     "uglify-js": "^2.7.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bbox-dateline": "^1.1.1"
+  }
 }

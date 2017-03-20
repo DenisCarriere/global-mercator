@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.6.0 - 2017-03-20
+
+- Fix LatLng validation (issue with lat being a lng)
+
 ## 2.5.0 - 2017-03-18
 
 - Add minified build using Uglifyjs
