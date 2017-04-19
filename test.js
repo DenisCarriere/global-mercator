@@ -169,6 +169,11 @@ describe('validate', () => {
     expect(mercator.validateTile(TILE)).toEqual(TILE)
   })
   test('validateLngLat', () => expect(mercator.validateLngLat(LNGLAT)).toEqual(LNGLAT))
+  test('validTile', () => {
+    expect(mercator.validTile([-10, 30, 5])).toEqual(false)
+    expect(mercator.validTile([30, -10, 5])).toEqual(false)
+    expect(mercator.validTile([25, 60, 3])).toEqual(false)
+  })
 })
 
 /**
