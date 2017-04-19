@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.7.0 - 2017-04-19
+
+- Add `validTile` method
+
 ## 2.6.0 - 2017-03-20
 
 - Fix LatLng validation (issue with lat being a lng)

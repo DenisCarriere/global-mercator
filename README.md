@@ -63,6 +63,7 @@ mercator.tileToBBox(tile)
 | [validateLngLat(LngLat)](#validatelnglat)         | Validates LngLat coordinates                              |
 | [validatePixels(Pixels)](#validatepixels)         | Validates Pixels coordinates                              |
 | [maxBBox(BBox\[\])](#maxbbox)                     | Maximum extent of BBox                                    |
+| [validTile(tile)](#validtile)                     | Valid Tile                                                |
 
 ## API
 
@@ -531,3 +532,24 @@ var bbox = mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
 ```
 
 Returns **BBox** Maximum BBox
+
+### validTile
+
+Valid TMS Tile
+
+**Parameters**
+
+-   `tile` **Tile** Tile [x, y, zoom]
+
+**Examples**
+
+```javascript
+mercator.validTile([60, 80, 12])
+//= true
+mercator.validTile([60, -43, 5])
+//= false
+mercator.validTile([25, 60, 3])
+//= false
+```
+
+Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** valid tile true/false

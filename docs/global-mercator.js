@@ -1925,6 +1925,28 @@ function maxBBox (array) {
   }
 }
 
+/**
+ * Valid TMS Tile
+ *
+ * @param {Tile} tile Tile [x, y, zoom]
+ * @returns {boolean} valid tile true/false
+ * @example
+ * mercator.validTile([60, 80, 12])
+ * //= true
+ * mercator.validTile([60, -43, 5])
+ * //= false
+ * mercator.validTile([25, 60, 3])
+ * //= false
+ */
+function validTile (tile) {
+  try {
+    validateTile(tile);
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 var index = {
   hash: hash,
   bboxToCenter: bboxToCenter,
@@ -1952,7 +1974,8 @@ var index = {
   validateLngLat: validateLngLat,
   resolution: resolution,
   range: range,
-  maxBBox: maxBBox
+  maxBBox: maxBBox,
+  validTile: validTile
 };
 
 return index;
