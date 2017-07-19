@@ -1,4 +1,6 @@
 var originShift = 2 * Math.PI * 6378137 / 2.0
+var d2r = Math.PI / 180
+// var r2d = 180 / Math.PI
 function initialResolution (tileSize) {
   tileSize = tileSize || 256
   return 2 * Math.PI * 6378137 / tileSize
@@ -18,6 +20,45 @@ function hash (tile) {
   var y = tile[1]
   var z = tile[2]
   return (1 << z) * ((1 << z) + x) + y
+}
+
+/**
+ * Get the tile for a point at a specified zoom level
+ * https://github.com/mapbox/tilebelt
+ *
+ * @param {[number, number]} lnglat [Longitude, Latitude]
+ * @param {number} zoom Zoom level
+ * @example
+ * var tile = mercator.pointToTile([1, 1], 12)
+ * //= [ 2059, 2036, 12 ]
+ */
+function pointToTile (lnglat, zoom) {
+  var tile = pointToTileFraction(lnglat, zoom)
+  tile[0] = Math.floor(tile[0])
+  tile[1] = Math.floor(tile[1])
+  return tile
+}
+
+/**
+ * Get the precise fractional tile location for a point at a zoom level
+ * https://github.com/mapbox/tilebelt
+ *
+ * @name pointToTileFraction
+ * @param {[number, number]} lnglat [Longitude, Latitude]
+ * @param {number} zoom Zoom level
+ * @returns {[number, number, number]} tile fraction
+ * var tile = mercator.pointToTileFraction([1, 1], 12)
+ * //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
+ */
+function pointToTileFraction (lnglat, zoom) {
+  var z = zoom
+  var lon = lnglat[0]
+  var lat = lnglat[1]
+  var sin = Math.sin(lat * d2r)
+  var z2 = Math.pow(2, z)
+  var x = z2 * (lon / 360 + 0.5)
+  var y = z2 * (0.5 - 0.25 * Math.log((1 + sin) / (1 - sin)) / Math.PI)
+  return [x, y, z]
 }
 
 /**
@@ -44,7 +85,7 @@ function bboxToCenter (bbox) {
 /**
  * Converts LngLat coordinates to Meters coordinates.
  *
- * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+ * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Meters} Meters coordinates
  * @example
@@ -106,7 +147,7 @@ function metersToPixels (meters, zoom, tileSize) {
 /**
  * Converts LngLat coordinates to TMS Tile.
  *
- * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+ * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {number} zoom Zoom level
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Tile} TMS Tile
@@ -124,7 +165,7 @@ function lngLatToTile (lnglat, zoom, validate) {
 /**
  * Converts LngLat coordinates to Google (XYZ) Tile.
  *
- * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+ * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {number} zoom Zoom level
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Google} Google (XYZ) Tile
@@ -371,7 +412,6 @@ function tileToQuadkey (tile, validate) {
     return ''
   }
   var quadkey = ''
-  ty = (Math.pow(2, zoom) - 1) - ty
   range(zoom, 0, -1).map(function (i) {
     var digit = 0
     var mask = 1 << (i - 1)
@@ -506,7 +546,7 @@ function validateZoom (zoom) {
 /**
  * Validates LngLat coordinates
  *
- * @param {LngLat} lnglat Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+ * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @throws {Error} Will throw an error if LngLat is not valid.
  * @returns {LngLat} LngLat coordinates
@@ -705,5 +745,7 @@ module.exports = {
   resolution: resolution,
   range: range,
   maxBBox: maxBBox,
-  validTile: validTile
+  validTile: validTile,
+  pointToTileFraction: pointToTileFraction,
+  pointToTile: pointToTile
 }

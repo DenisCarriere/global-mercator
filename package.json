@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "repository": {
     "type": "git",
@@ -45,6 +45,7 @@
     "quadkey"
   ],
   "devDependencies": {
+    "@mapbox/tilebelt": "^1.0.1",
     "benchmark": "^2.1.4",
     "documentation": "^4.0.0-rc.1",
     "standard": "^10.0.2",

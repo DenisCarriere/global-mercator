@@ -1,8 +1,10 @@
 
 # Changelog
 
-## 2.8.0 - 2017-07-19
+## 2.8.1 - 2017-07-19
 
+- Include tests side by side with `tilebelt`
+- Fixed issue with `tileToQuadkey`
 - Drop rollup setup
 - Add Git URL repo to `package.json`
 - Added `longitude` & `latitude` as exposed methods

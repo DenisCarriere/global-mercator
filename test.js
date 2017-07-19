@@ -1,4 +1,5 @@
 const {test} = require('tap')
+const tilebelt = require('@mapbox/tilebelt')
 const mercator = require('./')
 
 const ZOOM = 13
@@ -109,7 +110,8 @@ test('tile', t => {
   t.true(toBeCloseToArray(mercator.tileToBBoxMeters(TILE), BBOX_METERS, 0), 'tileToBBoxMeters')
   t.deepEqual(mercator.tileToGoogle(TILE), GOOGLE, 'tileToGoogle')
   t.deepEqual(mercator.tileToGoogle([0, 0, 0]), [0, 0, 0], 'tileToGoogle')
-  t.deepEqual(mercator.tileToQuadkey(TILE), QUADKEY, 'tileToQuadkey')
+  t.deepEqual(mercator.tileToQuadkey(TILE), '2120103232303', 'tileToQuadkey')
+  t.deepEqual(tilebelt.tileToQuadkey(TILE), '2120103232303', 'tileToQuadkey -- tilebelt')
   t.deepEqual(mercator.tileToQuadkey([0, 0, 0]), '', 'tileToQuadkey -- null')
   t.end()
 })
@@ -130,7 +132,8 @@ test('quadkey', t => {
 test('google', t => {
   t.true(toBeCloseToArray(mercator.googleToBBox(GOOGLE), BBOX), 'googleToBbox')
   t.true(toBeCloseToArray(mercator.googleToBBoxMeters(GOOGLE), BBOX_METERS, 0), 'googleToBBoxMeters')
-  t.deepEqual(mercator.googleToQuadkey(GOOGLE), QUADKEY, 'googleToQuadKey')
+  t.deepEqual(mercator.googleToQuadkey(GOOGLE), '2120103232303', 'googleToQuadKey')
+  t.deepEqual(tilebelt.tileToQuadkey(mercator.googleToTile(GOOGLE)), '2120103232303', 'googleToQuadKey -- tilebelt')
   t.deepEqual(mercator.googleToTile(GOOGLE), TILE, 'googleToTile')
   t.end()
 })
@@ -187,13 +190,37 @@ test('validate -- validTile', t => {
   t.end()
 })
 
-/**
- * maxBBox
- */
 test('maxBBox', t => {
   t.throws(() => mercator.maxBBox(null), 'null')
   t.throws(() => mercator.maxBBox(undefined), 'undefined')
   t.deepEqual(mercator.maxBBox([-20, -30, 20, 30]), [-20, -30, 20, 30], 'single')
   t.deepEqual(mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]]), [-110, -30, 120, 80], 'multiple')
+  t.end()
+})
+
+test('pointToTile', t => {
+  var tile = mercator.pointToTile([0, 0], 10)
+  t.equal(tile.length, 3)
+  t.equal(tile[2], 10)
+  t.end()
+})
+
+test('pointToTileFraction', t => {
+  const tile = mercator.pointToTileFraction([-95.93965530395508, 41.26000108568697], 9)
+  t.ok(tile, 'convert point to tile fraction')
+  t.equal(tile[0], 119.552490234375)
+  t.equal(tile[1], 191.47119140625)
+  t.equal(tile[2], 9)
+  t.end()
+})
+
+test('point to tile verified', t => {
+  var tile = mercator.pointToTile([-77.03239381313323, 38.91326516559442], 10)
+  t.equal(tile.length, 3)
+  t.equal(tile[0], 292)
+  t.equal(tile[1], 391)
+  t.equal(tile[2], 10)
+  t.equal(mercator.tileToQuadkey(tile), '0320100322', 'pointToTile')
+  t.equal(tilebelt.tileToQuadkey(tile), '0320100322', 'pointToTile -- tilebelt')
   t.end()
 })

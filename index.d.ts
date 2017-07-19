@@ -40,3 +40,7 @@ export declare function resolution(zoom: number): number;
 export declare function range(start: number, stop?: number, step?: number): number[];
 export declare function maxBBox(array: BBox|BBox[]): BBox
 export declare function validTile(tile: Tile): boolean;
+export declare function longitude(lng: number): number;
+export declare function latitude(lat: number): number;
+export declare function pointToTileFraction(lnglat: LngLat, zoom: number): Tile;
+export declare function pointToTile(lnglat: LngLat, zoom: number): Tile;
