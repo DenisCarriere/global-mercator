@@ -412,6 +412,7 @@ function tileToQuadkey (tile, validate) {
     return ''
   }
   var quadkey = ''
+  ty = (Math.pow(2, zoom) - 1) - ty
   range(zoom, 0, -1).map(function (i) {
     var digit = 0
     var mask = 1 << (i - 1)

@@ -59,8 +59,10 @@ mercator.tileToBBox(tile)
 | [validatePixels(Pixels)](#validatepixels)         | Validates Pixels coordinates                              |
 | [maxBBox(BBox\[\])](#maxbbox)                     | Maximum extent of BBox                                    |
 | [validTile(tile)](#validtile)                     | Valid Tile                                                |
-| [longitude(degree)](#longitude)                     | Modifies a Longitude to fit within +/-180 degrees.                                                |
-| [latitude(degree)](#latitude)                     | Modifies a Latitude to fit within +/-90 degrees.                                                |
+| [longitude(degree)](#longitude)                   | Modifies a Longitude to fit within +/-180 degrees.        |
+| [latitude(degree)](#latitude)                     | Modifies a Latitude to fit within +/-90 degrees.          |
+| [pointToTile(lnglat, zoom)](#pointtotile)                     | Get the tile for a point at a specified zoom level          |
+| [pointToTileFraction(lnglat, zoom)](#pointtotilefraction)                     | Get the precise fractional tile location for a point at a zoom level          |
 
 ## API
 
@@ -82,6 +84,37 @@ var id = mercator.hash([312, 480, 4])
 ```
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** hash
+
+### pointToTile
+
+Get the tile for a point at a specified zoom level
+<https://github.com/mapbox/tilebelt>
+
+**Parameters**
+
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+**Examples**
+
+```javascript
+var tile = mercator.pointToTile([1, 1], 12)
+//= [ 2059, 2036, 12 ]
+```
+
+### pointToTileFraction
+
+Get the precise fractional tile location for a point at a zoom level
+<https://github.com/mapbox/tilebelt>
+
+**Parameters**
+
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+Returns **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** tile fraction
+var tile = mercator.pointToTileFraction([1, 1], 12)
+//= [ 2059.3777777777777, 2036.6216445333432, 12 ]
 
 ### bboxToCenter
 
@@ -106,7 +139,7 @@ Converts LngLat coordinates to Meters coordinates.
 
 **Parameters**
 
--   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
 **Examples**
@@ -160,7 +193,7 @@ Converts LngLat coordinates to TMS Tile.
 
 **Parameters**
 
--   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
@@ -179,7 +212,7 @@ Converts LngLat coordinates to Google (XYZ) Tile.
 
 **Parameters**
 
--   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
@@ -499,7 +532,7 @@ Validates LngLat coordinates
 
 **Parameters**
 
--   `lnglat` **LngLat** Longitude (Meridians) & Latitude (Parallels) in decimal degrees
+-   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
 **Examples**

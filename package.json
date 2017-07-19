@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "repository": {
     "type": "git",
