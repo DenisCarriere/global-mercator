@@ -201,18 +201,13 @@ function pixelsToTile (pixels, tileSize, validate) {
   var px = pixels[0]
   var py = pixels[1]
   var zoom = pixels[2]
-  if (zoom === 0) {
-    return [0, 0, 0]
-  }
+  if (zoom === 0) return [0, 0, 0]
+
   validateZoom(zoom, validate)
   var tx = Math.ceil(px / tileSize) - 1
   var ty = Math.ceil(py / tileSize) - 1
-  if (tx < 0) {
-    tx = 0
-  }
-  if (ty < 0) {
-    ty = 0
-  }
+  if (tx < 0) tx = 0
+  if (ty < 0) ty = 0
   return [tx, ty, zoom]
 }
 
@@ -479,12 +474,12 @@ function validateTile (tile, validate) {
   var zoom = tile[2]
   if (validate === false) return tile
   validateZoom(zoom)
-  if (tx === undefined || tx === null) { throw new Error('<x> is required') }
-  if (ty === undefined || ty === null) { throw new Error('<y> is required') }
-  if (tx < 0) { throw new Error('<x> must not be less than 0') }
-  if (ty < 0) { throw new Error('<y> must not be less than 0') }
+  if (tx === undefined || tx === null) throw new Error('<x> is required')
+  if (ty === undefined || ty === null) throw new Error('<y> is required')
+  if (tx < 0) throw new Error('<x> must not be less than 0')
+  if (ty < 0) throw new Error('<y> must not be less than 0')
   var maxCount = Math.pow(2, zoom)
-  if (tx >= maxCount || ty >= maxCount) { throw new Error('Illegal parameters for tile') }
+  if (tx >= maxCount || ty >= maxCount) throw new Error('Illegal parameters for tile')
   return tile
 }
 
@@ -593,6 +588,8 @@ function range (start, stop, step) {
  * //=[-110, -30, 120, 80]
  */
 function maxBBox (array) {
+  if (!array) throw new Error('array is required')
+
   // Single BBox
   if (array && array[0] && array.length === 4 && array[0][0] === undefined) {
     return array
