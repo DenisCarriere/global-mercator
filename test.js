@@ -246,3 +246,16 @@ test('pointToTile -- cross meridian', t => {
   t.deepEqual(mercator.pointToTile([-175, 95], 2), [0, 3, 2], '[-175, +95] zoom 2')
   t.end()
 })
+
+// test('tilebelt.pointToTile -- cross meridian', t => {
+//   // X axis
+//   t.deepEqual(tilebelt.pointToTile(-180, 85, 2), [0, 0, 2], '[-180, 85] zoom 2')
+//   t.deepEqual(tilebelt.pointToTile(180, 85, 2), [0, 0, 2], '[+180, 85] zoom 2')
+//   t.deepEqual(tilebelt.pointToTile(-185, 85, 2), [3, 0, 2], '[-185, 85] zoom 2')
+//   t.deepEqual(tilebelt.pointToTile(185, 85, 2), [0, 0, 2], '[+185, 85] zoom 2')
+
+//   // Y axis
+//   t.deepEqual(tilebelt.pointToTile(-175, -97, 2), [0, 0, 2], '[-175, -95] zoom 2')
+//   t.deepEqual(tilebelt.pointToTile(-175, 95, 2), [0, 3, 2], '[-175, +95] zoom 2')
+//   t.end()
+// })

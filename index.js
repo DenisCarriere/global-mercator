@@ -536,12 +536,12 @@ function validateTile (tile, validate) {
  *
  * @param {[number, number, number]} tile Tile
  * @param {number} zoom Zoom Level
- * @returns {number} Tile X
+ * @returns {[number, number, number]} Wrapped Tile
  * @example
  * mercator.wrapTile([0, 3, 2])
  * //= [0, 3, 2] -- Valid Tile X
  * mercator.wrapTile([4, 2, 2])
- * //= [0, 2, 2]  -- Tile 4 does not exist, wrap around to TileX=0
+ * //= [0, 2, 2] -- Tile 4 does not exist, wrap around to TileX=0
  */
 function wrapTile (tile) {
   var tx = tile[0]

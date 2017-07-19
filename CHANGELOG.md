@@ -3,6 +3,7 @@
 
 ## 2.8.1 - 2017-07-19
 
+- Add `wrapTile` method
 - Include tests side by side with `tilebelt`
 - Fixed issue with `tileToQuadkey`
 - Drop rollup setup

@@ -522,10 +522,10 @@ Wrap Tile -- Handles tiles which crosses the 180th meridian or 90th parallel
 mercator.wrapTile([0, 3, 2])
 //= [0, 3, 2] -- Valid Tile X
 mercator.wrapTile([4, 2, 2])
-//= [0, 2, 2]  -- Tile 4 does not exist, wrap around to TileX=0
+//= [0, 2, 2] -- Tile 4 does not exist, wrap around to TileX=0
 ```
 
-Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Tile X
+Returns **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Wrapped Tile
 
 ### validateZoom
 
