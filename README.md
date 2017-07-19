@@ -64,6 +64,8 @@ mercator.tileToBBox(tile)
 | [validatePixels(Pixels)](#validatepixels)         | Validates Pixels coordinates                              |
 | [maxBBox(BBox\[\])](#maxbbox)                     | Maximum extent of BBox                                    |
 | [validTile(tile)](#validtile)                     | Valid Tile                                                |
+| [longitude(degree)](#longitude)                     | Modifies a Longitude to fit within +/-180 degrees.                                                |
+| [latitude(degree)](#latitude)                     | Modifies a Latitude to fit within +/-90 degrees.                                                |
 
 ## API
 
@@ -555,3 +557,37 @@ mercator.validTile([25, 60, 3])
 ```
 
 Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** valid tile true/false
+
+### latitude
+
+Modifies a Latitude to fit within +/-90 degrees.
+
+**Parameters**
+
+-   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** latitude to modify
+
+**Examples**
+
+```javascript
+dateline.latitude(100)
+//= -80
+```
+
+Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** modified latitude
+
+### longitude
+
+Modifies a Longitude to fit within +/-180 degrees.
+
+**Parameters**
+
+-   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** longitude to modify
+
+**Examples**
+
+```javascript
+dateline.longitude(190)
+//= -170
+```
+
+Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** modified longitude

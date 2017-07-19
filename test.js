@@ -1,4 +1,4 @@
-const test = require('tape')
+const {test} = require('tap')
 const mercator = require('./')
 
 const ZOOM = 13

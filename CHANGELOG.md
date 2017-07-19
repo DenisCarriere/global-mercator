@@ -1,6 +1,13 @@
 
 # Changelog
 
+## 2.8.0 - 2017-07-19
+
+- Add Git URL repo to `package.json`
+- Added `longitude` & `latitude` as exposed methods
+- Dropped `bbox-dateline` from dependencies
+- Remove Jest in favor of a minimalistic test suite (Tap)
+
 ## 2.7.0 - 2017-04-19
 
 - Add `validTile` method
