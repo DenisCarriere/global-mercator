@@ -3,6 +3,7 @@
 
 ## 2.8.0 - 2017-07-19
 
+- Drop rollup setup
 - Add Git URL repo to `package.json`
 - Added `longitude` & `latitude` as exposed methods
 - Dropped `bbox-dateline` from dependencies
