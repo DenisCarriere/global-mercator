@@ -1,4 +1,4 @@
-const {test} = require('tap')
+const test = require('tape')
 const tilebelt = require('@mapbox/tilebelt')
 const mercator = require('./')
 
@@ -170,10 +170,10 @@ test('validate -- validateZoom', t => {
 })
 
 test('validate -- validateTile', t => {
-  t.throws(() => mercator.validateTile([-10, 30, 5]))
-  t.throws(() => mercator.validateTile([30, -10, 5]))
-  t.throws(() => mercator.validateTile([25, 60, 3]))
-  t.deepEqual(mercator.validateTile(TILE), TILE)
+  t.deepEqual(mercator.validateTile(TILE), TILE, 'no changes')
+  t.deepEqual(mercator.validateTile([-1, 0, 2]), [3, 0, 2], 'tile x wraps around')
+  t.deepEqual(mercator.validateTile([4, 0, 2]), [0, 0, 2], 'tile x wraps around')
+  t.deepEqual(mercator.validateTile([25, 60, 3]), [ 1, 4, 3 ], 'tile x & y wraps around')
   t.end()
 })
 
@@ -183,9 +183,15 @@ test('validate -- validateLngLat', t => {
 })
 
 test('validate -- validTile', t => {
-  t.false(mercator.validTile([-10, 30, 5]))
-  t.false(mercator.validTile([30, -10, 5]))
-  t.false(mercator.validTile([25, 60, 3]))
+  // Missing value
+  t.false(mercator.validTile([undefined, 30, 5]))
+  t.false(mercator.validTile([30, null, 5]))
+  t.false(mercator.validTile([25, 60, null]))
+
+  // Valid Tiles
+  t.true(mercator.validTile([-10, 30, 5]))
+  t.true(mercator.validTile([30, -10, 5]))
+  t.true(mercator.validTile([25, 60, 3]))
   t.true(mercator.validTile([2, 1, 3]))
   t.end()
 })
@@ -214,7 +220,7 @@ test('pointToTileFraction', t => {
   t.end()
 })
 
-test('point to tile verified', t => {
+test('pointToTile', t => {
   var tile = mercator.pointToTile([-77.03239381313323, 38.91326516559442], 10)
   t.equal(tile.length, 3)
   t.equal(tile[0], 292)
@@ -222,5 +228,21 @@ test('point to tile verified', t => {
   t.equal(tile[2], 10)
   t.equal(mercator.tileToQuadkey(tile), '2102322100', 'pointToTile')
   t.equal(tilebelt.tileToQuadkey(mercator.tileToGoogle(tile)), '2102322100', 'pointToTile -- tilebelt')
+  // t.deepEqual(tilebelt.pointToTile(180, 0, 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
+  t.deepEqual(mercator.pointToTile([180, 85], 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
+  t.deepEqual(mercator.pointToTile([180, 85], 1), [0, 0, 1])
+  t.end()
+})
+
+test('pointToTile -- cross meridian', t => {
+  // X axis
+  t.deepEqual(mercator.pointToTile([-180, 85], 2), [0, 0, 2], '[-180, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([180, 85], 2), [0, 0, 2], '[+180, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([-185, 85], 2), [3, 0, 2], '[-185, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([185, 85], 2), [0, 0, 2], '[+185, 85] zoom 2')
+
+  // Y axis
+  t.deepEqual(mercator.pointToTile([-175, -97], 2), [0, 0, 2], '[-175, -95] zoom 2')
+  t.deepEqual(mercator.pointToTile([-175, 95], 2), [0, 3, 2], '[-175, +95] zoom 2')
   t.end()
 })

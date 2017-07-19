@@ -28,12 +28,14 @@ function hash (tile) {
  *
  * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {number} zoom Zoom level
+ * @param {boolean} [validate=true] validates LatLng coordinates
+ * @returns {Google} Google (XYZ) Tile
  * @example
  * var tile = mercator.pointToTile([1, 1], 12)
  * //= [ 2059, 2036, 12 ]
  */
-function pointToTile (lnglat, zoom) {
-  var tile = pointToTileFraction(lnglat, zoom)
+function pointToTile (lnglat, zoom, validate) {
+  var tile = pointToTileFraction(lnglat, zoom, validate)
   tile[0] = Math.floor(tile[0])
   tile[1] = Math.floor(tile[1])
   return tile
@@ -46,19 +48,21 @@ function pointToTile (lnglat, zoom) {
  * @name pointToTileFraction
  * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {number} zoom Zoom level
- * @returns {[number, number, number]} tile fraction
+ * @param {boolean} [validate=true] validates LatLng coordinates
+ * @returns {Google} Google (XYZ) Tile
  * var tile = mercator.pointToTileFraction([1, 1], 12)
  * //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
  */
-function pointToTileFraction (lnglat, zoom) {
+function pointToTileFraction (lnglat, zoom, validate) {
+  // lnglat = validateLngLat(lnglat, validate)
   var z = zoom
-  var lon = lnglat[0]
-  var lat = lnglat[1]
+  var lon = longitude(lnglat[0])
+  var lat = latitude(lnglat[1])
   var sin = Math.sin(lat * d2r)
   var z2 = Math.pow(2, z)
   var x = z2 * (lon / 360 + 0.5)
   var y = z2 * (0.5 - 0.25 * Math.log((1 + sin) / (1 - sin)) / Math.PI)
-  return [x, y, z]
+  return validateTile([x, y, z], validate)
 }
 
 /**
@@ -511,14 +515,54 @@ function validateTile (tile, validate) {
   var ty = tile[1]
   var zoom = tile[2]
   if (validate === false) return tile
-  validateZoom(zoom)
+  if (zoom === undefined || zoom === null) throw new Error('<zoom> is required')
   if (tx === undefined || tx === null) throw new Error('<x> is required')
   if (ty === undefined || ty === null) throw new Error('<y> is required')
-  if (tx < 0) throw new Error('<x> must not be less than 0')
-  if (ty < 0) throw new Error('<y> must not be less than 0')
-  var maxCount = Math.pow(2, zoom)
-  if (tx >= maxCount || ty >= maxCount) throw new Error('Illegal parameters for tile')
+
+  // Adjust values of tiles to fit within tile scheme
+  zoom = validateZoom(zoom)
+  tile = wrapTile(tile)
+
+  // // Check to see if tile is valid based on the zoom level
+  // // Currently impossible to hit since WrapTile handles this error
+  // // will keep this test commented out in case it doesnt handle it
+  // var maxCount = Math.pow(2, zoom)
+  // if (tile[0] >= maxCount || tile[1] >= maxCount) throw new Error('Illegal parameters for tile')
   return tile
+}
+
+/**
+ * Wrap Tile -- Handles tiles which crosses the 180th meridian or 90th parallel
+ *
+ * @param {[number, number, number]} tile Tile
+ * @param {number} zoom Zoom Level
+ * @returns {number} Tile X
+ * @example
+ * mercator.wrapTile([0, 3, 2])
+ * //= [0, 3, 2] -- Valid Tile X
+ * mercator.wrapTile([4, 2, 2])
+ * //= [0, 2, 2]  -- Tile 4 does not exist, wrap around to TileX=0
+ */
+function wrapTile (tile) {
+  var tx = tile[0]
+  var ty = tile[1]
+  var zoom = tile[2]
+
+  // Maximum tile allowed
+  // zoom 0 => 1
+  // zoom 1 => 2
+  // zoom 2 => 4
+  // zoom 3 => 8
+  var maxTile = 1 << zoom
+
+  // Handle Tile X
+  tx = tx % maxTile
+  if (tx < 0) tx = tx + maxTile
+
+  // Handle Tile Y
+  ty = ty % maxTile
+  if (ty < 0) ty = ty + maxTile
+  return [tx, ty, zoom]
 }
 
 /**
@@ -748,5 +792,6 @@ module.exports = {
   maxBBox: maxBBox,
   validTile: validTile,
   pointToTileFraction: pointToTileFraction,
-  pointToTile: pointToTile
+  pointToTile: pointToTile,
+  wrapTile: wrapTile
 }

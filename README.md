@@ -32,37 +32,38 @@ mercator.tileToBBox(tile)
 
 ## Features
 
-| Function                                          | Description                                               |
-| ------------------------------------------------- | :-------------------------------------------------------- |
-| [lngLatToMeters(LngLat)](#lnglattometers)         | Converts LngLat coordinates to Meters coordinates.        |
-| [metersToLngLat(Meters)](#meterstolnglat)         | Converts Meters coordinates to LngLat coordinates.        |
-| [metersToPixels(Meters, zoom)](#meterstopixels)   | Converts Meters coordinates to Pixels coordinates.        |
-| [lngLatToTile(LngLat, zoom)](#lnglattotile)       | Converts LngLat coordinates to TMS Tile.                  |
-| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)   | Converts LngLat coordinates to Google (XYZ) Tile.         |
-| [metersToTile(Meters, zoom)](#meterstotile)       | Converts Meters coordinates to TMS Tile.                  |
-| [pixelsToMeters(Pixels)](#pixelstometers)         | Converts Pixels coordinates to Meters coordinates.        |
-| [pixelsToTile(Pixels)](#pixelstotile)             | Converts Pixels coordinates to TMS Tile.                  |
-| [tileToBBoxMeters(tile)](#tiletobboxmeters)       | Converts TMS Tile to bbox in Meters coordinates.          |
-| [tileToBBox(tile)](#tiletobbox)                   | Converts TMS Tile to bbox in LngLat coordinates.          |
-| [googleToBBoxMeters(google)](#googletobboxmeters) | Converts Google (XYZ) Tile to bbox in Meters coordinates. |
-| [googleToBBox(google)](#googletobbox)             | Converts Google (XYZ) Tile to bbox in LngLat coordinates. |
-| [tileToGoogle(tile)](#tiletogoogle)               | Converts TMS Tile to Google (XYZ) Tile.                   |
-| [googleToTile(google)](#googletotile)             | Converts Google (XYZ) Tile to TMS Tile.                   |
-| [googleToQuadkey(google)](#googletoquadkey)       | Converts Google (XYZ) Tile to Quadkey.                    |
-| [tileToQuadkey(tile)](#tiletoquadkey)             | Converts TMS Tile to QuadKey.                             |
-| [quadkeyToTile(quadkey)](#quadkeytotile)          | Converts Quadkey to TMS Tile.                             |
-| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)      | Converts Quadkey to Google (XYZ) Tile.                    |
-| [hash(tile)](#hash)                               | Hash tile for unique id key                               |
-| [validateTile(tile)](#validatetile)               | Validates TMS Tile                                        |
-| [validateZoom(zoom)](#validatezoom)               | Validates Zoom level                                      |
-| [validateLngLat(LngLat)](#validatelnglat)         | Validates LngLat coordinates                              |
-| [validatePixels(Pixels)](#validatepixels)         | Validates Pixels coordinates                              |
-| [maxBBox(BBox\[\])](#maxbbox)                     | Maximum extent of BBox                                    |
-| [validTile(tile)](#validtile)                     | Valid Tile                                                |
-| [longitude(degree)](#longitude)                   | Modifies a Longitude to fit within +/-180 degrees.        |
-| [latitude(degree)](#latitude)                     | Modifies a Latitude to fit within +/-90 degrees.          |
-| [pointToTile(lnglat, zoom)](#pointtotile)                     | Get the tile for a point at a specified zoom level          |
-| [pointToTileFraction(lnglat, zoom)](#pointtotilefraction)                     | Get the precise fractional tile location for a point at a zoom level          |
+| Function                                                  | Description                                                          |
+| --------------------------------------------------------- | :------------------------------------------------------------------- |
+| [lngLatToMeters(LngLat)](#lnglattometers)                 | Converts LngLat coordinates to Meters coordinates.                   |
+| [metersToLngLat(Meters)](#meterstolnglat)                 | Converts Meters coordinates to LngLat coordinates.                   |
+| [metersToPixels(Meters, zoom)](#meterstopixels)           | Converts Meters coordinates to Pixels coordinates.                   |
+| [lngLatToTile(LngLat, zoom)](#lnglattotile)               | Converts LngLat coordinates to TMS Tile.                             |
+| [lngLatToGoogle(LngLat, zoom)](#lnglattogoogle)           | Converts LngLat coordinates to Google (XYZ) Tile.                    |
+| [metersToTile(Meters, zoom)](#meterstotile)               | Converts Meters coordinates to TMS Tile.                             |
+| [pixelsToMeters(Pixels)](#pixelstometers)                 | Converts Pixels coordinates to Meters coordinates.                   |
+| [pixelsToTile(Pixels)](#pixelstotile)                     | Converts Pixels coordinates to TMS Tile.                             |
+| [tileToBBoxMeters(tile)](#tiletobboxmeters)               | Converts TMS Tile to bbox in Meters coordinates.                     |
+| [tileToBBox(tile)](#tiletobbox)                           | Converts TMS Tile to bbox in LngLat coordinates.                     |
+| [googleToBBoxMeters(google)](#googletobboxmeters)         | Converts Google (XYZ) Tile to bbox in Meters coordinates.            |
+| [googleToBBox(google)](#googletobbox)                     | Converts Google (XYZ) Tile to bbox in LngLat coordinates.            |
+| [tileToGoogle(tile)](#tiletogoogle)                       | Converts TMS Tile to Google (XYZ) Tile.                              |
+| [googleToTile(google)](#googletotile)                     | Converts Google (XYZ) Tile to TMS Tile.                              |
+| [googleToQuadkey(google)](#googletoquadkey)               | Converts Google (XYZ) Tile to Quadkey.                               |
+| [tileToQuadkey(tile)](#tiletoquadkey)                     | Converts TMS Tile to QuadKey.                                        |
+| [quadkeyToTile(quadkey)](#quadkeytotile)                  | Converts Quadkey to TMS Tile.                                        |
+| [quadkeyToGoogle(quadkey)](#quadkeytogoogle)              | Converts Quadkey to Google (XYZ) Tile.                               |
+| [hash(tile)](#hash)                                       | Hash tile for unique id key                                          |
+| [validateTile(tile)](#validatetile)                       | Validates TMS Tile                                                   |
+| [validateZoom(zoom)](#validatezoom)                       | Validates Zoom level                                                 |
+| [validateLngLat(LngLat)](#validatelnglat)                 | Validates LngLat coordinates                                         |
+| [validatePixels(Pixels)](#validatepixels)                 | Validates Pixels coordinates                                         |
+| [maxBBox(BBox\[\])](#maxbbox)                             | Maximum extent of BBox                                               |
+| [validTile(tile)](#validtile)                             | Valid Tile                                                           |
+| [longitude(degree)](#longitude)                           | Modifies a Longitude to fit within +/-180 degrees.                   |
+| [latitude(degree)](#latitude)                             | Modifies a Latitude to fit within +/-90 degrees.                     |
+| [pointToTile(lnglat, zoom)](#pointtotile)                 | Get the tile for a point at a specified zoom level                   |
+| [pointToTileFraction(lnglat, zoom)](#pointtotilefraction) | Get the precise fractional tile location for a point at a zoom level |
+| [wrapTile(tile)](#wraptile)                               | Handles tiles which crosses the 180th meridian or 90th parallel      |
 
 ## API
 
@@ -94,6 +95,7 @@ Get the tile for a point at a specified zoom level
 
 -   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
 **Examples**
 
@@ -101,6 +103,8 @@ Get the tile for a point at a specified zoom level
 var tile = mercator.pointToTile([1, 1], 12)
 //= [ 2059, 2036, 12 ]
 ```
+
+Returns **Google** Google (XYZ) Tile
 
 ### pointToTileFraction
 
@@ -111,8 +115,9 @@ Get the precise fractional tile location for a point at a zoom level
 
 -   `lnglat` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** [Longitude, Latitude]
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+-   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
-Returns **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** tile fraction
+Returns **Google** Google (XYZ) Tile
 var tile = mercator.pointToTileFraction([1, 1], 12)
 //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
 
@@ -501,6 +506,26 @@ mercator.validateTile([25, 60, 3])
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if TMS Tile is not valid.
 
 Returns **Tile** TMS Tile
+
+### wrapTile
+
+Wrap Tile -- Handles tiles which crosses the 180th meridian or 90th parallel
+
+**Parameters**
+
+-   `tile` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Tile
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom Level
+
+**Examples**
+
+```javascript
+mercator.wrapTile([0, 3, 2])
+//= [0, 3, 2] -- Valid Tile X
+mercator.wrapTile([4, 2, 2])
+//= [0, 2, 2]  -- Tile 4 does not exist, wrap around to TileX=0
+```
+
+Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Tile X
 
 ### validateZoom
 

@@ -42,5 +42,6 @@ export declare function maxBBox(array: BBox|BBox[]): BBox
 export declare function validTile(tile: Tile): boolean;
 export declare function longitude(lng: number): number;
 export declare function latitude(lat: number): number;
-export declare function pointToTileFraction(lnglat: LngLat, zoom: number): Tile;
-export declare function pointToTile(lnglat: LngLat, zoom: number): Tile;
+export declare function pointToTileFraction(lnglat: LngLat, zoom: number, validate?: boolean): Tile;
+export declare function pointToTile(lnglat: LngLat, zoom: number, validate?: boolean): Tile;
+export declare function wrapTile(tile: Tile): Tile;
