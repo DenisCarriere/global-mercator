@@ -1,4 +1,4 @@
-# [Global Mercator](https://www.npmjs.com/package/global-mercator)
+# Global Mercator
 
 [![Build Status](https://travis-ci.org/DenisCarriere/global-mercator.svg?branch=master)](https://travis-ci.org/DenisCarriere/global-mercator)
 [![npm version](https://badge.fury.io/js/global-mercator.svg)](https://badge.fury.io/js/global-mercator)
