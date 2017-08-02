@@ -32,6 +32,7 @@ const BBOX = [-75.014648, 44.995883, -74.970703, 45.026950]
 
 const suite = new Benchmark.Suite('global-mercator')
 suite
+  .add('wrapTile', () => mercator.wrapTile([4, 2, 2]))
   .add('bboxToCenter', () => mercator.bboxToCenter([90, -45, 85, -50]))
   .add('bboxToMeters', () => mercator.bboxToMeters(BBOX))
   .add('hash', () => mercator.hash([312, 480, 4]))

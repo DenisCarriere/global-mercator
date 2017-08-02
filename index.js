@@ -12,7 +12,7 @@ function initialResolution (tileSize) {
  * @param {Tile} tile [x, y, z]
  * @returns {number} hash
  * @example
- * var id = mercator.hash([312, 480, 4])
+ * var id = globalMercator.hash([312, 480, 4])
  * //=5728
  */
 function hash (tile) {
@@ -31,7 +31,7 @@ function hash (tile) {
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Google} Google (XYZ) Tile
  * @example
- * var tile = mercator.pointToTile([1, 1], 12)
+ * var tile = globalMercator.pointToTile([1, 1], 12)
  * //= [ 2059, 2036, 12 ]
  */
 function pointToTile (lnglat, zoom, validate) {
@@ -50,7 +50,7 @@ function pointToTile (lnglat, zoom, validate) {
  * @param {number} zoom Zoom level
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Google} Google (XYZ) Tile
- * var tile = mercator.pointToTileFraction([1, 1], 12)
+ * var tile = globalMercator.pointToTileFraction([1, 1], 12)
  * //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
  */
 function pointToTileFraction (lnglat, zoom, validate) {
@@ -71,7 +71,7 @@ function pointToTileFraction (lnglat, zoom, validate) {
  * @param {BBox} bbox - [west, south, east, north] coordinates
  * @return {LngLat} center
  * @example
- * var center = mercator.bboxToCenter([90, -45, 85, -50])
+ * var center = globalMercator.bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
 function bboxToCenter (bbox) {
@@ -93,7 +93,7 @@ function bboxToCenter (bbox) {
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Meters} Meters coordinates
  * @example
- * var meters = mercator.lngLatToMeters([126, 37])
+ * var meters = globalMercator.lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
 function lngLatToMeters (lnglat, validate) {
@@ -114,7 +114,7 @@ function lngLatToMeters (lnglat, validate) {
  * @param {Meters} meters Meters in Mercator [x, y]
  * @returns {LngLat} LngLat coordinates
  * @example
- * var lnglat = mercator.metersToLngLat([14026255, 4439106])
+ * var lnglat = globalMercator.metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
 function metersToLngLat (meters) {
@@ -136,7 +136,7 @@ function metersToLngLat (meters) {
  * @param {number} [tileSize=256] Tile size
  * @returns {Pixels} Pixels coordinates
  * @example
- * var pixels = mercator.metersToPixels([14026255, 4439106], 13)
+ * var pixels = globalMercator.metersToPixels([14026255, 4439106], 13)
  * //=[ 1782579.1, 1280877.3, 13 ]
  */
 function metersToPixels (meters, zoom, tileSize) {
@@ -156,7 +156,7 @@ function metersToPixels (meters, zoom, tileSize) {
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Tile} TMS Tile
  * @example
- * var tile = mercator.lngLatToTile([126, 37], 13)
+ * var tile = globalMercator.lngLatToTile([126, 37], 13)
  * //=[ 6963, 5003, 13 ]
  */
 function lngLatToTile (lnglat, zoom, validate) {
@@ -174,7 +174,7 @@ function lngLatToTile (lnglat, zoom, validate) {
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Google} Google (XYZ) Tile
  * @example
- * var google = mercator.lngLatToGoogle([126, 37], 13)
+ * var google = globalMercator.lngLatToGoogle([126, 37], 13)
  * //=[ 6963, 3188, 13 ]
  */
 function lngLatToGoogle (lnglat, zoom, validate) {
@@ -194,7 +194,7 @@ function lngLatToGoogle (lnglat, zoom, validate) {
  * @param {number} zoom Zoom level
  * @returns {Tile} TMS Tile
  * @example
- * var tile = mercator.metersToTile([14026255, 4439106], 13)
+ * var tile = globalMercator.metersToTile([14026255, 4439106], 13)
  * //=[ 6963, 5003, 13 ]
  */
 function metersToTile (meters, zoom) {
@@ -212,7 +212,7 @@ function metersToTile (meters, zoom) {
  * @param {number} [tileSize=256] Tile size
  * @returns {Meters} Meters coordinates
  * @example
- * var meters = mercator.pixelsToMeters([1782579, 1280877, 13])
+ * var meters = globalMercator.pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
 function pixelsToMeters (pixels, tileSize) {
@@ -235,7 +235,7 @@ function pixelsToMeters (pixels, tileSize) {
  * @param {boolean} [validate=true] validates Pixels coordinates
  * @returns {Tile} TMS Tile
  * @example
- * var tile = mercator.pixelsToTile([1782579, 1280877, 13])
+ * var tile = globalMercator.pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
 function pixelsToTile (pixels, tileSize, validate) {
@@ -264,7 +264,7 @@ function pixelsToTile (pixels, tileSize, validate) {
  * @param {boolean} [validate=true] validates Tile
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * var bbox = mercator.tileToBBoxMeters([6963, 5003, 13])
+ * var bbox = globalMercator.tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
 function tileToBBoxMeters (tile, tileSize, validate) {
@@ -289,7 +289,7 @@ function tileToBBoxMeters (tile, tileSize, validate) {
  * @param {boolean} [validate=true] validates Tile
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * var bbox = mercator.tileToBBox([6963, 5003, 13])
+ * var bbox = globalMercator.tileToBBox([6963, 5003, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
 function tileToBBox (tile, validate) {
@@ -317,7 +317,7 @@ function tileToBBox (tile, validate) {
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * var bbox = mercator.googleToBBoxMeters([6963, 3188, 13])
+ * var bbox = globalMercator.googleToBBoxMeters([6963, 3188, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
 function googleToBBoxMeters (google) {
@@ -331,7 +331,7 @@ function googleToBBoxMeters (google) {
  * @param {Google} google Google [x, y, zoom]
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * var bbox = mercator.googleToBBox([6963, 3188, 13])
+ * var bbox = globalMercator.googleToBBox([6963, 3188, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
 function googleToBBox (google) {
@@ -346,7 +346,7 @@ function googleToBBox (google) {
  * @param {boolean} [validate=true] validates Tile
  * @returns {Google} Google (XYZ) Tile
  * @example
- * var google = mercator.tileToGoogle([6963, 5003, 13])
+ * var google = globalMercator.tileToGoogle([6963, 5003, 13])
  * //=[ 6963, 3188, 13 ]
  */
 function tileToGoogle (tile, validate) {
@@ -369,7 +369,7 @@ function tileToGoogle (tile, validate) {
  * @param {Google} google Google [x, y, zoom]
  * @returns {Tile} TMS Tile
  * @example
- * var tile = mercator.googleToTile([6963, 3188, 13])
+ * var tile = globalMercator.googleToTile([6963, 3188, 13])
  * //=[ 6963, 5003, 13 ]
  */
 function googleToTile (google) {
@@ -387,7 +387,7 @@ function googleToTile (google) {
  * @param {Google} google Google [x, y, zoom]
  * @returns {string} Microsoft's Quadkey schema
  * @example
- * var quadkey = mercator.googleToQuadkey([6963, 3188, 13])
+ * var quadkey = globalMercator.googleToQuadkey([6963, 3188, 13])
  * //='1321102330211'
  */
 function googleToQuadkey (google) {
@@ -402,7 +402,7 @@ function googleToQuadkey (google) {
  * @param {boolean} [validate=true] validates Tile
  * @returns {string} Microsoft's Quadkey schema
  * @example
- * var quadkey = mercator.tileToQuadkey([6963, 5003, 13])
+ * var quadkey = globalMercator.tileToQuadkey([6963, 5003, 13])
  * //='1321102330211'
  */
 function tileToQuadkey (tile, validate) {
@@ -437,7 +437,7 @@ function tileToQuadkey (tile, validate) {
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Tile} TMS Tile
  * @example
- * var tile = mercator.quadkeyToTile('1321102330211')
+ * var tile = globalMercator.quadkeyToTile('1321102330211')
  * //=[ 6963, 5003, 13 ]
  */
 function quadkeyToTile (quadkey) {
@@ -451,7 +451,7 @@ function quadkeyToTile (quadkey) {
  * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Google} Google (XYZ) Tile
  * @example
- * var google = mercator.quadkeyToGoogle('1321102330211')
+ * var google = globalMercator.quadkeyToGoogle('1321102330211')
  * //=[ 6963, 3188, 13 ]
  */
 function quadkeyToGoogle (quadkey) {
@@ -486,7 +486,7 @@ function quadkeyToGoogle (quadkey) {
  * @param {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @returns {BBox} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * var meters = mercator.bboxToMeters([ 125, 35, 127, 37 ])
+ * var meters = globalMercator.bboxToMeters([ 125, 35, 127, 37 ])
  * //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
  */
 function bboxToMeters (bbox) {
@@ -503,11 +503,11 @@ function bboxToMeters (bbox) {
  * @throws {Error} Will throw an error if TMS Tile is not valid.
  * @returns {Tile} TMS Tile
  * @example
- * mercator.validateTile([60, 80, 12])
+ * globalMercator.validateTile([60, 80, 12])
  * //=[60, 80, 12]
- * mercator.validateTile([60, -43, 5])
+ * globalMercator.validateTile([60, -43, 5])
  * //= Error: Tile <y> must not be less than 0
- * mercator.validateTile([25, 60, 3])
+ * globalMercator.validateTile([25, 60, 3])
  * //= Error: Illegal parameters for tile
  */
 function validateTile (tile, validate) {
@@ -538,9 +538,9 @@ function validateTile (tile, validate) {
  * @param {number} zoom Zoom Level
  * @returns {[number, number, number]} Wrapped Tile
  * @example
- * mercator.wrapTile([0, 3, 2])
+ * globalMercator.wrapTile([0, 3, 2])
  * //= [0, 3, 2] -- Valid Tile X
- * mercator.wrapTile([4, 2, 2])
+ * globalMercator.wrapTile([4, 2, 2])
  * //= [0, 2, 2] -- Tile 4 does not exist, wrap around to TileX=0
  */
 function wrapTile (tile) {
@@ -553,15 +553,12 @@ function wrapTile (tile) {
   // zoom 1 => 2
   // zoom 2 => 4
   // zoom 3 => 8
-  var maxTile = 1 << zoom
+  var maxTile = Math.pow(2, zoom)
 
   // Handle Tile X
   tx = tx % maxTile
   if (tx < 0) tx = tx + maxTile
 
-  // Handle Tile Y
-  ty = ty % maxTile
-  if (ty < 0) ty = ty + maxTile
   return [tx, ty, zoom]
 }
 
@@ -573,11 +570,11 @@ function wrapTile (tile) {
  * @throws {Error} Will throw an error if zoom is not valid.
  * @returns {number} zoom Zoom level
  * @example
- * mercator.validateZoom(12)
+ * globalMercator.validateZoom(12)
  * //=12
- * mercator.validateZoom(-4)
+ * globalMercator.validateZoom(-4)
  * //= Error: <zoom> cannot be less than 0
- * mercator.validateZoom(32)
+ * globalMercator.validateZoom(32)
  * //= Error: <zoom> cannot be greater than 30
  */
 function validateZoom (zoom) {
@@ -596,9 +593,9 @@ function validateZoom (zoom) {
  * @throws {Error} Will throw an error if LngLat is not valid.
  * @returns {LngLat} LngLat coordinates
  * @example
- * mercator.validateLngLat([-115, 44])
+ * globalMercator.validateLngLat([-115, 44])
  * //= [ -115, 44 ]
- * mercator.validateLngLat([-225, 44])
+ * globalMercator.validateLngLat([-225, 44])
  * //= Error: LngLat [lng] must be within -180 to 180 degrees
  */
 function validateLngLat (lnglat, validate) {
@@ -621,7 +618,7 @@ function validateLngLat (lnglat, validate) {
  * @param {number} [tileSize=256] Tile size
  * @returns {number} resolution
  * @example
- * var res = mercator.resolution(13)
+ * var res = globalMercator.resolution(13)
  * //=19.109257071294063
  */
 function resolution (zoom, tileSize) {
@@ -637,11 +634,11 @@ function resolution (zoom, tileSize) {
  * @param {number} [step=1] Step
  * @returns {number[]} range
  * @example
- * mercator.range(3)
+ * globalMercator.range(3)
  * //=[ 0, 1, 2 ]
- * mercator.range(3, 6)
+ * globalMercator.range(3, 6)
  * //=[ 3, 4, 5 ]
- * mercator.range(6, 3, -1)
+ * globalMercator.range(6, 3, -1)
  * //=[ 6, 5, 4 ]
  */
 function range (start, stop, step) {
@@ -666,7 +663,7 @@ function range (start, stop, step) {
  * @param {BBox|BBox[]} array BBox [west, south, east, north]
  * @returns {BBox} Maximum BBox
  * @example
- * var bbox = mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
+ * var bbox = globalMercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
  * //=[-110, -30, 120, 80]
  */
 function maxBBox (array) {
@@ -700,11 +697,11 @@ function maxBBox (array) {
  * @param {Tile} tile Tile [x, y, zoom]
  * @returns {boolean} valid tile true/false
  * @example
- * mercator.validTile([60, 80, 12])
+ * globalMercator.validTile([60, 80, 12])
  * //= true
- * mercator.validTile([60, -43, 5])
+ * globalMercator.validTile([60, -43, 5])
  * //= false
- * mercator.validTile([25, 60, 3])
+ * globalMercator.validTile([25, 60, 3])
  * //= false
  */
 function validTile (tile) {

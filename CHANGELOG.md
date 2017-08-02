@@ -1,6 +1,11 @@
 
 # Changelog
 
+## 2.8.4 - 2017-08-02
+
+- Update docs to match https://wzrd.in
+- Drop Tile Y wrapping
+
 ## 2.8.1 - 2017-07-19
 
 - Add `wrapTile` method

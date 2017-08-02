@@ -4,6 +4,7 @@
 [![npm version](https://badge.fury.io/js/global-mercator.svg)](https://badge.fury.io/js/global-mercator)
 [![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/global-mercator/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/global-mercator?branch=master)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/global-mercator/master/LICENSE)
+[![ES5](https://camo.githubusercontent.com/d341caa63123c99b79fda7f8efdc29b35f9f2e70/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f65732d352d627269676874677265656e2e737667)](http://kangax.github.io/compat-table/es5/)
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
@@ -21,12 +22,18 @@ Another great simplistic tile library is [`tilebelt`](https://github.com/mapbox/
 $ npm install --save global-mercator
 ```
 
+**web**
+
+```html
+<script src="https://wzrd.in/standalone/global-mercator@latest"></script>
+```
+
 ## Quickstart
 
 ```javascript
-var mercator = require('global-mercator')
+var globalMercator = require('global-mercator')
 var tile = [10, 15, 8] // [x, y, zoom]
-mercator.tileToBBox(tile)
+globalMercator.tileToBBox(tile)
 // [ -165.937, -82.853, -164.531, -82.676 ]
 ```
 
@@ -63,7 +70,7 @@ mercator.tileToBBox(tile)
 | [latitude(degree)](#latitude)                             | Modifies a Latitude to fit within +/-90 degrees.                     |
 | [pointToTile(lnglat, zoom)](#pointtotile)                 | Get the tile for a point at a specified zoom level                   |
 | [pointToTileFraction(lnglat, zoom)](#pointtotilefraction) | Get the precise fractional tile location for a point at a zoom level |
-| [wrapTile(tile)](#wraptile)                               | Handles tiles which crosses the 180th meridian or 90th parallel      |
+| [wrapTile(tile)](#wraptile)                               | Handles tiles which crosses the 180th meridian                       |
 
 ## API
 
@@ -80,7 +87,7 @@ Hash tile for unique id key
 **Examples**
 
 ```javascript
-var id = mercator.hash([312, 480, 4])
+var id = globalMercator.hash([312, 480, 4])
 //=5728
 ```
 
@@ -100,7 +107,7 @@ Get the tile for a point at a specified zoom level
 **Examples**
 
 ```javascript
-var tile = mercator.pointToTile([1, 1], 12)
+var tile = globalMercator.pointToTile([1, 1], 12)
 //= [ 2059, 2036, 12 ]
 ```
 
@@ -118,7 +125,7 @@ Get the precise fractional tile location for a point at a zoom level
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
 Returns **Google** Google (XYZ) Tile
-var tile = mercator.pointToTileFraction([1, 1], 12)
+var tile = globalMercator.pointToTileFraction([1, 1], 12)
 //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
 
 ### bboxToCenter
@@ -132,7 +139,7 @@ Converts BBox to Center
 **Examples**
 
 ```javascript
-var center = mercator.bboxToCenter([90, -45, 85, -50])
+var center = globalMercator.bboxToCenter([90, -45, 85, -50])
 //= [ 87.5, -47.5 ]
 ```
 
@@ -150,7 +157,7 @@ Converts LngLat coordinates to Meters coordinates.
 **Examples**
 
 ```javascript
-var meters = mercator.lngLatToMeters([126, 37])
+var meters = globalMercator.lngLatToMeters([126, 37])
 //=[ 14026255.8, 4439106.7 ]
 ```
 
@@ -167,7 +174,7 @@ Converts Meters coordinates to LngLat coordinates.
 **Examples**
 
 ```javascript
-var lnglat = mercator.metersToLngLat([14026255, 4439106])
+var lnglat = globalMercator.metersToLngLat([14026255, 4439106])
 //=[ 126, 37 ]
 ```
 
@@ -186,7 +193,7 @@ Converts Meters coordinates to Pixels coordinates.
 **Examples**
 
 ```javascript
-var pixels = mercator.metersToPixels([14026255, 4439106], 13)
+var pixels = globalMercator.metersToPixels([14026255, 4439106], 13)
 //=[ 1782579.1, 1280877.3, 13 ]
 ```
 
@@ -205,7 +212,7 @@ Converts LngLat coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = mercator.lngLatToTile([126, 37], 13)
+var tile = globalMercator.lngLatToTile([126, 37], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -224,7 +231,7 @@ Converts LngLat coordinates to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = mercator.lngLatToGoogle([126, 37], 13)
+var google = globalMercator.lngLatToGoogle([126, 37], 13)
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -242,7 +249,7 @@ Converts Meters coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = mercator.metersToTile([14026255, 4439106], 13)
+var tile = globalMercator.metersToTile([14026255, 4439106], 13)
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -260,7 +267,7 @@ Converts Pixels coordinates to Meters coordinates.
 **Examples**
 
 ```javascript
-var meters = mercator.pixelsToMeters([1782579, 1280877, 13])
+var meters = globalMercator.pixelsToMeters([1782579, 1280877, 13])
 //=[ 14026252.0, 4439099.5 ]
 ```
 
@@ -279,7 +286,7 @@ Converts Pixels coordinates to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = mercator.pixelsToTile([1782579, 1280877, 13])
+var tile = globalMercator.pixelsToTile([1782579, 1280877, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -301,7 +308,7 @@ Converts TMS Tile to bbox in Meters coordinates.
 **Examples**
 
 ```javascript
-var bbox = mercator.tileToBBoxMeters([6963, 5003, 13])
+var bbox = globalMercator.tileToBBoxMeters([6963, 5003, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
@@ -322,7 +329,7 @@ Converts TMS Tile to bbox in LngLat coordinates.
 **Examples**
 
 ```javascript
-var bbox = mercator.tileToBBox([6963, 5003, 13])
+var bbox = globalMercator.tileToBBox([6963, 5003, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
@@ -339,7 +346,7 @@ Converts Google (XYZ) Tile to bbox in Meters coordinates.
 **Examples**
 
 ```javascript
-var bbox = mercator.googleToBBoxMeters([6963, 3188, 13])
+var bbox = globalMercator.googleToBBoxMeters([6963, 3188, 13])
 //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
 ```
 
@@ -356,7 +363,7 @@ Converts Google (XYZ) Tile to bbox in LngLat coordinates.
 **Examples**
 
 ```javascript
-var bbox = mercator.googleToBBox([6963, 3188, 13])
+var bbox = globalMercator.googleToBBox([6963, 3188, 13])
 //=[ 125.991, 36.985, 126.035, 37.020 ]
 ```
 
@@ -374,7 +381,7 @@ Converts TMS Tile to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = mercator.tileToGoogle([6963, 5003, 13])
+var google = globalMercator.tileToGoogle([6963, 5003, 13])
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -391,7 +398,7 @@ Converts Google (XYZ) Tile to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = mercator.googleToTile([6963, 3188, 13])
+var tile = globalMercator.googleToTile([6963, 3188, 13])
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -408,7 +415,7 @@ Converts Google (XYZ) Tile to Quadkey.
 **Examples**
 
 ```javascript
-var quadkey = mercator.googleToQuadkey([6963, 3188, 13])
+var quadkey = globalMercator.googleToQuadkey([6963, 3188, 13])
 //='1321102330211'
 ```
 
@@ -426,7 +433,7 @@ Converts TMS Tile to QuadKey.
 **Examples**
 
 ```javascript
-var quadkey = mercator.tileToQuadkey([6963, 5003, 13])
+var quadkey = globalMercator.tileToQuadkey([6963, 5003, 13])
 //='1321102330211'
 ```
 
@@ -443,7 +450,7 @@ Converts Quadkey to TMS Tile.
 **Examples**
 
 ```javascript
-var tile = mercator.quadkeyToTile('1321102330211')
+var tile = globalMercator.quadkeyToTile('1321102330211')
 //=[ 6963, 5003, 13 ]
 ```
 
@@ -460,7 +467,7 @@ Converts Quadkey to Google (XYZ) Tile.
 **Examples**
 
 ```javascript
-var google = mercator.quadkeyToGoogle('1321102330211')
+var google = globalMercator.quadkeyToGoogle('1321102330211')
 //=[ 6963, 3188, 13 ]
 ```
 
@@ -477,7 +484,7 @@ Converts BBox from LngLat coordinates to Meters coordinates
 **Examples**
 
 ```javascript
-var meters = mercator.bboxToMeters([ 125, 35, 127, 37 ])
+var meters = globalMercator.bboxToMeters([ 125, 35, 127, 37 ])
 //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
 ```
 
@@ -495,11 +502,11 @@ Validates TMS Tile.
 **Examples**
 
 ```javascript
-mercator.validateTile([60, 80, 12])
+globalMercator.validateTile([60, 80, 12])
 //=[60, 80, 12]
-mercator.validateTile([60, -43, 5])
+globalMercator.validateTile([60, -43, 5])
 //= Error: Tile <y> must not be less than 0
-mercator.validateTile([25, 60, 3])
+globalMercator.validateTile([25, 60, 3])
 //= Error: Illegal parameters for tile
 ```
 
@@ -519,9 +526,9 @@ Wrap Tile -- Handles tiles which crosses the 180th meridian or 90th parallel
 **Examples**
 
 ```javascript
-mercator.wrapTile([0, 3, 2])
+globalMercator.wrapTile([0, 3, 2])
 //= [0, 3, 2] -- Valid Tile X
-mercator.wrapTile([4, 2, 2])
+globalMercator.wrapTile([4, 2, 2])
 //= [0, 2, 2] -- Tile 4 does not exist, wrap around to TileX=0
 ```
 
@@ -539,11 +546,11 @@ Validates Zoom level
 **Examples**
 
 ```javascript
-mercator.validateZoom(12)
+globalMercator.validateZoom(12)
 //=12
-mercator.validateZoom(-4)
+globalMercator.validateZoom(-4)
 //= Error: <zoom> cannot be less than 0
-mercator.validateZoom(32)
+globalMercator.validateZoom(32)
 //= Error: <zoom> cannot be greater than 30
 ```
 
@@ -563,9 +570,9 @@ Validates LngLat coordinates
 **Examples**
 
 ```javascript
-mercator.validateLngLat([-115, 44])
+globalMercator.validateLngLat([-115, 44])
 //= [ -115, 44 ]
-mercator.validateLngLat([-225, 44])
+globalMercator.validateLngLat([-225, 44])
 //= Error: LngLat [lng] must be within -180 to 180 degrees
 ```
 
@@ -584,7 +591,7 @@ Maximum extent of BBox
 **Examples**
 
 ```javascript
-var bbox = mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
+var bbox = globalMercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
 //=[-110, -30, 120, 80]
 ```
 
@@ -601,11 +608,11 @@ Valid TMS Tile
 **Examples**
 
 ```javascript
-mercator.validTile([60, 80, 12])
+globalMercator.validTile([60, 80, 12])
 //= true
-mercator.validTile([60, -43, 5])
+globalMercator.validTile([60, -43, 5])
 //= false
-mercator.validTile([25, 60, 3])
+globalMercator.validTile([25, 60, 3])
 //= false
 ```
 

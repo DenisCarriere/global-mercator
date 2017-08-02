@@ -173,7 +173,6 @@ test('validate -- validateTile', t => {
   t.deepEqual(mercator.validateTile(TILE), TILE, 'no changes')
   t.deepEqual(mercator.validateTile([-1, 0, 2]), [3, 0, 2], 'tile x wraps around')
   t.deepEqual(mercator.validateTile([4, 0, 2]), [0, 0, 2], 'tile x wraps around')
-  t.deepEqual(mercator.validateTile([25, 60, 3]), [ 1, 4, 3 ], 'tile x & y wraps around')
   t.end()
 })
 
@@ -227,8 +226,6 @@ test('pointToTile', t => {
   t.equal(tile[1], 391)
   t.equal(tile[2], 10)
   t.equal(mercator.tileToQuadkey(tile), '2102322100', 'pointToTile')
-  t.equal(tilebelt.tileToQuadkey(mercator.tileToGoogle(tile)), '2102322100', 'pointToTile -- tilebelt')
-  // t.deepEqual(tilebelt.pointToTile(180, 0, 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
   t.deepEqual(mercator.pointToTile([180, 85], 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
   t.deepEqual(mercator.pointToTile([180, 85], 1), [0, 0, 1])
   t.end()
@@ -240,22 +237,5 @@ test('pointToTile -- cross meridian', t => {
   t.deepEqual(mercator.pointToTile([180, 85], 2), [0, 0, 2], '[+180, 85] zoom 2')
   t.deepEqual(mercator.pointToTile([-185, 85], 2), [3, 0, 2], '[-185, 85] zoom 2')
   t.deepEqual(mercator.pointToTile([185, 85], 2), [0, 0, 2], '[+185, 85] zoom 2')
-
-  // Y axis
-  t.deepEqual(mercator.pointToTile([-175, -97], 2), [0, 0, 2], '[-175, -95] zoom 2')
-  t.deepEqual(mercator.pointToTile([-175, 95], 2), [0, 3, 2], '[-175, +95] zoom 2')
   t.end()
 })
-
-// test('tilebelt.pointToTile -- cross meridian', t => {
-//   // X axis
-//   t.deepEqual(tilebelt.pointToTile(-180, 85, 2), [0, 0, 2], '[-180, 85] zoom 2')
-//   t.deepEqual(tilebelt.pointToTile(180, 85, 2), [0, 0, 2], '[+180, 85] zoom 2')
-//   t.deepEqual(tilebelt.pointToTile(-185, 85, 2), [3, 0, 2], '[-185, 85] zoom 2')
-//   t.deepEqual(tilebelt.pointToTile(185, 85, 2), [0, 0, 2], '[+185, 85] zoom 2')
-
-//   // Y axis
-//   t.deepEqual(tilebelt.pointToTile(-175, -97, 2), [0, 0, 2], '[-175, -95] zoom 2')
-//   t.deepEqual(tilebelt.pointToTile(-175, 95, 2), [0, 3, 2], '[-175, +95] zoom 2')
-//   t.end()
-// })
