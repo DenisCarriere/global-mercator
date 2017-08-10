@@ -50,6 +50,7 @@ function pointToTile (lnglat, zoom, validate) {
  * @param {number} zoom Zoom level
  * @param {boolean} [validate=true] validates LatLng coordinates
  * @returns {Google} Google (XYZ) Tile
+ * @example
  * var tile = globalMercator.pointToTileFraction([1, 1], 12)
  * //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
  */
@@ -719,7 +720,7 @@ function validTile (tile) {
  * @param {number} lat latitude to modify
  * @returns {number} modified latitude
  * @example
- * dateline.latitude(100)
+ * globalMercator.latitude(100)
  * //= -80
  */
 function latitude (lat) {
@@ -741,7 +742,7 @@ function latitude (lat) {
  * @param {number} lng longitude to modify
  * @returns {number} modified longitude
  * @example
- * dateline.longitude(190)
+ * globalMercator.longitude(190)
  * //= -170
  */
 function longitude (lng) {

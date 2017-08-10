@@ -124,9 +124,14 @@ Get the precise fractional tile location for a point at a zoom level
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 -   `validate` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** validates LatLng coordinates (optional, default `true`)
 
-Returns **Google** Google (XYZ) Tile
+**Examples**
+
+```javascript
 var tile = globalMercator.pointToTileFraction([1, 1], 12)
 //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
+```
+
+Returns **Google** Google (XYZ) Tile
 
 ### bboxToCenter
 
@@ -629,7 +634,7 @@ Modifies a Latitude to fit within +/-90 degrees.
 **Examples**
 
 ```javascript
-dateline.latitude(100)
+globalMercator.latitude(100)
 //= -80
 ```
 
@@ -646,7 +651,7 @@ Modifies a Longitude to fit within +/-180 degrees.
 **Examples**
 
 ```javascript
-dateline.longitude(190)
+globalMercator.longitude(190)
 //= -170
 ```
 
