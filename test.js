@@ -41,11 +41,22 @@ function round (num, precision) {
  * @returns {Boolean} true/false
  */
 function toBeCloseToArray (array1, array2, precision = 2) {
+  let ret = true
   array1.forEach((value, index) => {
-    if (round(value, precision) !== round(array2[index], precision)) return false
+    if (round(value, precision) !== round(array2[index], precision)) ret = false
   })
-  return true
+  return ret
 }
+
+/**
+ * custom matchers
+ */
+test('custom matchers', t => {
+  t.true(toBeCloseToArray([1, 2, 3], [1, 2, 3]), 'toBeCloseToArray, exact')
+  t.true(toBeCloseToArray([1, 2, 3], [1, 2.001, 2.999]), 'toBeCloseToArray, approx')
+  t.false(toBeCloseToArray([1, 2, 3], [1, 2000, 3000]), 'toBeCloseToArray, total out')
+  t.end()
+})
 
 /**
  * BBox
