@@ -40,8 +40,9 @@ function round (num, precision) {
  * @param {number[]} array2
  * @returns {Boolean} true/false
  */
-function toBeCloseToArray (array1, array2, precision = 2) {
-  let ret = true
+function toBeCloseToArray (array1, array2, precision) {
+  precision = 2
+  var ret = true
   array1.forEach((value, index) => {
     if (round(value, precision) !== round(array2[index], precision)) ret = false
   })
