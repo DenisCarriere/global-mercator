@@ -1,7 +1,7 @@
 var originShift = 2 * Math.PI * 6378137 / 2.0
 var d2r = Math.PI / 180
-// var r2d = 180 / Math.PI
-function initialResolution (tileSize) {
+
+export function initialResolution (tileSize) {
   tileSize = tileSize || 256
   return 2 * Math.PI * 6378137 / tileSize
 }
@@ -15,7 +15,7 @@ function initialResolution (tileSize) {
  * var id = globalMercator.hash([312, 480, 4])
  * //=5728
  */
-function hash (tile) {
+export function hash (tile) {
   var x = tile[0]
   var y = tile[1]
   var z = tile[2]
@@ -34,7 +34,7 @@ function hash (tile) {
  * var tile = globalMercator.pointToTile([1, 1], 12)
  * //= [ 2059, 2036, 12 ]
  */
-function pointToTile (lnglat, zoom, validate) {
+export function pointToTile (lnglat, zoom, validate) {
   var tile = pointToTileFraction(lnglat, zoom, validate)
   tile[0] = Math.floor(tile[0])
   tile[1] = Math.floor(tile[1])
@@ -54,7 +54,7 @@ function pointToTile (lnglat, zoom, validate) {
  * var tile = globalMercator.pointToTileFraction([1, 1], 12)
  * //= [ 2059.3777777777777, 2036.6216445333432, 12 ]
  */
-function pointToTileFraction (lnglat, zoom, validate) {
+export function pointToTileFraction (lnglat, zoom, validate) {
   // lnglat = validateLngLat(lnglat, validate)
   var z = zoom
   var lon = longitude(lnglat[0])
@@ -75,7 +75,7 @@ function pointToTileFraction (lnglat, zoom, validate) {
  * var center = globalMercator.bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
-function bboxToCenter (bbox) {
+export function bboxToCenter (bbox) {
   var west = bbox[0]
   var south = bbox[1]
   var east = bbox[2]
@@ -97,7 +97,7 @@ function bboxToCenter (bbox) {
  * var meters = globalMercator.lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
-function lngLatToMeters (lnglat, validate) {
+export function lngLatToMeters (lnglat, validate) {
   lnglat = validateLngLat(lnglat, validate)
   var lng = lnglat[0]
   var lat = lnglat[1]
@@ -118,7 +118,7 @@ function lngLatToMeters (lnglat, validate) {
  * var lnglat = globalMercator.metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
-function metersToLngLat (meters) {
+export function metersToLngLat (meters) {
   var x = meters[0]
   var y = meters[1]
   var lng = (x / originShift) * 180.0
@@ -140,7 +140,7 @@ function metersToLngLat (meters) {
  * var pixels = globalMercator.metersToPixels([14026255, 4439106], 13)
  * //=[ 1782579.1, 1280877.3, 13 ]
  */
-function metersToPixels (meters, zoom, tileSize) {
+export function metersToPixels (meters, zoom, tileSize) {
   var x = meters[0]
   var y = meters[1]
   var res = resolution(zoom, tileSize)
@@ -160,7 +160,7 @@ function metersToPixels (meters, zoom, tileSize) {
  * var tile = globalMercator.lngLatToTile([126, 37], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function lngLatToTile (lnglat, zoom, validate) {
+export function lngLatToTile (lnglat, zoom, validate) {
   lnglat = validateLngLat(lnglat, validate)
   var meters = lngLatToMeters(lnglat)
   var pixels = metersToPixels(meters, zoom)
@@ -178,7 +178,7 @@ function lngLatToTile (lnglat, zoom, validate) {
  * var google = globalMercator.lngLatToGoogle([126, 37], 13)
  * //=[ 6963, 3188, 13 ]
  */
-function lngLatToGoogle (lnglat, zoom, validate) {
+export function lngLatToGoogle (lnglat, zoom, validate) {
   lnglat = validateLngLat(lnglat, validate)
 
   if (zoom === 0) {
@@ -198,7 +198,7 @@ function lngLatToGoogle (lnglat, zoom, validate) {
  * var tile = globalMercator.metersToTile([14026255, 4439106], 13)
  * //=[ 6963, 5003, 13 ]
  */
-function metersToTile (meters, zoom) {
+export function metersToTile (meters, zoom) {
   if (zoom === 0) {
     return [0, 0, 0]
   }
@@ -216,7 +216,7 @@ function metersToTile (meters, zoom) {
  * var meters = globalMercator.pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-function pixelsToMeters (pixels, tileSize) {
+export function pixelsToMeters (pixels, tileSize) {
   var px = pixels[0]
   var py = pixels[1]
   var zoom = pixels[2]
@@ -239,7 +239,7 @@ function pixelsToMeters (pixels, tileSize) {
  * var tile = globalMercator.pixelsToTile([1782579, 1280877, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function pixelsToTile (pixels, tileSize, validate) {
+export function pixelsToTile (pixels, tileSize, validate) {
   tileSize = tileSize || 256
   var px = pixels[0]
   var py = pixels[1]
@@ -268,7 +268,7 @@ function pixelsToTile (pixels, tileSize, validate) {
  * var bbox = globalMercator.tileToBBoxMeters([6963, 5003, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function tileToBBoxMeters (tile, tileSize, validate) {
+export function tileToBBoxMeters (tile, tileSize, validate) {
   validateTile(tile, validate)
 
   tileSize = tileSize || 256
@@ -293,7 +293,7 @@ function tileToBBoxMeters (tile, tileSize, validate) {
  * var bbox = globalMercator.tileToBBox([6963, 5003, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function tileToBBox (tile, validate) {
+export function tileToBBox (tile, validate) {
   validateTile(tile, validate)
 
   var tx = tile[0]
@@ -321,7 +321,7 @@ function tileToBBox (tile, validate) {
  * var bbox = globalMercator.googleToBBoxMeters([6963, 3188, 13])
  * //=[ 14025277.4, 4437016.6, 14030169.4, 4441908.5 ]
  */
-function googleToBBoxMeters (google) {
+export function googleToBBoxMeters (google) {
   var Tile = googleToTile(google)
   return tileToBBoxMeters(Tile)
 }
@@ -335,7 +335,7 @@ function googleToBBoxMeters (google) {
  * var bbox = globalMercator.googleToBBox([6963, 3188, 13])
  * //=[ 125.991, 36.985, 126.035, 37.020 ]
  */
-function googleToBBox (google) {
+export function googleToBBox (google) {
   var Tile = googleToTile(google)
   return tileToBBox(Tile)
 }
@@ -350,7 +350,7 @@ function googleToBBox (google) {
  * var google = globalMercator.tileToGoogle([6963, 5003, 13])
  * //=[ 6963, 3188, 13 ]
  */
-function tileToGoogle (tile, validate) {
+export function tileToGoogle (tile, validate) {
   validateTile(tile, validate)
 
   var tx = tile[0]
@@ -373,7 +373,7 @@ function tileToGoogle (tile, validate) {
  * var tile = globalMercator.googleToTile([6963, 3188, 13])
  * //=[ 6963, 5003, 13 ]
  */
-function googleToTile (google) {
+export function googleToTile (google) {
   var x = google[0]
   var y = google[1]
   var zoom = google[2]
@@ -391,7 +391,7 @@ function googleToTile (google) {
  * var quadkey = globalMercator.googleToQuadkey([6963, 3188, 13])
  * //='1321102330211'
  */
-function googleToQuadkey (google) {
+export function googleToQuadkey (google) {
   var Tile = googleToTile(google)
   return tileToQuadkey(Tile)
 }
@@ -406,7 +406,7 @@ function googleToQuadkey (google) {
  * var quadkey = globalMercator.tileToQuadkey([6963, 5003, 13])
  * //='1321102330211'
  */
-function tileToQuadkey (tile, validate) {
+export function tileToQuadkey (tile, validate) {
   validateTile(tile, validate)
 
   var tx = tile[0]
@@ -441,7 +441,7 @@ function tileToQuadkey (tile, validate) {
  * var tile = globalMercator.quadkeyToTile('1321102330211')
  * //=[ 6963, 5003, 13 ]
  */
-function quadkeyToTile (quadkey) {
+export function quadkeyToTile (quadkey) {
   var Google = quadkeyToGoogle(quadkey)
   return googleToTile(Google)
 }
@@ -455,7 +455,7 @@ function quadkeyToTile (quadkey) {
  * var google = globalMercator.quadkeyToGoogle('1321102330211')
  * //=[ 6963, 3188, 13 ]
  */
-function quadkeyToGoogle (quadkey) {
+export function quadkeyToGoogle (quadkey) {
   var x = 0
   var y = 0
   var zoom = quadkey.length
@@ -490,7 +490,7 @@ function quadkeyToGoogle (quadkey) {
  * var meters = globalMercator.bboxToMeters([ 125, 35, 127, 37 ])
  * //=[ 13914936.3, 4163881.1, 14137575.3, 4439106.7 ]
  */
-function bboxToMeters (bbox) {
+export function bboxToMeters (bbox) {
   var min = lngLatToMeters([bbox[0], bbox[1]])
   var max = lngLatToMeters([bbox[2], bbox[3]])
   return [min[0], min[1], max[0], max[1]]
@@ -511,7 +511,7 @@ function bboxToMeters (bbox) {
  * globalMercator.validateTile([25, 60, 3])
  * //= Error: Illegal parameters for tile
  */
-function validateTile (tile, validate) {
+export function validateTile (tile, validate) {
   var tx = tile[0]
   var ty = tile[1]
   var zoom = tile[2]
@@ -544,7 +544,7 @@ function validateTile (tile, validate) {
  * globalMercator.wrapTile([4, 2, 2])
  * //= [0, 2, 2] -- Tile 4 does not exist, wrap around to TileX=0
  */
-function wrapTile (tile) {
+export function wrapTile (tile) {
   var tx = tile[0]
   var ty = tile[1]
   var zoom = tile[2]
@@ -578,7 +578,7 @@ function wrapTile (tile) {
  * globalMercator.validateZoom(32)
  * //= Error: <zoom> cannot be greater than 30
  */
-function validateZoom (zoom) {
+export function validateZoom (zoom) {
   if (zoom === false) return zoom
   if (zoom === undefined || zoom === null) { throw new Error('<zoom> is required') }
   if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
@@ -599,7 +599,7 @@ function validateZoom (zoom) {
  * globalMercator.validateLngLat([-225, 44])
  * //= Error: LngLat [lng] must be within -180 to 180 degrees
  */
-function validateLngLat (lnglat, validate) {
+export function validateLngLat (lnglat, validate) {
   if (validate === false) return lnglat
 
   var lng = longitude(lnglat[0])
@@ -622,7 +622,7 @@ function validateLngLat (lnglat, validate) {
  * var res = globalMercator.resolution(13)
  * //=19.109257071294063
  */
-function resolution (zoom, tileSize) {
+export function resolution (zoom, tileSize) {
   return initialResolution(tileSize) / Math.pow(2, zoom)
 }
 
@@ -642,7 +642,7 @@ function resolution (zoom, tileSize) {
  * globalMercator.range(6, 3, -1)
  * //=[ 6, 5, 4 ]
  */
-function range (start, stop, step) {
+export function range (start, stop, step) {
   if (stop == null) {
     stop = start || 0
     start = 0
@@ -667,7 +667,7 @@ function range (start, stop, step) {
  * var bbox = globalMercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]])
  * //=[-110, -30, 120, 80]
  */
-function maxBBox (array) {
+export function maxBBox (array) {
   if (!array) throw new Error('array is required')
 
   // Single BBox
@@ -705,7 +705,7 @@ function maxBBox (array) {
  * globalMercator.validTile([25, 60, 3])
  * //= false
  */
-function validTile (tile) {
+export function validTile (tile) {
   try {
     validateTile(tile)
     return true
@@ -723,7 +723,7 @@ function validTile (tile) {
  * globalMercator.latitude(100)
  * //= -80
  */
-function latitude (lat) {
+export function latitude (lat) {
   if (lat === undefined || lat === null) throw new Error('lat is required')
 
   // Latitudes cannot extends beyond +/-90 degrees
@@ -745,7 +745,7 @@ function latitude (lat) {
  * globalMercator.longitude(190)
  * //= -170
  */
-function longitude (lng) {
+export function longitude (lng) {
   if (lng === undefined || lng === null) throw new Error('lng is required')
 
   // lngitudes cannot extends beyond +/-90 degrees
@@ -756,40 +756,4 @@ function longitude (lng) {
     if (lng === 0) lng = 0
   }
   return lng
-}
-
-module.exports = {
-  hash: hash,
-  longitude: longitude,
-  latitude: latitude,
-  bboxToCenter: bboxToCenter,
-  lngLatToMeters: lngLatToMeters,
-  metersToLngLat: metersToLngLat,
-  metersToPixels: metersToPixels,
-  lngLatToTile: lngLatToTile,
-  lngLatToGoogle: lngLatToGoogle,
-  metersToTile: metersToTile,
-  pixelsToMeters: pixelsToMeters,
-  pixelsToTile: pixelsToTile,
-  tileToBBoxMeters: tileToBBoxMeters,
-  tileToBBox: tileToBBox,
-  googleToBBoxMeters: googleToBBoxMeters,
-  googleToBBox: googleToBBox,
-  tileToGoogle: tileToGoogle,
-  googleToTile: googleToTile,
-  googleToQuadkey: googleToQuadkey,
-  tileToQuadkey: tileToQuadkey,
-  quadkeyToTile: quadkeyToTile,
-  quadkeyToGoogle: quadkeyToGoogle,
-  bboxToMeters: bboxToMeters,
-  validateTile: validateTile,
-  validateZoom: validateZoom,
-  validateLngLat: validateLngLat,
-  resolution: resolution,
-  range: range,
-  maxBBox: maxBBox,
-  validTile: validTile,
-  pointToTileFraction: pointToTileFraction,
-  pointToTile: pointToTile,
-  wrapTile: wrapTile
 }

@@ -1,3 +1,6 @@
+.esm-cache
+global-mercator.js
+
 # Logs
 logs
 *.log

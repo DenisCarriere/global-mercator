@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 3.0.0 - 2017-09-29
+
+- Support ES modules
+
 ## 2.8.4 - 2017-08-02
 
 - Update docs to match https://wzrd.in

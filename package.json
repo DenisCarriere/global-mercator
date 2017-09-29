@@ -1,21 +1,25 @@
 {
   "name": "global-mercator",
-  "version": "2.8.4",
+  "version": "3.0.0",
   "description": "Tools to help with TMS, Quadkey & Google (XYZ) Tiles",
   "repository": {
     "type": "git",
     "url": "git://github.com/DenisCarriere/global-mercator.git"
   },
-  "main": "index.js",
+  "main": "global-mercator.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "global-mercator.js"
   ],
   "scripts": {
     "pretest": "standard",
-    "test": "tap test.js",
-    "bench": "node bench.js",
+    "test": "node -r @std/esm test.js",
+    "postest": "rollup -f cjs -o global-mercator.js index.js",
+    "bench": "node -r @std/esm bench.js",
     "docs": "documentation readme index.js --shallow --section=API"
   },
   "author": "Denis Carriere <@DenisCarriere>",
@@ -45,12 +49,16 @@
     "quadkey"
   ],
   "devDependencies": {
-    "@mapbox/tilebelt": "^1.0.1",
-    "benchmark": "^2.1.4",
-    "documentation": "^4.0.0-rc.1",
-    "standard": "^10.0.2",
-    "tap": "^10.7.0",
-    "tape": "^4.7.0"
+    "@mapbox/tilebelt": "*",
+    "@std/esm": "*",
+    "benchmark": "*",
+    "documentation": "*",
+    "standard": "*",
+    "tape": "*"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "@std/esm": {
+    "esm": "js",
+    "cjs": true
+  }
 }
