@@ -16,10 +16,10 @@
     "global-mercator.js"
   ],
   "scripts": {
-    "pretest": "standard",
-    "test": "node -r @std/esm test.js",
-    "postest": "rollup -f cjs -o global-mercator.js index.js",
-    "bench": "node -r @std/esm bench.js",
+    "pretest": "rollup -f cjs -o global-mercator.js index.js",
+    "test": "tap test.js --coverage",
+    "posttest": "standard index.js",
+    "bench": "node bench.js",
     "docs": "documentation readme index.js --shallow --section=API"
   },
   "author": "Denis Carriere <@DenisCarriere>",
@@ -50,15 +50,11 @@
   ],
   "devDependencies": {
     "@mapbox/tilebelt": "*",
-    "@std/esm": "*",
     "benchmark": "*",
     "documentation": "*",
+    "rollup": "*",
     "standard": "*",
     "tape": "*"
   },
-  "dependencies": {},
-  "@std/esm": {
-    "esm": "js",
-    "cjs": true
-  }
+  "dependencies": {}
 }

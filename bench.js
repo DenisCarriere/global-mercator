@@ -1,5 +1,5 @@
-import Benchmark from 'benchmark'
-import mercator from './'
+const Benchmark = require('benchmark')
+const mercator = require('./')
 
 const ZOOM = 13
 const TILE = [2389, 5245, 13]

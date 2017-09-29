@@ -1,6 +1,5 @@
-import test from 'tape'
-import tilebelt from '@mapbox/tilebelt'
-import * as mercator from './'
+const test = require('tape')
+const mercator = require('./')
 
 const ZOOM = 13
 const TILE = [2389, 5245, 13]
@@ -125,7 +124,6 @@ test('tile', t => {
   t.deepEqual(mercator.tileToGoogle(TILE), GOOGLE, 'tileToGoogle')
   t.deepEqual(mercator.tileToGoogle([0, 0, 0]), [0, 0, 0], 'tileToGoogle')
   t.deepEqual(mercator.tileToQuadkey(TILE), '0302321010121', 'tileToQuadkey')
-  t.deepEqual(tilebelt.tileToQuadkey(mercator.tileToGoogle(TILE)), '0302321010121', 'tileToQuadkey -- tilebelt')
   t.deepEqual(mercator.tileToQuadkey([0, 0, 0]), '', 'tileToQuadkey -- null')
   t.end()
 })
@@ -147,109 +145,108 @@ test('google', t => {
   t.true(toBeCloseToArray(mercator.googleToBBox(GOOGLE), BBOX), 'googleToBbox')
   t.true(toBeCloseToArray(mercator.googleToBBoxMeters(GOOGLE), BBOX_METERS, 0), 'googleToBBoxMeters')
   t.deepEqual(mercator.googleToQuadkey(GOOGLE), '0302321010121', 'googleToQuadKey')
-  t.deepEqual(tilebelt.tileToQuadkey(GOOGLE), '0302321010121', 'googleToQuadKey -- tilebelt')
   t.deepEqual(mercator.googleToTile(GOOGLE), TILE, 'googleToTile')
   t.end()
 })
 
-// /**
-//  * Validate
-//  */
-// test('validate -- Throws Error Bad LngLat', t => {
-//   t.equal(mercator.validateLngLat([0, -110])[1], 70)
-//   t.equal(mercator.validateLngLat([0, 110])[1], -70)
-//   t.equal(mercator.validateLngLat([90, 80])[0], 90)
-//   t.equal(mercator.validateLngLat([180, 80])[0], 180)
-//   t.equal(mercator.validateLngLat([270, 80])[0], -90)
-//   t.equal(mercator.validateLngLat([360, 80])[0], 0)
-//   t.equal(mercator.validateLngLat([450, 80])[0], 90)
-//   t.equal(mercator.validateLngLat([540, 80])[0], 180)
-//   t.equal(mercator.validateLngLat([630, 80])[0], -90)
-//   t.equal(mercator.validateLngLat([720, 80])[0], 0)
-//   t.equal(mercator.validateLngLat([-90, 80])[0], -90)
-//   t.equal(mercator.validateLngLat([-180, 80])[0], -180)
-//   t.equal(mercator.validateLngLat([-270, 80])[0], 90)
-//   t.equal(mercator.validateLngLat([-360, 80])[0], 0)
-//   t.equal(mercator.validateLngLat([-450, 80])[0], -90)
-//   t.equal(mercator.validateLngLat([-540, 80])[0], -180)
-//   t.equal(mercator.validateLngLat([-630, 80])[0], 90)
-//   t.equal(mercator.validateLngLat([-720, 80])[0], 0)
-//   t.end()
-// })
+/**
+ * Validate
+ */
+test('validate -- Throws Error Bad LngLat', t => {
+  t.equal(mercator.validateLngLat([0, -110])[1], 70)
+  t.equal(mercator.validateLngLat([0, 110])[1], -70)
+  t.equal(mercator.validateLngLat([90, 80])[0], 90)
+  t.equal(mercator.validateLngLat([180, 80])[0], 180)
+  t.equal(mercator.validateLngLat([270, 80])[0], -90)
+  t.equal(mercator.validateLngLat([360, 80])[0], 0)
+  t.equal(mercator.validateLngLat([450, 80])[0], 90)
+  t.equal(mercator.validateLngLat([540, 80])[0], 180)
+  t.equal(mercator.validateLngLat([630, 80])[0], -90)
+  t.equal(mercator.validateLngLat([720, 80])[0], 0)
+  t.equal(mercator.validateLngLat([-90, 80])[0], -90)
+  t.equal(mercator.validateLngLat([-180, 80])[0], -180)
+  t.equal(mercator.validateLngLat([-270, 80])[0], 90)
+  t.equal(mercator.validateLngLat([-360, 80])[0], 0)
+  t.equal(mercator.validateLngLat([-450, 80])[0], -90)
+  t.equal(mercator.validateLngLat([-540, 80])[0], -180)
+  t.equal(mercator.validateLngLat([-630, 80])[0], 90)
+  t.equal(mercator.validateLngLat([-720, 80])[0], 0)
+  t.end()
+})
 
-// test('validate -- validateZoom', t => {
-//   t.throws(() => mercator.validateZoom(-2))
-//   t.throws(() => mercator.validateZoom(35))
-//   t.end()
-// })
+test('validate -- validateZoom', t => {
+  t.throws(() => mercator.validateZoom(-2))
+  t.throws(() => mercator.validateZoom(35))
+  t.end()
+})
 
-// test('validate -- validateTile', t => {
-//   t.deepEqual(mercator.validateTile(TILE), TILE, 'no changes')
-//   t.deepEqual(mercator.validateTile([-1, 0, 2]), [3, 0, 2], 'tile x wraps around')
-//   t.deepEqual(mercator.validateTile([4, 0, 2]), [0, 0, 2], 'tile x wraps around')
-//   t.end()
-// })
+test('validate -- validateTile', t => {
+  t.deepEqual(mercator.validateTile(TILE), TILE, 'no changes')
+  t.deepEqual(mercator.validateTile([-1, 0, 2]), [3, 0, 2], 'tile x wraps around')
+  t.deepEqual(mercator.validateTile([4, 0, 2]), [0, 0, 2], 'tile x wraps around')
+  t.end()
+})
 
-// test('validate -- validateLngLat', t => {
-//   t.deepEqual(mercator.validateLngLat(LNGLAT), LNGLAT)
-//   t.end()
-// })
+test('validate -- validateLngLat', t => {
+  t.deepEqual(mercator.validateLngLat(LNGLAT), LNGLAT)
+  t.end()
+})
 
-// test('validate -- validTile', t => {
-//   // Missing value
-//   t.false(mercator.validTile([undefined, 30, 5]))
-//   t.false(mercator.validTile([30, null, 5]))
-//   t.false(mercator.validTile([25, 60, null]))
+test('validate -- validTile', t => {
+  // Missing value
+  t.false(mercator.validTile([undefined, 30, 5]))
+  t.false(mercator.validTile([30, null, 5]))
+  t.false(mercator.validTile([25, 60, null]))
 
-//   // Valid Tiles
-//   t.true(mercator.validTile([-10, 30, 5]))
-//   t.true(mercator.validTile([30, -10, 5]))
-//   t.true(mercator.validTile([25, 60, 3]))
-//   t.true(mercator.validTile([2, 1, 3]))
-//   t.end()
-// })
+  // Valid Tiles
+  t.true(mercator.validTile([-10, 30, 5]))
+  t.true(mercator.validTile([30, -10, 5]))
+  t.true(mercator.validTile([25, 60, 3]))
+  t.true(mercator.validTile([2, 1, 3]))
+  t.end()
+})
 
-// test('maxBBox', t => {
-//   t.throws(() => mercator.maxBBox(null), 'null')
-//   t.throws(() => mercator.maxBBox(undefined), 'undefined')
-//   t.deepEqual(mercator.maxBBox([-20, -30, 20, 30]), [-20, -30, 20, 30], 'single')
-//   t.deepEqual(mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]]), [-110, -30, 120, 80], 'multiple')
-//   t.end()
-// })
+test('maxBBox', t => {
+  t.throws(() => mercator.maxBBox(null), 'null')
+  t.throws(() => mercator.maxBBox(undefined), 'undefined')
+  t.deepEqual(mercator.maxBBox([-20, -30, 20, 30]), [-20, -30, 20, 30], 'single')
+  t.deepEqual(mercator.maxBBox([[-20, -30, 20, 30], [-110, -30, 120, 80]]), [-110, -30, 120, 80], 'multiple')
+  t.end()
+})
 
-// test('pointToTile', t => {
-//   var tile = mercator.pointToTile([0, 0], 10)
-//   t.equal(tile.length, 3)
-//   t.equal(tile[2], 10)
-//   t.end()
-// })
+test('pointToTile', t => {
+  var tile = mercator.pointToTile([0, 0], 10)
+  t.equal(tile.length, 3)
+  t.equal(tile[2], 10)
+  t.end()
+})
 
-// test('pointToTileFraction', t => {
-//   const tile = mercator.pointToTileFraction([-95.93965530395508, 41.26000108568697], 9)
-//   t.ok(tile, 'convert point to tile fraction')
-//   t.equal(tile[0], 119.552490234375)
-//   t.equal(tile[1], 191.47119140625)
-//   t.equal(tile[2], 9)
-//   t.end()
-// })
+test('pointToTileFraction', t => {
+  const tile = mercator.pointToTileFraction([-95.93965530395508, 41.26000108568697], 9)
+  t.ok(tile, 'convert point to tile fraction')
+  t.equal(tile[0], 119.552490234375)
+  t.equal(tile[1], 191.47119140625)
+  t.equal(tile[2], 9)
+  t.end()
+})
 
-// test('pointToTile', t => {
-//   var tile = mercator.pointToTile([-77.03239381313323, 38.91326516559442], 10)
-//   t.equal(tile.length, 3)
-//   t.equal(tile[0], 292)
-//   t.equal(tile[1], 391)
-//   t.equal(tile[2], 10)
-//   t.equal(mercator.tileToQuadkey(tile), '2102322100', 'pointToTile')
-//   t.deepEqual(mercator.pointToTile([180, 85], 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
-//   t.deepEqual(mercator.pointToTile([180, 85], 1), [0, 0, 1])
-//   t.end()
-// })
+test('pointToTile', t => {
+  var tile = mercator.pointToTile([-77.03239381313323, 38.91326516559442], 10)
+  t.equal(tile.length, 3)
+  t.equal(tile[0], 292)
+  t.equal(tile[1], 391)
+  t.equal(tile[2], 10)
+  t.equal(mercator.tileToQuadkey(tile), '2102322100', 'pointToTile')
+  t.deepEqual(mercator.pointToTile([180, 85], 0), [0, 0, 0], 'zoom 0 only has 1 available tile')
+  t.deepEqual(mercator.pointToTile([180, 85], 1), [0, 0, 1])
+  t.end()
+})
 
-// test('pointToTile -- cross meridian', t => {
-//   // X axis
-//   t.deepEqual(mercator.pointToTile([-180, 85], 2), [0, 0, 2], '[-180, 85] zoom 2')
-//   t.deepEqual(mercator.pointToTile([180, 85], 2), [0, 0, 2], '[+180, 85] zoom 2')
-//   t.deepEqual(mercator.pointToTile([-185, 85], 2), [3, 0, 2], '[-185, 85] zoom 2')
-//   t.deepEqual(mercator.pointToTile([185, 85], 2), [0, 0, 2], '[+185, 85] zoom 2')
-//   t.end()
-// })
+test('pointToTile -- cross meridian', t => {
+  // X axis
+  t.deepEqual(mercator.pointToTile([-180, 85], 2), [0, 0, 2], '[-180, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([180, 85], 2), [0, 0, 2], '[+180, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([-185, 85], 2), [3, 0, 2], '[-185, 85] zoom 2')
+  t.deepEqual(mercator.pointToTile([185, 85], 2), [0, 0, 2], '[+185, 85] zoom 2')
+  t.end()
+})
