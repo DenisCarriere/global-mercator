@@ -49,12 +49,11 @@
     "quadkey"
   ],
   "devDependencies": {
-    "@mapbox/tilebelt": "*",
     "benchmark": "*",
     "documentation": "*",
     "rollup": "*",
     "standard": "*",
-    "tape": "*"
+    "tap": "*"
   },
   "dependencies": {}
 }
