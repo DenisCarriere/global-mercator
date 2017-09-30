@@ -16,7 +16,7 @@
     "global-mercator.js"
   ],
   "scripts": {
-    "pretest": "rollup -f cjs -o global-mercator.js index.js",
+    "pretest": "rollup -c rollup.config.js",
     "test": "tap test.js --coverage",
     "posttest": "standard index.js",
     "bench": "node bench.js",
