@@ -45,3 +45,4 @@ export declare function latitude(lat: number): number;
 export declare function pointToTileFraction(lnglat: LngLat, zoom: number, validate?: boolean): Tile;
 export declare function pointToTile(lnglat: LngLat, zoom: number, validate?: boolean): Tile;
 export declare function wrapTile(tile: Tile): Tile;
+export declare function bboxToTile(bbox: BBox): Tile;

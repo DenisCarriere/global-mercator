@@ -71,6 +71,7 @@ globalMercator.tileToBBox(tile)
 | [pointToTile(lnglat, zoom)](#pointtotile)                 | Get the tile for a point at a specified zoom level                   |
 | [pointToTileFraction(lnglat, zoom)](#pointtotilefraction) | Get the precise fractional tile location for a point at a zoom level |
 | [wrapTile(tile)](#wraptile)                               | Handles tiles which crosses the 180th meridian                       |
+| [bboxToTile(bbox)](#bboxtotile)                           | Get the smallest tile to cover a bbox                                |
 
 ## API
 
@@ -656,3 +657,21 @@ globalMercator.longitude(190)
 ```
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** modified longitude
+
+### bboxToTile
+
+Get the smallest tile to cover a bbox
+
+**Parameters**
+
+-   `bboxCoords`  
+-   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** BBox
+
+**Examples**
+
+```javascript
+var tile = bboxToTile([-178, 84, -177, 85])
+//=tile
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** tile Tile

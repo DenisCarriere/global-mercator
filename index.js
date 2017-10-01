@@ -757,3 +757,37 @@ export function longitude (lng) {
   }
   return lng
 }
+
+/**
+ * Get the smallest tile to cover a bbox
+ *
+ * @param {Array<number>} bbox BBox
+ * @returns {Array<number>} tile Tile
+ * @example
+ * var tile = bboxToTile([-178, 84, -177, 85])
+ * //=tile
+ */
+export function bboxToTile (bboxCoords) {
+  var min = pointToTile(bboxCoords[0], bboxCoords[1], 32)
+  var max = pointToTile(bboxCoords[2], bboxCoords[3], 32)
+  var bbox = [min[0], min[1], max[0], max[1]]
+
+  var z = getBboxZoom(bbox)
+  if (z === 0) return [0, 0, 0]
+  var x = bbox[0] >>> (32 - z)
+  var y = bbox[1] >>> (32 - z)
+  return [x, y, z]
+}
+
+function getBboxZoom (bbox) {
+  var MAX_ZOOM = 28
+  for (var z = 0; z < MAX_ZOOM; z++) {
+    var mask = 1 << (32 - (z + 1))
+    if (((bbox[0] & mask) !== (bbox[2] & mask)) ||
+      ((bbox[1] & mask) !== (bbox[3] & mask))) {
+      return z
+    }
+  }
+
+  return MAX_ZOOM
+}
