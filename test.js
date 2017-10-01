@@ -250,3 +250,10 @@ test('pointToTile -- cross meridian', t => {
   t.deepEqual(mercator.pointToTile([185, 85], 2), [0, 0, 2], '[+185, 85] zoom 2')
   t.end()
 })
+
+test('bboxToTile', t => {
+  const bbox = [-84.72, 11.17, -5.625, 61.60]
+  const tile = mercator.bboxToTile(bbox)
+  t.deepEqual(tile, [1, 1, 2], '[1, 1, 2]')
+  t.end()
+})

@@ -582,7 +582,7 @@ export function validateZoom (zoom) {
   if (zoom === false) return zoom
   if (zoom === undefined || zoom === null) { throw new Error('<zoom> is required') }
   if (zoom < 0) { throw new Error('<zoom> cannot be less than 0') }
-  if (zoom > 30) { throw new Error('<zoom> cannot be greater than 30') }
+  if (zoom > 32) { throw new Error('<zoom> cannot be greater than 32') }
   return zoom
 }
 
@@ -768,8 +768,8 @@ export function longitude (lng) {
  * //=tile
  */
 export function bboxToTile (bboxCoords) {
-  var min = pointToTile(bboxCoords[0], bboxCoords[1], 32)
-  var max = pointToTile(bboxCoords[2], bboxCoords[3], 32)
+  var min = pointToTile([bboxCoords[0], bboxCoords[1]], 32)
+  var max = pointToTile([bboxCoords[2], bboxCoords[3]], 32)
   var bbox = [min[0], min[1], max[0], max[1]]
 
   var z = getBboxZoom(bbox)
