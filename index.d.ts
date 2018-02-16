@@ -1,7 +1,7 @@
 /**
  * Types
  */
-export declare type LngLat = [number, number];
+export declare type LngLat = number[];
 export declare type Meters = [number, number];
 export declare type Pixels = [number, number, number];
 export declare type BBox = [number, number, number, number];

@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 3.0.3 - 2017-09-29
+
+- Drop strict `[number, number]` for LngLat inputs
+
 ## 3.0.0 - 2017-09-29
 
 - Added `bboxToTile`
