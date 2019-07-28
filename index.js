@@ -70,20 +70,23 @@ export function pointToTileFraction (lnglat, zoom, validate) {
  * Converts BBox to Center
  *
  * @param {BBox} bbox - [west, south, east, north] coordinates
+ * @param {Object} accurancy - { enable: true, decimal: 6}
  * @return {LngLat} center
  * @example
  * var center = globalMercator.bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
-export function bboxToCenter (bbox) {
+export function bboxToCenter (bbox, accurancy = { enable: true, decimal: 6 }) {
   var west = bbox[0]
   var south = bbox[1]
   var east = bbox[2]
   var north = bbox[3]
   var lng = (west - east) / 2 + east
   var lat = (south - north) / 2 + north
-  lng = Number(lng.toFixed(6))
-  lat = Number(lat.toFixed(6))
+  if (accurancy.enable) {
+    lng = Number(lng.toFixed(accurancy.decimal))
+    lat = Number(lat.toFixed(accurancy.decimal))
+  }
   return [lng, lat]
 }
 
@@ -92,20 +95,23 @@ export function bboxToCenter (bbox) {
  *
  * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {boolean} [validate=true] validates LatLng coordinates
+ * @param {Object} accurancy - { enable: true, decimal: 6 }
  * @returns {Meters} Meters coordinates
  * @example
  * var meters = globalMercator.lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
-export function lngLatToMeters (lnglat, validate) {
+export function lngLatToMeters (lnglat, validate, accurancy = { enable: true, decimal: 1 }) {
   lnglat = validateLngLat(lnglat, validate)
   var lng = lnglat[0]
   var lat = lnglat[1]
   var x = lng * originShift / 180.0
   var y = Math.log(Math.tan((90 + lat) * Math.PI / 360.0)) / (Math.PI / 180.0)
   y = y * originShift / 180.0
-  x = Number(x.toFixed(1))
-  y = Number(y.toFixed(1))
+  if (accurancy.enable) {
+    x = Number(x.toFixed(accurancy.decimal))
+    y = Number(y.toFixed(accurancy.decimal))
+  }
   return [x, y]
 }
 
@@ -113,19 +119,22 @@ export function lngLatToMeters (lnglat, validate) {
  * Converts Meters coordinates to LngLat coordinates.
  *
  * @param {Meters} meters Meters in Mercator [x, y]
+ * @param {Object} accurancy - { enable: true, decimal: 6}
  * @returns {LngLat} LngLat coordinates
  * @example
  * var lnglat = globalMercator.metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
-export function metersToLngLat (meters) {
+export function metersToLngLat (meters, accurancy = { enable: true, decimal: 6 }) {
   var x = meters[0]
   var y = meters[1]
   var lng = (x / originShift) * 180.0
   var lat = (y / originShift) * 180.0
   lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180.0)) - Math.PI / 2.0)
-  lng = Number(lng.toFixed(6))
-  lat = Number(lat.toFixed(6))
+  if (accurancy.enable) {
+    lng = Number(lng.toFixed(accurancy.decimal))
+    lat = Number(lat.toFixed(accurancy.decimal))
+  }
   return [lng, lat]
 }
 
@@ -211,20 +220,23 @@ export function metersToTile (meters, zoom) {
  *
  * @param {Pixels} pixels Pixels [x, y, zoom]
  * @param {number} [tileSize=256] Tile size
+ * @param {Object} accurancy - { enable: true, decimal: 6}
  * @returns {Meters} Meters coordinates
  * @example
  * var meters = globalMercator.pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-export function pixelsToMeters (pixels, tileSize) {
+export function pixelsToMeters (pixels, tileSize, accurancy = { enable: true, decimal: 6 }) {
   var px = pixels[0]
   var py = pixels[1]
   var zoom = pixels[2]
   var res = resolution(zoom, tileSize)
   var mx = px * res - originShift
   var my = py * res - originShift
-  mx = Number(mx.toFixed(1))
-  my = Number(my.toFixed(1))
+  if (accurancy.enable) {
+    mx = Number(mx.toFixed(accurancy.decimal))
+    my = Number(my.toFixed(accurancy.decimal))
+  }
   return [mx, my]
 }
 
