@@ -70,22 +70,22 @@ export function pointToTileFraction (lnglat, zoom, validate) {
  * Converts BBox to Center
  *
  * @param {BBox} bbox - [west, south, east, north] coordinates
- * @param {Object} accurancy - { enable: true, decimal: 6}
+ * @param {number} [decimal=6] - coordinate decimals
  * @return {LngLat} center
  * @example
  * var center = globalMercator.bboxToCenter([90, -45, 85, -50])
  * //= [ 87.5, -47.5 ]
  */
-export function bboxToCenter (bbox, accurancy = { enable: true, decimal: 6 }) {
+export function bboxToCenter (bbox, decimal = 6) {
   var west = bbox[0]
   var south = bbox[1]
   var east = bbox[2]
   var north = bbox[3]
   var lng = (west - east) / 2 + east
   var lat = (south - north) / 2 + north
-  if (accurancy.enable) {
-    lng = Number(lng.toFixed(accurancy.decimal))
-    lat = Number(lat.toFixed(accurancy.decimal))
+  if (decimal !== undefined && decimal !== null) {
+    lng = Number(lng.toFixed(decimal))
+    lat = Number(lat.toFixed(decimal))
   }
   return [lng, lat]
 }
@@ -95,22 +95,22 @@ export function bboxToCenter (bbox, accurancy = { enable: true, decimal: 6 }) {
  *
  * @param {[number, number]} lnglat [Longitude, Latitude]
  * @param {boolean} [validate=true] validates LatLng coordinates
- * @param {Object} accurancy - { enable: true, decimal: 6 }
+ * @param {Object} accuracy - { enable: true, decimal: 6 }
  * @returns {Meters} Meters coordinates
  * @example
  * var meters = globalMercator.lngLatToMeters([126, 37])
  * //=[ 14026255.8, 4439106.7 ]
  */
-export function lngLatToMeters (lnglat, validate, accurancy = { enable: true, decimal: 1 }) {
+export function lngLatToMeters (lnglat, validate, accuracy = { enable: true, decimal: 1 }) {
   lnglat = validateLngLat(lnglat, validate)
   var lng = lnglat[0]
   var lat = lnglat[1]
   var x = lng * originShift / 180.0
   var y = Math.log(Math.tan((90 + lat) * Math.PI / 360.0)) / (Math.PI / 180.0)
   y = y * originShift / 180.0
-  if (accurancy.enable) {
-    x = Number(x.toFixed(accurancy.decimal))
-    y = Number(y.toFixed(accurancy.decimal))
+  if (accuracy.enable) {
+    x = Number(x.toFixed(accuracy.decimal))
+    y = Number(y.toFixed(accuracy.decimal))
   }
   return [x, y]
 }
@@ -119,21 +119,21 @@ export function lngLatToMeters (lnglat, validate, accurancy = { enable: true, de
  * Converts Meters coordinates to LngLat coordinates.
  *
  * @param {Meters} meters Meters in Mercator [x, y]
- * @param {Object} accurancy - { enable: true, decimal: 6}
+ * @param {number} [decimal=6] - coordinate decimals
  * @returns {LngLat} LngLat coordinates
  * @example
  * var lnglat = globalMercator.metersToLngLat([14026255, 4439106])
  * //=[ 126, 37 ]
  */
-export function metersToLngLat (meters, accurancy = { enable: true, decimal: 6 }) {
+export function metersToLngLat (meters, decimal = 6) {
   var x = meters[0]
   var y = meters[1]
   var lng = (x / originShift) * 180.0
   var lat = (y / originShift) * 180.0
   lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180.0)) - Math.PI / 2.0)
-  if (accurancy.enable) {
-    lng = Number(lng.toFixed(accurancy.decimal))
-    lat = Number(lat.toFixed(accurancy.decimal))
+  if (decimal !== undefined && decimal !== null) {
+    lng = Number(lng.toFixed(decimal))
+    lat = Number(lat.toFixed(decimal))
   }
   return [lng, lat]
 }
@@ -220,22 +220,22 @@ export function metersToTile (meters, zoom) {
  *
  * @param {Pixels} pixels Pixels [x, y, zoom]
  * @param {number} [tileSize=256] Tile size
- * @param {Object} accurancy - { enable: true, decimal: 6}
+ * @param {number} [decimal=1] - coordinate decimals
  * @returns {Meters} Meters coordinates
  * @example
  * var meters = globalMercator.pixelsToMeters([1782579, 1280877, 13])
  * //=[ 14026252.0, 4439099.5 ]
  */
-export function pixelsToMeters (pixels, tileSize, accurancy = { enable: true, decimal: 6 }) {
+export function pixelsToMeters (pixels, tileSize, decimal = 1) {
   var px = pixels[0]
   var py = pixels[1]
   var zoom = pixels[2]
   var res = resolution(zoom, tileSize)
   var mx = px * res - originShift
   var my = py * res - originShift
-  if (accurancy.enable) {
-    mx = Number(mx.toFixed(accurancy.decimal))
-    my = Number(my.toFixed(accurancy.decimal))
+  if (decimal !== undefined && decimal !== null) {
+    mx = Number(mx.toFixed(decimal))
+    my = Number(my.toFixed(decimal))
   }
   return [mx, my]
 }

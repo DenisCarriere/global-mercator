@@ -8,20 +8,19 @@ export declare type BBox = [number, number, number, number];
 export declare type Google = [number, number, number];
 export declare type Tile = [number, number, number];
 export declare type Quadkey = string;
-export declare type Accurancy = { enable: Boolean, decimal, Number};
 
 /**
  * Methods
  */
 export declare function hash(tile: Tile): number;
-export declare function bboxToCenter(bbox: BBox, accurancy?: Accurancy): LngLat;
-export declare function lngLatToMeters(lnglat: LngLat, validate?: boolean, accurancy?: Accurancy): Meters;
-export declare function metersToLngLat(meters: Meters, accurancy?: Accurancy): LngLat;
+export declare function bboxToCenter(bbox: BBox, decimal?: number): LngLat;
+export declare function lngLatToMeters(lnglat: LngLat, validate?: boolean, decimal?: number): Meters;
+export declare function metersToLngLat(meters: Meters, decimal?: number): LngLat;
 export declare function metersToPixels(meters: Meters, zoom: number): Pixels;
 export declare function lngLatToTile(lnglat: LngLat, zoom: number, validate?: boolean): Tile;
 export declare function lngLatToGoogle(lnglat: LngLat, zoom: number, validate?: boolean): Google;
 export declare function metersToTile(meters: Meters, zoom: number): Tile;
-export declare function pixelsToMeters(pixels: Pixels, validate?: boolean, accurancy?: Accurancy): Meters;
+export declare function pixelsToMeters(pixels: Pixels, validate?: boolean, decimal?: number): Meters;
 export declare function pixelsToTile(pixels: Pixels, validate?: boolean): Tile;
 export declare function tileToBBoxMeters(tile: Tile, validate?: boolean): BBox;
 export declare function tileToBBox(tile: Tile, validate?: boolean): BBox;
